@@ -9,12 +9,29 @@ import Navbar from "./shared/Navbar";
 import { ProductProps } from "./types/types";
 
 const App = () => {
-  const [products, setProducts] = useState<ProductProps[]>([]);
+  const [toys, setToys] = useState<ProductProps[]>([]);
+  const [accessories, setAccessories] = useState<ProductProps[]>([]);
+  const [stationery, setStationery] = useState<ProductProps[]>([]);
 
   useEffect(() => {
     fetch("/products.json")
       .then((res) => res.json())
-      .then((data) => setProducts(data));
+      .then((data) => {
+        // Filter products by category
+        setToys(
+          data.filter((product: ProductProps) => product.category === "toys")
+        );
+        setAccessories(
+          data.filter(
+            (product: ProductProps) => product.category === "accessory"
+          )
+        );
+        setStationery(
+          data.filter(
+            (product: ProductProps) => product.category === "stationery"
+          )
+        );
+      });
   }, []);
 
   return (
@@ -26,11 +43,11 @@ const App = () => {
       {/* Hero */}
       <Hero />
       {/* Toys */}
-      <Toys products={products} />
+      <Toys products={toys} />
       {/* Accessories */}
-      <Accessories products={products} />
+      <Accessories products={accessories} />
       {/* Stationery */}
-      <Stationery products={products} />
+      <Stationery products={stationery} />
       {/* Footer */}
       <Footer />
     </>

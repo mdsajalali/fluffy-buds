@@ -5,4 +5,5 @@ export interface ProductProps {
   originalPrice: number;
   discount: number;
   image: string;
+  category: "toys" | "accessory" | "stationery";
 }
