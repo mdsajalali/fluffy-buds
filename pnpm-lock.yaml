@@ -26,6 +26,9 @@ importers:
       react-router-dom:
         specifier: ^7.5.0
         version: 7.5.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      react-slideshow-image:
+        specifier: ^4.3.2
+        version: 4.3.2(react@19.1.0)
       tailwindcss:
         specifier: ^4.1.3
         version: 4.1.3
@@ -568,6 +571,9 @@ packages:
     resolution: {integrity: sha512-lUI/QaDxLtlV52Lho6pu07CG9pSnRYLOPmKGIQjyHdTBagemc6HmgZxyjGAQ/5HMPrNeWBfTVIpQl0/jLXvWHQ==}
     peerDependencies:
       vite: ^5.2.0 || ^6
+
+  '@tweenjs/tween.js@18.6.4':
+    resolution: {integrity: sha512-lB9lMjuqjtuJrx7/kOkqQBtllspPIN+96OvTCeJ2j5FEzinoAXTdAMFnDAQT1KVPRlnYfBrqxtqP66vDM40xxQ==}
 
   '@types/babel__core@7.20.5':
     resolution: {integrity: sha512-qoQprZvz5wQFJwMDqeseRXWv3rqMvhgpbXFfVyWhbx9X47POIA6i/+dXefEmZKoAgOaTdaIgNSMqMIU61yRyzA==}
@@ -1224,9 +1230,17 @@ packages:
       react-dom:
         optional: true
 
+  react-slideshow-image@4.3.2:
+    resolution: {integrity: sha512-cALXr6RvP7er5QYWcX1ctBvG2x4jvZsgSPMPWUzQG47ZeKZjmXNmN9h8y4tScsWk/7TV23uAFQIESN8kxTaBHQ==}
+    peerDependencies:
+      react: '>=15'
+
   react@19.1.0:
     resolution: {integrity: sha512-FS+XFBNvn3GTAWq26joslQgWNoFu08F4kl0J4CgdNKADkdSGXQyTCnKteIAJy96Br6YbpEU1LSzV5dYtjMkMDg==}
     engines: {node: '>=0.10.0'}
+
+  resize-observer-polyfill@1.5.1:
+    resolution: {integrity: sha512-LwZrotdHOo12nQuZlHEmtuXdqGoOD0OhaxopaNFxWzInpEgaLWoVuAMbTzixuosCx2nEG58ngzW3vxdWoxIgdg==}
 
   resolve-from@4.0.0:
     resolution: {integrity: sha512-pb/MYmXstAkysRFx8piNI1tGFNQIFA3vkE3Gq4EuA1dF6gHp/+vgZqsCGJapvy8N3Q+4o7FwvquPJcnZ7RYy4g==}
@@ -1782,6 +1796,8 @@ snapshots:
       '@tailwindcss/oxide': 4.1.3
       tailwindcss: 4.1.3
       vite: 6.2.6(jiti@2.4.2)(lightningcss@1.29.2)
+
+  '@tweenjs/tween.js@18.6.4': {}
 
   '@types/babel__core@7.20.5':
     dependencies:
@@ -2448,7 +2464,15 @@ snapshots:
     optionalDependencies:
       react-dom: 19.1.0(react@19.1.0)
 
+  react-slideshow-image@4.3.2(react@19.1.0):
+    dependencies:
+      '@tweenjs/tween.js': 18.6.4
+      react: 19.1.0
+      resize-observer-polyfill: 1.5.1
+
   react@19.1.0: {}
+
+  resize-observer-polyfill@1.5.1: {}
 
   resolve-from@4.0.0: {}
 
