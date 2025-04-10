@@ -1,18 +1,9 @@
-import { useEffect, useState } from "react";
 import HeadingTitle from "../shared/HeadingTitle";
 import Container from "../shared/Container";
-import { ProductProps } from "../types/types";
 import ProductCard from "../shared/ProductCard";
+import { ProductProps } from "../types/types";
 
-const Toys = () => {
-  const [products, setProducts] = useState<ProductProps[]>([]);
-
-  useEffect(() => {
-    fetch("/products.json")
-      .then((res) => res.json())
-      .then((data) => setProducts(data));
-  }, []);
-
+const Toys = ({ products }: { products: ProductProps[] }) => {
   return (
     <>
       <HeadingTitle title="Toys" />
