@@ -3,32 +3,35 @@ import { Link } from "react-router-dom";
 import Container from "./Container";
 import { Menu, X } from "lucide-react";
 
+const navItems = [
+  { label: "Home", path: "/" },
+  { label: "Products", path: "/products" },
+  { label: "Categories", path: "/categories" },
+];
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="border-b border-gray-300">
+    <div className="border-b border-gray-300 md:fixed md:w-full md:top-0 md:bg-white md:z-50">
       <Container>
         <div className="flex items-center justify-between py-5">
-          {/* Logo */}
           <Link to="/">
             <img className="w-24" src="/logo.webp" alt="Logo" />
           </Link>
 
-          {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-8">
-            <Link className="text-gray-600 text-base" to="/">
-              Home
-            </Link>
-            <Link className="text-gray-600 text-base" to="/products">
-              Products
-            </Link>
-            <Link className="text-gray-600 text-base" to="/category">
-              Category
-            </Link>
+            {navItems?.map((item) => (
+              <Link
+                key={item.path}
+                className="text-gray-600 text-base"
+                to={item.path}
+              >
+                {item.label}
+              </Link>
+            ))}
           </nav>
 
-          {/* Icons */}
           <div className="flex items-center gap-4">
             <svg
               className="cursor-pointer"
@@ -51,8 +54,6 @@ const Navbar = () => {
               src="/profile_icon.png"
               alt="Profile"
             />
-
-            {/* Hamburger */}
             <button onClick={() => setIsOpen(true)} className="md:hidden">
               <Menu size={24} />
             </button>
@@ -60,7 +61,6 @@ const Navbar = () => {
         </div>
       </Container>
 
-      {/* Sidebar */}
       <div
         className={`fixed top-0 right-0 h-full w-64 bg-white shadow-lg z-50 transform transition-transform duration-300 ease-in-out ${
           isOpen ? "translate-x-0" : "translate-x-full"
@@ -73,35 +73,23 @@ const Navbar = () => {
           </button>
         </div>
         <div className="flex flex-col p-4 gap-4">
-          <Link
-            to="/"
-            onClick={() => setIsOpen(false)}
-            className="text-gray-700 text-sm"
-          >
-            Home
-          </Link>
-          <Link
-            to="/products"
-            onClick={() => setIsOpen(false)}
-            className="text-gray-700 text-sm"
-          >
-            Products
-          </Link>
-          <Link
-            to="/category"
-            onClick={() => setIsOpen(false)}
-            className="text-gray-700 text-sm"
-          >
-            Category
-          </Link>
+          {navItems?.map((item) => (
+            <Link
+              key={item.path}
+              to={item.path}
+              onClick={() => setIsOpen(false)}
+              className="text-gray-700 text-sm"
+            >
+              {item.label}
+            </Link>
+          ))}
         </div>
       </div>
 
-      {/* Overlay */}
       {isOpen && (
         <div
           onClick={() => setIsOpen(false)}
-          className="fixed inset-0 bg-black/20 bg-opacity-40 z-40"
+          className="fixed inset-0 bg-black/20 z-40"
         />
       )}
     </div>
