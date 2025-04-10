@@ -1,5 +1,6 @@
 import Accessories from "./components/Accessories";
 import Hero from "./components/Hero";
+import Stationery from "./components/Stationery";
 import Toys from "./components/Toys";
 import BottomNavbar from "./shared/BottomNavbar";
 import Footer from "./shared/Footer";
@@ -18,6 +19,8 @@ const App = () => {
       <Toys />
       {/* Accessories */}
       <Accessories />
+      {/* Stationery */}
+      <Stationery />
       {/* Footer */}
       <Footer />
     </>
