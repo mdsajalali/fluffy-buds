@@ -1,8 +1,15 @@
+import Footer from "./shared/Footer";
+import Navbar from "./shared/Navbar";
+
 const App = () => {
   return (
-    <div>
-      <h1 className="text-center">Home Page</h1>
-    </div>
+    <>
+      <Navbar />
+      <div>
+        <h1>Content will be here</h1>
+      </div>
+      <Footer />
+    </>
   );
 };
 
