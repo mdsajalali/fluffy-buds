@@ -11,7 +11,7 @@ const App = () => {
       {/* Bottom Navbar */}
       <BottomNavbar />
       <Container>
-        <h1>Content will be here</h1>
+        <h1 className="md:mt-20 my-2">Content will be here</h1>
       </Container>
       <Footer />
     </>
