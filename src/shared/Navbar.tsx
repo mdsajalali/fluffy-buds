@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Container from "./Container";
 import { Menu, X } from "lucide-react";
@@ -12,6 +12,14 @@ const navItems = [
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 768) setIsOpen(false);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <div className="border-b border-gray-300 md:fixed md:w-full md:top-0 md:bg-white md:z-50">
       <Container>
@@ -21,7 +29,7 @@ const Navbar = () => {
           </Link>
 
           <nav className="hidden md:flex items-center gap-8">
-            {navItems?.map((item) => (
+            {navItems.map((item) => (
               <Link
                 key={item.path}
                 className="text-gray-600 text-base"
@@ -61,6 +69,7 @@ const Navbar = () => {
         </div>
       </Container>
 
+      {/* Sidebar */}
       <div
         className={`fixed top-0 right-0 h-full w-64 bg-white shadow-lg z-50 transform transition-transform duration-300 ease-in-out ${
           isOpen ? "translate-x-0" : "translate-x-full"
@@ -73,7 +82,7 @@ const Navbar = () => {
           </button>
         </div>
         <div className="flex flex-col p-4 gap-4">
-          {navItems?.map((item) => (
+          {navItems.map((item) => (
             <Link
               key={item.path}
               to={item.path}
@@ -86,6 +95,7 @@ const Navbar = () => {
         </div>
       </div>
 
+      {/* Overlay */}
       {isOpen && (
         <div
           onClick={() => setIsOpen(false)}
