@@ -7,6 +7,7 @@ import BottomNavbar from "./shared/BottomNavbar";
 import Footer from "./shared/Footer";
 import Navbar from "./shared/Navbar";
 import { ProductProps } from "./types/types";
+import Categories from "./components/Categories";
 
 const App = () => {
   const [toys, setToys] = useState<ProductProps[]>([]);
@@ -48,6 +49,9 @@ const App = () => {
       <Accessories products={accessories} />
       {/* Stationery */}
       <Stationery products={stationery} />
+
+      {/* Categories */}
+      <Categories />
       {/* Footer */}
       <Footer />
     </>
