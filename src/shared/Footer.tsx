@@ -1,10 +1,10 @@
-import React from "react";
+import Container from "./Container";
 
 const Footer = () => {
   return (
-    <div>
+    <Container>
       <h1>Footer</h1>
-    </div>
+    </Container>
   );
 };
 
