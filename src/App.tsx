@@ -11,7 +11,6 @@ import { ProductProps } from "./types/types";
 import Categories from "./components/Categories";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Shop from "./pages/Shop";
 import Dashboard from "./pages/(dashboard)/Dashboard";
 import AddItems from "./pages/(dashboard)/AddItems";
 import ListItems from "./pages/(dashboard)/ListItems";
@@ -19,6 +18,8 @@ import Orders from "./pages/(dashboard)/Orders";
 import RefundPolicy from "./pages/(privacy-policy)/Refund-Policy";
 import TermsConditions from "./pages/(privacy-policy)/Terms-Conditions";
 import PrivacyPolicy from "./pages/(privacy-policy)/Privacy-Policy";
+import Shop from "./pages/(products)/Shop";
+import ProductDetails from "./pages/(products)/ProductDetails";
 
 const App = () => {
   const location = useLocation();
@@ -72,6 +73,7 @@ const App = () => {
 
         {/* shop page */}
         <Route path="/shop" element={<Shop products={products} />} />
+        <Route path="/shop/:id" element={<ProductDetails />} />
 
         {/* categories page */}
         <Route path="/categories" element={<Categories />} />

@@ -1,9 +1,9 @@
 import { Search } from "lucide-react";
-import Container from "../shared/Container";
-import ProductCard from "../shared/ProductCard";
-import { ProductProps } from "../types/types";
 import { useState } from "react";
-import Pagination from "../components/Pagination";
+import { ProductProps } from "../../types/types";
+import Container from "../../shared/Container";
+import ProductCard from "../../shared/ProductCard";
+import Pagination from "../../components/Pagination";
 
 interface ProductType {
   products: ProductProps[];

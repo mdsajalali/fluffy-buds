@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ProductProps } from "../types/types";
+import { Link } from "react-router-dom";
 
 const ProductCard = ({
   product,
@@ -47,7 +48,9 @@ const ProductCard = ({
 
       {/* Info Section */}
       <div className="p-3">
-        <h2 className="font-bold text-sm">{product.title}</h2>
+        <Link to={`/shop/${idx}`}>
+          <h2 className="font-bold text-sm">{product.title}</h2>
+        </Link>
         <div className="text-sm mt-1">
           <span className="font-bold text-black">৳ {product.price}</span>{" "}
           <span className="line-through text-gray-500 text-xs">
