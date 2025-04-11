@@ -20,7 +20,7 @@ const Shop = ({ products }: ProductType) => {
       </div>
       <Container>
         <div className="grid grid-cols-12 gap-5">
-          <div className="p-4 col-span-3">
+          <div className="p-4 md:col-span-3 hidden md:block">
             {/* Search Section */}
             <h2 className="text-lg font-bold mb-2">Search</h2>
             <div className="relative">
@@ -78,8 +78,8 @@ const Shop = ({ products }: ProductType) => {
             </ul>
           </div>
 
-          <div className="col-span-9 ">
-            <div className="flex flex-col my-4 md:flex-row items-center justify-between w-full max-w-7xl mx-auto   px-4">
+          <div className="md:col-span-9 col-span-12 ">
+            <div className="flex gap-2   my-4   items-center justify-between w-full max-w-7xl mx-auto   md:px-4">
               <h1 className="text-sm md:text-base mb-2 md:mb-0">
                 Showing 1 - 6 of 15 results
               </h1>
@@ -90,7 +90,7 @@ const Shop = ({ products }: ProductType) => {
               </select>
             </div>
 
-            <div className=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className=" grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-3 gap-6">
               {products.map((product, idx) => (
                 <ProductCard key={idx} idx={idx} product={product} />
               ))}
