@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ProductProps } from "../types/types";
+import { Link } from "react-router-dom";
 
 interface ProductCardProps {
   product: ProductProps;
@@ -36,15 +37,17 @@ const ProductDetailsCard = ({ product }: ProductCardProps) => {
   };
 
   return (
-    <div className="container mx-auto p-4 md:p-8">
+    <div className="container mx-auto py-6 md:py-10">
       {/* Breadcrumb */}
-      <div className="text-sm text-gray-500 mb-4">
-        <span>Home / Shop</span>
+      <div className="text-sm mb-4  text-gray-500 ">
+        <span>
+          <Link to="/">Home</Link> / <Link to="/shop">Shop</Link>
+        </span>
       </div>
 
-      <div className="flex flex-col md:flex-row gap-8">
+      <div className="flex flex-col lg:flex-row gap-8">
         {/* Left Section: Images */}
-        <div className="flex-1">
+        <div className="flex-1 w-full">
           <div className="flex flex-col md:flex-row gap-4">
             {/* Thumbnail Images */}
             <div className="flex md:flex-col gap-2 order-2 md:order-1">
@@ -64,11 +67,11 @@ const ProductDetailsCard = ({ product }: ProductCardProps) => {
             </div>
 
             {/* Main Image */}
-            <div className="order-1 md:order-2">
+            <div className="order-1 w-full md:w-[600px]  md:order-2">
               <img
                 src={selectedImage}
                 alt="Main Product"
-                className="w-full max-w-md h-auto object-cover"
+                className="w-full h-[300px]  md:h-[600px] object-cover"
               />
             </div>
           </div>
@@ -93,6 +96,8 @@ const ProductDetailsCard = ({ product }: ProductCardProps) => {
 
           {/* Description */}
           <p className="text-gray-600 mb-4">{product.description}</p>
+
+          <hr className="text-gray-300 mb-4" />
 
           {/* Size Selection */}
           <div className="mb-4">
@@ -141,60 +146,67 @@ const ProductDetailsCard = ({ product }: ProductCardProps) => {
 
           {/* Add to Cart */}
           <div className="flex items-center gap-4 mb-4">
-            {/* Quantity Controller */}
-            {quantities[product.id] ? (
-              <div className="mt-3 border border-black flex items-center justify-between px-3 py-1">
-                <button
-                  onClick={() => handleDecrease(product.id)}
-                  className="text-xl"
-                >
-                  <svg
-                    className="cursor-pointer"
-                    stroke="currentColor"
-                    fill="currentColor"
-                    stroke-width="0"
-                    viewBox="0 0 1024 1024"
-                    height="1em"
-                    width="1em"
-                    xmlns="http://www.w3.org/2000/svg"
+            <div className="w-full">
+              {/* Quantity Controller */}
+              {quantities[product.id] ? (
+                <div className="mt-3 border border-black flex items-center justify-between px-3 py-1">
+                  <button
+                    onClick={() => handleDecrease(product.id)}
+                    className="text-xl"
                   >
-                    <path d="M872 474H152c-4.4 0-8 3.6-8 8v60c0 4.4 3.6 8 8 8h720c4.4 0 8-3.6 8-8v-60c0-4.4-3.6-8-8-8z"></path>
-                  </svg>
-                </button>
-                <span className="font-bold">{quantities[product.id]}</span>
-                <button
-                  onClick={() => handleIncrease(product.id)}
-                  className="text-xl"
-                >
-                  <svg
-                    className="cursor-pointer"
-                    stroke="currentColor"
-                    fill="currentColor"
-                    stroke-width="0"
-                    viewBox="0 0 1024 1024"
-                    height="1em"
-                    width="1em"
-                    xmlns="http://www.w3.org/2000/svg"
+                    <svg
+                      className="cursor-pointer"
+                      stroke="currentColor"
+                      fill="currentColor"
+                      stroke-width="0"
+                      viewBox="0 0 1024 1024"
+                      height="1em"
+                      width="1em"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M872 474H152c-4.4 0-8 3.6-8 8v60c0 4.4 3.6 8 8 8h720c4.4 0 8-3.6 8-8v-60c0-4.4-3.6-8-8-8z"></path>
+                    </svg>
+                  </button>
+                  <span className="font-bold">{quantities[product.id]}</span>
+                  <button
+                    onClick={() => handleIncrease(product.id)}
+                    className="text-xl"
                   >
-                    <path d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8Z"></path>
-                    <path d="M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8Z"></path>
-                  </svg>
-                </button>
-              </div>
-            ) : (
-              <div
-                className="mt-3 border border-gray-300 w-full hover:shadow duration-300 shadow-[4px_4px_0_0_#22c55e]"
-                onClick={() => handleAddToCart(product.id)}
-              >
-                <button className="w-full py-2 cursor-pointer font-bold text-sm  ">
-                  Add To Cart
-                </button>
-              </div>
-            )}
+                    <svg
+                      className="cursor-pointer"
+                      stroke="currentColor"
+                      fill="currentColor"
+                      stroke-width="0"
+                      viewBox="0 0 1024 1024"
+                      height="1em"
+                      width="1em"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8Z"></path>
+                      <path d="M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8Z"></path>
+                    </svg>
+                  </button>
+                </div>
+              ) : (
+                <div
+                  className="mt-3 border border-gray-300 w-full hover:shadow duration-300 shadow-[4px_4px_0_0_#22c55e]"
+                  onClick={() => handleAddToCart(product.id)}
+                >
+                  <button className="w-full py-2 cursor-pointer font-bold text-sm  ">
+                    Add To Cart
+                  </button>
+                </div>
+              )}
+            </div>
+            <div className="mt-3 border border-gray-300 w-full hover:shadow duration-300 shadow-[4px_4px_0_0_#22c55e]">
+              <button className="w-full py-2 cursor-pointer font-bold text-sm  ">
+                Buy It Now
+              </button>
+            </div>
           </div>
 
           {/* Category */}
-          <p className="text-gray-600">
+          <p className="text-gray-600  ">
             Category: <span className="font-semibold">{product.category}</span>
           </p>
         </div>
