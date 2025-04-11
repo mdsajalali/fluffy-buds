@@ -2,11 +2,7 @@ import { useState } from "react";
 import { ProductProps } from "../types/types";
 import { Link } from "react-router-dom";
 
-const ProductCard = ({
-  product,
-}: {
-  product: ProductProps;
-}) => {
+const ProductCard = ({ product }: { product: ProductProps }) => {
   const [quantities, setQuantities] = useState<{ [key: number]: number }>({});
 
   const handleAddToCart = (index: number) => {
@@ -38,7 +34,7 @@ const ProductCard = ({
       {/* Image */}
       <div className="overflow-hidden border border-gray-300 shadow-[4px_4px_0_0_#000]">
         <img
-          src={product.image}
+          src={product.images[0]}
           alt={product.title}
           className="w-full h-64 object-contain cursor-pointer transition-transform duration-300 hover:scale-105"
         />
@@ -59,7 +55,10 @@ const ProductCard = ({
         {/* Quantity Controller */}
         {quantities[product.id] ? (
           <div className="mt-3 border border-black flex items-center justify-between px-3 py-1">
-            <button onClick={() => handleDecrease(product.id)} className="text-xl">
+            <button
+              onClick={() => handleDecrease(product.id)}
+              className="text-xl"
+            >
               <svg
                 className="cursor-pointer"
                 stroke="currentColor"
@@ -74,7 +73,10 @@ const ProductCard = ({
               </svg>
             </button>
             <span className="font-bold">{quantities[product.id]}</span>
-            <button onClick={() => handleIncrease(product.id)} className="text-xl">
+            <button
+              onClick={() => handleIncrease(product.id)}
+              className="text-xl"
+            >
               <svg
                 className="cursor-pointer"
                 stroke="currentColor"

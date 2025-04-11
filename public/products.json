@@ -2,136 +2,256 @@
   {
     "id": 1,
     "title": "Fluffy Theme Notebook",
-    "discount": "51%",
+    "discount": 51,
     "price": 220,
     "originalPrice": 450,
-    "image": "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2F1704884664-668232595609980517370275&w=256&q=75",
-    "category": "toys"
+    "images": [
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2F1704884664-668232595609980517370275&w=256&q=75",
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2Fcategory%2FF1_iBftFUE.webp&w=384&q=75",
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2Fcategory%2FNoodoll-blanket-playmat-Ricepuffy-white-1_900x.webp&w=384&q=75",
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2Fcategory%2FStationery.webp&w=384&q=75"
+    ],
+    "description": "A soft-cover notebook with a cute fluffy theme, perfect for kids.",
+    "category": "toys",
+    "sizes": ["M", "L", "XL"],
+    "colors": ["Red", "White"]
   },
   {
     "id": 2,
     "title": "Mr PearTeary",
-    "discount": "41%",
+    "discount": 41,
     "price": 699,
     "originalPrice": 1200,
-    "image": "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2F1704884664-668232595609980517370275&w=256&q=75",
-    "category": "toys"
+    "images": [
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2F1704884664-668232595609980517370275&w=256&q=75",
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2Fcategory%2FF1_iBftFUE.webp&w=384&q=75",
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2Fcategory%2FNoodoll-blanket-playmat-Ricepuffy-white-1_900x.webp&w=384&q=75",
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2Fcategory%2FStationery.webp&w=384&q=75"
+    ],
+    "description": "A soft-cover notebook with a cute fluffy theme, perfect for kids.",
+    "category": "toys",
+    "sizes": ["M", "L", "XL"],
+    "colors": ["Red", "White"]
   },
   {
     "id": 3,
     "title": "Mr Shuffy Puffy",
-    "discount": "30%",
+    "discount": 30,
     "price": 560,
     "originalPrice": 800,
-    "image": "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2F1704884664-668232595609980517370275&w=256&q=75",
-    "category": "toys"
+    "images": [
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2F1704884664-668232595609980517370275&w=256&q=75",
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2Fcategory%2FF1_iBftFUE.webp&w=384&q=75",
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2Fcategory%2FNoodoll-blanket-playmat-Ricepuffy-white-1_900x.webp&w=384&q=75",
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2Fcategory%2FStationery.webp&w=384&q=75"
+    ],
+    "description": "A soft-cover notebook with a cute fluffy theme, perfect for kids.",
+    "category": "toys",
+    "sizes": ["M", "L", "XL"],
+    "colors": ["Red", "White"]
   },
   {
     "id": 4,
     "title": "Mr Flashy",
-    "discount": "20%",
+    "discount": 20,
     "price": 4799,
     "originalPrice": 5999,
-    "image": "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2F1704884664-668232595609980517370275&w=256&q=75",
-    "category": "toys"
+    "images": [
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2F1704884664-668232595609980517370275&w=256&q=75",
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2Fcategory%2FF1_iBftFUE.webp&w=384&q=75",
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2Fcategory%2FNoodoll-blanket-playmat-Ricepuffy-white-1_900x.webp&w=384&q=75",
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2Fcategory%2FStationery.webp&w=384&q=75"
+    ],
+    "description": "A soft-cover notebook with a cute fluffy theme, perfect for kids.",
+    "category": "toys",
+    "sizes": ["M", "L", "XL"],
+    "colors": ["Red", "White"]
   },
   {
     "id": 5,
     "title": "Mr Scary Dragon",
-    "discount": "68%",
+    "discount": 68,
     "price": 999,
     "originalPrice": null,
-    "image": "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2F1704884664-668232595609980517370275&w=256&q=75",
-    "category": "toys"
+    "images": [
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2F1704884664-668232595609980517370275&w=256&q=75",
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2Fcategory%2FF1_iBftFUE.webp&w=384&q=75",
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2Fcategory%2FNoodoll-blanket-playmat-Ricepuffy-white-1_900x.webp&w=384&q=75",
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2Fcategory%2FStationery.webp&w=384&q=75"
+    ],
+    "description": "A soft-cover notebook with a cute fluffy theme, perfect for kids.",
+    "category": "toys",
+    "sizes": ["M", "L", "XL"],
+    "colors": ["Red", "White"]
   },
   {
     "id": 6,
     "title": "Mr Flying Nummy",
-    "discount": "58%",
+    "discount": 58,
     "price": 1700,
     "originalPrice": 4100,
-    "image": "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2F1704884664-668232595609980517370275&w=256&q=75",
-    "category": "toys"
+    "images": [
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2F1704884664-668232595609980517370275&w=256&q=75",
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2Fcategory%2FF1_iBftFUE.webp&w=384&q=75",
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2Fcategory%2FNoodoll-blanket-playmat-Ricepuffy-white-1_900x.webp&w=384&q=75",
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2Fcategory%2FStationery.webp&w=384&q=75"
+    ],
+    "description": "A soft-cover notebook with a cute fluffy theme, perfect for kids.",
+    "category": "toys",
+    "sizes": ["M", "L", "XL"],
+    "colors": ["Red", "White"]
   },
   {
     "id": 7,
     "title": "Mr One Eye Captain",
-    "discount": "51%",
+    "discount": 51,
     "price": 2200,
     "originalPrice": 4500,
-    "image": "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2F1704884664-668232595609980517370275&w=256&q=75",
-    "category": "toys"
+    "images": [
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2F1704884664-668232595609980517370275&w=256&q=75",
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2Fcategory%2FF1_iBftFUE.webp&w=384&q=75",
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2Fcategory%2FNoodoll-blanket-playmat-Ricepuffy-white-1_900x.webp&w=384&q=75",
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2Fcategory%2FStationery.webp&w=384&q=75"
+    ],
+    "description": "A soft-cover notebook with a cute fluffy theme, perfect for kids.",
+    "category": "toys",
+    "sizes": ["M", "L", "XL"],
+    "colors": ["Red", "White"]
   },
   {
     "id": 8,
     "title": "Mr Tomfy",
-    "discount": "41%",
+    "discount": 41,
     "price": 1750,
     "originalPrice": 3000,
-    "image": "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2F1704884664-668232595609980517370275&w=256&q=75",
-    "category": "toys"
+    "images": [
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2F1704884664-668232595609980517370275&w=256&q=75",
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2Fcategory%2FF1_iBftFUE.webp&w=384&q=75",
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2Fcategory%2FNoodoll-blanket-playmat-Ricepuffy-white-1_900x.webp&w=384&q=75",
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2Fcategory%2FStationery.webp&w=384&q=75"
+    ],
+    "description": "A soft-cover notebook with a cute fluffy theme, perfect for kids.",
+    "category": "toys",
+    "sizes": ["M", "L", "XL"],
+    "colors": ["Red", "White"]
   },
   {
     "id": 9,
     "title": "Mr Fluffy Family",
-    "discount": "30%",
+    "discount": 30,
     "price": 2900,
     "originalPrice": null,
-    "image": "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2F1704884664-668232595609980517370275&w=256&q=75",
-    "category": "toys"
+    "images": [
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2F1704884664-668232595609980517370275&w=256&q=75",
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2Fcategory%2FF1_iBftFUE.webp&w=384&q=75",
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2Fcategory%2FNoodoll-blanket-playmat-Ricepuffy-white-1_900x.webp&w=384&q=75",
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2Fcategory%2FStationery.webp&w=384&q=75"
+    ],
+    "description": "A soft-cover notebook with a cute fluffy theme, perfect for kids.",
+    "category": "toys",
+    "sizes": ["M", "L", "XL"],
+    "colors": ["Red", "White"]
   },
   {
     "id": 10,
     "title": "Mr Fluffy Sticker Set",
-    "discount": "25% OFF",
+    "discount": 25,
     "price": 450,
     "originalPrice": 600,
-    "image": "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2F1704884664-668232595609980517370275&w=256&q=75",
-    "category": "accessory"
+    "images": [
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2F1704884664-668232595609980517370275&w=256&q=75",
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2Fcategory%2FF1_iBftFUE.webp&w=384&q=75",
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2Fcategory%2FNoodoll-blanket-playmat-Ricepuffy-white-1_900x.webp&w=384&q=75",
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2Fcategory%2FStationery.webp&w=384&q=75"
+    ],
+    "description": "A soft-cover notebook with a cute fluffy theme, perfect for kids.",
+    "category": "accessory",
+    "sizes": ["M", "L", "XL"],
+    "colors": ["Red", "White"]
   },
   {
     "id": 11,
     "title": "Mr Fluffy Chalkboard",
-    "discount": "20% OFF",
+    "discount": 20,
     "price": 1200,
     "originalPrice": 1500,
-    "image": "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2F1704884664-668232595609980517370275&w=256&q=75",
-    "category": "accessory"
+    "images": [
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2F1704884664-668232595609980517370275&w=256&q=75",
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2Fcategory%2FF1_iBftFUE.webp&w=384&q=75",
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2Fcategory%2FNoodoll-blanket-playmat-Ricepuffy-white-1_900x.webp&w=384&q=75",
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2Fcategory%2FStationery.webp&w=384&q=75"
+    ],
+    "description": "A soft-cover notebook with a cute fluffy theme, perfect for kids.",
+    "category": "accessory",
+    "sizes": ["M", "L", "XL"],
+    "colors": ["Red", "White"]
   },
   {
     "id": 12,
     "title": "Mr Fluffy Gift Set 2",
-    "discount": "15% OFF",
+    "discount": 15,
     "price": 765,
     "originalPrice": 900,
-    "image": "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2F1704884664-668232595609980517370275&w=256&q=75",
-    "category": "accessory"
+    "images": [
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2F1704884664-668232595609980517370275&w=256&q=75",
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2Fcategory%2FF1_iBftFUE.webp&w=384&q=75",
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2Fcategory%2FNoodoll-blanket-playmat-Ricepuffy-white-1_900x.webp&w=384&q=75",
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2Fcategory%2FStationery.webp&w=384&q=75"
+    ],
+    "description": "A soft-cover notebook with a cute fluffy theme, perfect for kids.",
+    "category": "accessory",
+    "sizes": ["M", "L", "XL"],
+    "colors": ["Red", "White"]
   },
   {
     "id": 13,
     "title": "Mr Fluffy Gift Set 1",
-    "discount": "50% OFF",
+    "discount": 50,
     "price": 600,
     "originalPrice": 1200,
-    "image": "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2F1704884664-668232595609980517370275&w=256&q=75",
-    "category": "accessory"
+    "images": [
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2F1704884664-668232595609980517370275&w=256&q=75",
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2Fcategory%2FF1_iBftFUE.webp&w=384&q=75",
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2Fcategory%2FNoodoll-blanket-playmat-Ricepuffy-white-1_900x.webp&w=384&q=75",
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2Fcategory%2FStationery.webp&w=384&q=75"
+    ],
+    "description": "A soft-cover notebook with a cute fluffy theme, perfect for kids.",
+    "category": "accessory",
+    "sizes": ["M", "L", "XL"],
+    "colors": ["Red", "White"]
   },
   {
     "id": 14,
     "title": "Fluffy Sticker Set",
-    "discount": "25% OFF",
+    "discount": 25,
     "price": 299,
     "originalPrice": 400,
-    "image": "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2F1704884664-668232595609980517370275&w=256&q=75",
-    "category": "stationery"
+    "images": [
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2F1704884664-668232595609980517370275&w=256&q=75",
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2Fcategory%2FF1_iBftFUE.webp&w=384&q=75",
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2Fcategory%2FNoodoll-blanket-playmat-Ricepuffy-white-1_900x.webp&w=384&q=75",
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2Fcategory%2FStationery.webp&w=384&q=75"
+    ],
+    "description": "A soft-cover notebook with a cute fluffy theme, perfect for kids.",
+    "category": "stationery",
+    "sizes": ["M", "L", "XL"],
+    "colors": ["Red", "White"]
   },
   {
     "id": 15,
     "title": "Mr Fluffy Ruler",
-    "discount": "39% OFF",
+    "discount": 39,
     "price": 305,
     "originalPrice": 500,
-    "image": "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2F1704884664-668232595609980517370275&w=256&q=75",
-    "category": "stationery"
+    "images": [
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2F1704884664-668232595609980517370275&w=256&q=75",
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2Fcategory%2FF1_iBftFUE.webp&w=384&q=75",
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2Fcategory%2FNoodoll-blanket-playmat-Ricepuffy-white-1_900x.webp&w=384&q=75",
+      "https://mocknarzo.redshop.io/_next/image?url=https%3A%2F%2Fcdn.redshop.io%2Fmedia%2Fimages%2Fcategory%2FStationery.webp&w=384&q=75"
+    ],
+    "description": "A soft-cover notebook with a cute fluffy theme, perfect for kids.",
+    "category": "stationery",
+    "sizes": ["M", "L", "XL"],
+    "colors": ["Red", "White"]
   }
 ]
