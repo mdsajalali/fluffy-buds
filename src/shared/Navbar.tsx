@@ -5,7 +5,7 @@ import { Menu, X, LogOut, User, ShoppingBag } from "lucide-react";
 
 const navItems = [
   { label: "Home", path: "/" },
-  { label: "Products", path: "/products" },
+  { label: "Shop", path: "/shop" },
   { label: "Categories", path: "/categories" },
 ];
 

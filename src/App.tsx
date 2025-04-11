@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Route, Routes, useLocation } from "react-router-dom";
 import Accessories from "./components/Accessories";
 import Hero from "./components/Hero";
 import Stationery from "./components/Stationery";
@@ -8,61 +9,65 @@ import Footer from "./shared/Footer";
 import Navbar from "./shared/Navbar";
 import { ProductProps } from "./types/types";
 import Categories from "./components/Categories";
-import { Route, Routes } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Shop from "./pages/Shop";
 
 const App = () => {
+  const location = useLocation();
   const [toys, setToys] = useState<ProductProps[]>([]);
   const [accessories, setAccessories] = useState<ProductProps[]>([]);
   const [stationery, setStationery] = useState<ProductProps[]>([]);
+  const [products, setProducts] = useState<ProductProps[]>([]);
 
   useEffect(() => {
     fetch("/products.json")
       .then((res) => res.json())
       .then((data) => {
-        // Filter products by category
-        setToys(
-          data.filter((product: ProductProps) => product.category === "toys")
-        );
+        setProducts(data);
+        setToys(data.filter((p: ProductProps) => p.category === "toys"));
         setAccessories(
-          data.filter(
-            (product: ProductProps) => product.category === "accessory"
-          )
+          data.filter((p: ProductProps) => p.category === "accessory")
         );
         setStationery(
-          data.filter(
-            (product: ProductProps) => product.category === "stationery"
-          )
+          data.filter((p: ProductProps) => p.category === "stationery")
         );
       });
   }, []);
 
+  const isAuthPage =
+    location.pathname === "/login" || location.pathname === "/register";
+
   return (
-    <Routes>
-      {/* Homepage */}
-      <Route
-        path="/"
-        element={
-          <>
-            <Navbar />
-            <BottomNavbar />
-            <Hero />
-            <Toys products={toys} />
-            <Accessories products={accessories} />
-            <Stationery products={stationery} />
-            <Categories />
-            <Footer />
-          </>
-        }
-      />
+    <>
+      {!isAuthPage && <Navbar />}
+      {!isAuthPage && <BottomNavbar />}
 
-      {/* Login */}
-      <Route path="/login" element={<Login />} />
+      <Routes>
+        {/* Homepage */}
+        <Route
+          path="/"
+          element={
+            <>
+              <Hero />
+              <Toys products={toys} />
+              <Accessories products={accessories} />
+              <Stationery products={stationery} />
+              <Categories />
+            </>
+          }
+        />
 
-      {/* Register */}
-      <Route path="/register" element={<Register />} />
-    </Routes>
+        {/* shop page */}
+        <Route path="/shop" element={<Shop products={products} />} />
+
+        {/* Auth pages */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+      </Routes>
+
+      {!isAuthPage && <Footer />}
+    </>
   );
 };
 
