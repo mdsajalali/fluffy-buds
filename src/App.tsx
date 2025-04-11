@@ -12,7 +12,10 @@ import Categories from "./components/Categories";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Shop from "./pages/Shop";
-import Dashboard from "./pages/Dashboard";
+import Dashboard from "./pages/(dashboard)/Dashboard";
+import AddItems from "./pages/(dashboard)/AddItems";
+import ListItems from "./pages/(dashboard)/ListItems";
+import Orders from "./pages/(dashboard)/Orders";
 
 const App = () => {
   const location = useLocation();
@@ -39,7 +42,10 @@ const App = () => {
   const isAuthPage =
     location.pathname === "/login" ||
     location.pathname === "/register" ||
-    location.pathname === "/dashboard";
+    location.pathname === "/dashboard" ||
+    location.pathname === "/dashboard/add-items" ||
+    location.pathname === "/dashboard/list-items" ||
+    location.pathname === "/dashboard/orders";
 
   return (
     <>
@@ -68,7 +74,11 @@ const App = () => {
         <Route path="/categories" element={<Categories />} />
 
         {/* dashboard page */}
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard" element={<Dashboard />}>
+          <Route path="add-items" element={<AddItems />} />
+          <Route path="list-items" element={<ListItems />} />
+          <Route path="orders" element={<Orders />} />
+        </Route>
 
         {/* Auth pages */}
         <Route path="/login" element={<Login />} />

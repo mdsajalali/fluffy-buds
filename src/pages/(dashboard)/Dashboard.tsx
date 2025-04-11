@@ -8,7 +8,7 @@ import {
   X,
   Menu,
 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
 const Dashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -39,7 +39,7 @@ const Dashboard = () => {
             <ul className="space-y-2">
               <li>
                 <Link
-                  to="/"
+                  to="/dashboard"
                   className="flex items-center p-2 text-gray-700 hover:bg-gray-200 rounded"
                 >
                   <Home size={20} className="mr-3" />
@@ -48,7 +48,7 @@ const Dashboard = () => {
               </li>
               <li>
                 <Link
-                  to="/add-items"
+                  to="add-items"
                   className="flex items-center p-2 text-gray-700 hover:bg-gray-200 rounded"
                 >
                   <PlusCircle size={20} className="mr-3" />
@@ -57,7 +57,7 @@ const Dashboard = () => {
               </li>
               <li>
                 <Link
-                  to="/list-items"
+                  to="list-items"
                   className="flex items-center p-2 text-gray-700 hover:bg-gray-200 rounded"
                 >
                   <List size={20} className="mr-3" />
@@ -66,7 +66,7 @@ const Dashboard = () => {
               </li>
               <li>
                 <Link
-                  to="/orders"
+                  to="orders"
                   className="flex items-center p-2 text-gray-700 hover:bg-gray-200 rounded"
                 >
                   <ShoppingCart size={20} className="mr-3" />
@@ -110,7 +110,9 @@ const Dashboard = () => {
         </header>
 
         {/* Content Area */}
-        <main className="flex-1 p-6 overflow-y-auto">Content area</main>
+        <main className="flex-1 p-6 overflow-y-auto">
+          <Outlet />
+        </main>
       </div>
     </div>
   );
