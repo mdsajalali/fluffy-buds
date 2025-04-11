@@ -2,10 +2,10 @@ import { Link } from "react-router-dom";
 
 const Login = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4 md:px-0">
       <div className="bg-white shadow-lg rounded-lg flex flex-col md:flex-row w-full max-w-4xl">
         {/* Left Section: Form */}
-        <div className="p-8 w-full md:w-1/2">
+        <div className="lg:p-8 p-4 w-full md:w-1/2">
           <div className="flex items-center mb-6">
             <img src="/logo.webp" alt="Logo" />
           </div>
