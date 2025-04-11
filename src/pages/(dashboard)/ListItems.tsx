@@ -11,6 +11,8 @@ const mockProducts = [
     price: 18,
     regularPrice: 25,
     category: "Toys",
+    sizes: ["Small", "Medium"],
+    colors: ["Red", "Blue"],
   },
   {
     id: 2,
@@ -21,6 +23,8 @@ const mockProducts = [
     price: 12,
     regularPrice: 15,
     category: "Stationery",
+    sizes: ["A5", "A4"],
+    colors: ["Black"],
   },
   {
     id: 3,
@@ -31,6 +35,8 @@ const mockProducts = [
     price: 8,
     regularPrice: 10,
     category: "Accessories",
+    sizes: [],
+    colors: ["Brown", "Tan"],
   },
 ];
 
@@ -47,6 +53,8 @@ const ListItems = () => {
               <th className="px-5 py-4 font-semibold">Name</th>
               <th className="px-5 py-4 font-semibold">Description</th>
               <th className="px-5 py-4 font-semibold">Category</th>
+              <th className="px-5 py-4 font-semibold">Sizes</th>
+              <th className="px-5 py-4 font-semibold">Colors</th>
               <th className="px-5 py-4 font-semibold">Price</th>
               <th className="px-5 py-4 font-semibold text-center">Actions</th>
             </tr>
@@ -68,6 +76,12 @@ const ListItems = () => {
                   {item.description}
                 </td>
                 <td className="px-5 py-4 text-gray-700">{item.category}</td>
+                <td className="px-5 py-4 text-gray-700">
+                  {item.sizes.length > 0 ? item.sizes.join(", ") : "—"}
+                </td>
+                <td className="px-5 py-4 text-gray-700">
+                  {item.colors.length > 0 ? item.colors.join(", ") : "—"}
+                </td>
                 <td className="px-5 py-4">
                   <div className="flex flex-col sm:flex-row sm:items-center gap-1">
                     <span className="text-base font-bold text-gray-900">
