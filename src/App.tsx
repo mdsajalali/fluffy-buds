@@ -12,6 +12,7 @@ import Categories from "./components/Categories";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Shop from "./pages/Shop";
+import Dashboard from "./pages/Dashboard";
 
 const App = () => {
   const location = useLocation();
@@ -36,7 +37,9 @@ const App = () => {
   }, []);
 
   const isAuthPage =
-    location.pathname === "/login" || location.pathname === "/register";
+    location.pathname === "/login" ||
+    location.pathname === "/register" ||
+    location.pathname === "/dashboard";
 
   return (
     <>
@@ -60,9 +63,12 @@ const App = () => {
 
         {/* shop page */}
         <Route path="/shop" element={<Shop products={products} />} />
-        {/* shop page */}
 
+        {/* categories page */}
         <Route path="/categories" element={<Categories />} />
+
+        {/* dashboard page */}
+        <Route path="/dashboard" element={<Dashboard />} />
 
         {/* Auth pages */}
         <Route path="/login" element={<Login />} />

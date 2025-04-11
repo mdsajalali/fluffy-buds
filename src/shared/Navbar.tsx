@@ -7,6 +7,7 @@ const navItems = [
   { label: "Home", path: "/" },
   { label: "Shop", path: "/shop" },
   { label: "Categories", path: "/categories" },
+  { label: "Admin Dashboard", path: "/dashboard" },
 ];
 
 const Navbar = () => {
