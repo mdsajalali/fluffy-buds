@@ -16,6 +16,9 @@ import Dashboard from "./pages/(dashboard)/Dashboard";
 import AddItems from "./pages/(dashboard)/AddItems";
 import ListItems from "./pages/(dashboard)/ListItems";
 import Orders from "./pages/(dashboard)/Orders";
+import RefundPolicy from "./pages/(privacy-policy)/Refund-Policy";
+import TermsConditions from "./pages/(privacy-policy)/Terms-Conditions";
+import PrivacyPolicy from "./pages/(privacy-policy)/Privacy-Policy";
 
 const App = () => {
   const location = useLocation();
@@ -72,6 +75,11 @@ const App = () => {
 
         {/* categories page */}
         <Route path="/categories" element={<Categories />} />
+
+        {/* privacy policy pages */}
+        <Route path="/terms-conditions" element={<TermsConditions />} />
+        <Route path="/refund-policy" element={<RefundPolicy />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
 
         {/* dashboard page */}
         <Route path="/dashboard" element={<Dashboard />}>

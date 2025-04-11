@@ -41,12 +41,12 @@ const Footer = () => {
             </h1>
             <ul className="space-y-2 mt-4">
               <li>
-                <Link to="/" className="text-gray-600 hover:text-gray-900">
+                <Link to="/shop" className="text-gray-600 hover:text-gray-900">
                   Toys
                 </Link>
               </li>
               <li>
-                <Link to="/" className="text-gray-600 hover:text-gray-900">
+                <Link to="/shop" className="text-gray-600 hover:text-gray-900">
                   Accessories
                 </Link>
               </li>
@@ -56,7 +56,7 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/" className="text-gray-600 hover:text-gray-900">
+                <Link to="/shop" className="text-gray-600 hover:text-gray-900">
                   Stationery
                 </Link>
               </li>
@@ -70,17 +70,26 @@ const Footer = () => {
             </h1>
             <ul className="space-y-2 mt-4">
               <li>
-                <Link to="/" className="text-gray-600 hover:text-gray-900">
+                <Link
+                  to="/terms-conditions"
+                  className="text-gray-600 hover:text-gray-900"
+                >
                   Terms and Conditions
                 </Link>
               </li>
               <li>
-                <Link to="/" className="text-gray-600 hover:text-gray-900">
+                <Link
+                  to="/refund-policy"
+                  className="text-gray-600 hover:text-gray-900"
+                >
                   Refund Policy
                 </Link>
               </li>
               <li>
-                <Link to="/" className="text-gray-600 hover:text-gray-900">
+                <Link
+                  to="/privacy-policy"
+                  className="text-gray-600 hover:text-gray-900"
+                >
                   Privacy Policy
                 </Link>
               </li>
