@@ -1,5 +1,6 @@
 [
   {
+    "id": 1,
     "title": "Fluffy Theme Notebook",
     "discount": "51%",
     "price": 220,
@@ -8,6 +9,7 @@
     "category": "toys"
   },
   {
+    "id": 2,
     "title": "Mr PearTeary",
     "discount": "41%",
     "price": 699,
@@ -16,6 +18,7 @@
     "category": "toys"
   },
   {
+    "id": 3,
     "title": "Mr Shuffy Puffy",
     "discount": "30%",
     "price": 560,
@@ -24,6 +27,7 @@
     "category": "toys"
   },
   {
+    "id": 4,
     "title": "Mr Flashy",
     "discount": "20%",
     "price": 4799,
@@ -32,6 +36,7 @@
     "category": "toys"
   },
   {
+    "id": 5,
     "title": "Mr Scary Dragon",
     "discount": "68%",
     "price": 999,
@@ -40,6 +45,7 @@
     "category": "toys"
   },
   {
+    "id": 6,
     "title": "Mr Flying Nummy",
     "discount": "58%",
     "price": 1700,
@@ -48,6 +54,7 @@
     "category": "toys"
   },
   {
+    "id": 7,
     "title": "Mr One Eye Captain",
     "discount": "51%",
     "price": 2200,
@@ -56,6 +63,7 @@
     "category": "toys"
   },
   {
+    "id": 8,
     "title": "Mr Tomfy",
     "discount": "41%",
     "price": 1750,
@@ -64,6 +72,7 @@
     "category": "toys"
   },
   {
+    "id": 9,
     "title": "Mr Fluffy Family",
     "discount": "30%",
     "price": 2900,
@@ -72,6 +81,7 @@
     "category": "toys"
   },
   {
+    "id": 10,
     "title": "Mr Fluffy Sticker Set",
     "discount": "25% OFF",
     "price": 450,
@@ -80,6 +90,7 @@
     "category": "accessory"
   },
   {
+    "id": 11,
     "title": "Mr Fluffy Chalkboard",
     "discount": "20% OFF",
     "price": 1200,
@@ -88,6 +99,7 @@
     "category": "accessory"
   },
   {
+    "id": 12,
     "title": "Mr Fluffy Gift Set 2",
     "discount": "15% OFF",
     "price": 765,
@@ -96,6 +108,7 @@
     "category": "accessory"
   },
   {
+    "id": 13,
     "title": "Mr Fluffy Gift Set 1",
     "discount": "50% OFF",
     "price": 600,
@@ -104,6 +117,7 @@
     "category": "accessory"
   },
   {
+    "id": 14,
     "title": "Fluffy Sticker Set",
     "discount": "25% OFF",
     "price": 299,
@@ -112,6 +126,7 @@
     "category": "stationery"
   },
   {
+    "id": 15,
     "title": "Mr Fluffy Ruler",
     "discount": "39% OFF",
     "price": 305,

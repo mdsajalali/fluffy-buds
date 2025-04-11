@@ -1,5 +1,6 @@
 // Product cart type
 export interface ProductProps {
+  id: number;
   title: string;
   price: number;
   originalPrice: number;
