@@ -23,7 +23,7 @@ const Navbar = () => {
   return (
     <div className="border-b border-gray-300 md:fixed md:w-full md:top-0 md:bg-white md:z-50">
       <Container>
-        <div className="flex items-center justify-between py-5">
+        <div className="flex items-center justify-between py-3">
           <Link to="/">
             <img className="w-24" src="/logo.webp" alt="Logo" />
           </Link>
@@ -57,11 +57,18 @@ const Navbar = () => {
               <line x1="3" y1="6" x2="21" y2="6" />
               <path d="M16 10a4 4 0 0 1-8 0" />
             </svg>
-            <img
+            {/* user image */}
+            {/* <img
               className="w-6 h-6 object-contain cursor-pointer"
               src="/profile_icon.png"
               alt="Profile"
-            />
+            /> */}
+            <Link
+              to="/login"
+              className="border border-gray-300 px-4 py-[6px] cursor-pointer rounded-full"
+            >
+              Sign In
+            </Link>
             <button onClick={() => setIsOpen(true)} className="md:hidden">
               <Menu size={24} />
             </button>

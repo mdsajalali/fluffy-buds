@@ -8,6 +8,9 @@ import Footer from "./shared/Footer";
 import Navbar from "./shared/Navbar";
 import { ProductProps } from "./types/types";
 import Categories from "./components/Categories";
+import { Route, Routes } from "react-router-dom";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 const App = () => {
   const [toys, setToys] = useState<ProductProps[]>([]);
@@ -36,25 +39,30 @@ const App = () => {
   }, []);
 
   return (
-    <>
-      {/* Top Navbar */}
-      <Navbar />
-      {/* Bottom Navbar */}
-      <BottomNavbar />
-      {/* Hero */}
-      <Hero />
-      {/* Toys */}
-      <Toys products={toys} />
-      {/* Accessories */}
-      <Accessories products={accessories} />
-      {/* Stationery */}
-      <Stationery products={stationery} />
+    <Routes>
+      {/* Homepage */}
+      <Route
+        path="/"
+        element={
+          <>
+            <Navbar />
+            <BottomNavbar />
+            <Hero />
+            <Toys products={toys} />
+            <Accessories products={accessories} />
+            <Stationery products={stationery} />
+            <Categories />
+            <Footer />
+          </>
+        }
+      />
 
-      {/* Categories */}
-      <Categories />
-      {/* Footer */}
-      <Footer />
-    </>
+      {/* Login */}
+      <Route path="/login" element={<Login />} />
+
+      {/* Register */}
+      <Route path="/register" element={<Register />} />
+    </Routes>
   );
 };
 
