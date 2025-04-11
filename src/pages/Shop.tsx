@@ -3,6 +3,7 @@ import Container from "../shared/Container";
 import ProductCard from "../shared/ProductCard";
 import { ProductProps } from "../types/types";
 import { useState } from "react";
+import Pagination from "../components/Pagination";
 
 interface ProductType {
   products: ProductProps[];
@@ -96,6 +97,9 @@ const Shop = ({ products }: ProductType) => {
             </div>
           </div>
         </div>
+
+        {/* pagination here */}
+        <Pagination />
       </Container>
     </div>
   );
