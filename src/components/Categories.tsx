@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import HeadingTitle from "../shared/HeadingTitle";
 
 const Categories = () => {
@@ -41,7 +42,10 @@ const Categories = () => {
 
         {/* View All Button (Visible on larger screens) */}
         <div className="hidden lg:flex items-center h-[260px] justify-center border border-gray-300 shadow-[4px_4px_0_0_#000]  ">
-          <button className="text-lg font-semibold flex items-center gap-2 cursor-pointer">
+          <Link
+            to="/categories"
+            className="text-lg font-semibold flex items-center gap-2 cursor-pointer"
+          >
             View All
             <svg
               stroke="currentColor"
@@ -54,7 +58,7 @@ const Categories = () => {
             >
               <path d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z"></path>
             </svg>
-          </button>
+          </Link>
         </div>
       </div>
     </div>
