@@ -20,6 +20,7 @@ import TermsConditions from "./pages/(privacy-policy)/Terms-Conditions";
 import PrivacyPolicy from "./pages/(privacy-policy)/Privacy-Policy";
 import Shop from "./pages/(products)/Shop";
 import ProductDetails from "./pages/(products)/ProductDetails";
+import Cart from "./pages/(cart)/Cart";
 
 const App = () => {
   const location = useLocation();
@@ -77,6 +78,9 @@ const App = () => {
 
         {/* categories page */}
         <Route path="/categories" element={<Categories />} />
+
+        {/* cart page */}
+        <Route path="/cart" element={<Cart />} />
 
         {/* privacy policy pages */}
         <Route path="/terms-conditions" element={<TermsConditions />} />

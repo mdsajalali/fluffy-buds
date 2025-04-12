@@ -57,23 +57,30 @@ const Navbar = () => {
           </nav>
 
           <div className="flex items-center gap-4">
-            {/* Cart Icon */}
-            <svg
-              className="cursor-pointer"
-              stroke="currentColor"
-              fill="none"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              height="22"
-              width="22"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
-              <line x1="3" y1="6" x2="21" y2="6" />
-              <path d="M16 10a4 4 0 0 1-8 0" />
-            </svg>
+            <Link to="/cart" className="relative">
+              {/* Cart Icon */}
+              <svg
+                className="cursor-pointer text-gray-700 hover:text-black transition"
+                stroke="currentColor"
+                fill="none"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                height="28"
+                width="28"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+                <line x1="3" y1="6" x2="21" y2="6" />
+                <path d="M16 10a4 4 0 0 1-8 0" />
+              </svg>
+
+              {/* Badge */}
+              <div className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full shadow">
+                3
+              </div>
+            </Link>
 
             {/* Profile Dropdown */}
             <div className="relative" ref={dropdownRef}>

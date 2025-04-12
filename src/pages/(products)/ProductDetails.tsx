@@ -3,6 +3,7 @@ import Container from "../../shared/Container";
 import { useEffect, useState } from "react";
 import ProductDetailsCard from "../../components/ProductDetailsCard";
 import { ProductProps } from "../../types/types";
+import Categories from "../../components/Categories";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -29,6 +30,8 @@ const ProductDetails = () => {
         ) : (
           <div className="text-center text-xl text-gray-500">Loading...</div>
         )}
+        {/* Categories */}
+        <Categories />
       </Container>
     </div>
   );
