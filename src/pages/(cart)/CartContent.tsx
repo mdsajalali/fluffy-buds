@@ -1,4 +1,5 @@
 import { Trash2, Plus, Minus } from "lucide-react";
+import { Step } from "./Cart";
 
 const products = [
   {
@@ -21,7 +22,11 @@ const products = [
   },
 ];
 
-const CartContent = () => {
+const CartContent = ({
+  setActiveStep,
+}: {
+  setActiveStep: React.Dispatch<React.SetStateAction<Step>>;
+}) => {
   const subtotal = products.reduce(
     (acc, product) => acc + product.price * product.quantity,
     0
@@ -98,7 +103,10 @@ const CartContent = () => {
         <h2 className="text-lg font-semibold text-gray-800">
           Subtotal: ${subtotal}
         </h2>
-        <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md text-sm font-medium">
+        <button
+          onClick={() => setActiveStep("Address")}
+          className="bg-blue-600 hover:bg-blue-700 cursor-pointer text-white px-6 py-2 rounded-md text-sm font-medium"
+        >
           Proceed to Checkout
         </button>
       </div>

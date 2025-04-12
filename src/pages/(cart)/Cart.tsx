@@ -4,7 +4,7 @@ import Address from "./Address";
 import Payment from "./Payment";
 import CartContent from "./CartContent";
 
-type Step = "Cart" | "Address" | "Payment";
+export type Step = "Cart" | "Address" | "Payment";
 
 const Cart = () => {
   const [activeStep, setActiveStep] = useState<Step>("Cart");
@@ -53,8 +53,12 @@ const Cart = () => {
 
         {/* Content Section */}
         <div className="my-4">
-          {activeStep === "Cart" && <CartContent />}
-          {activeStep === "Address" && <Address />}
+          {activeStep === "Cart" && (
+            <CartContent setActiveStep={setActiveStep} />
+          )}
+          {activeStep === "Address" && (
+            <Address setActiveStep={setActiveStep} />
+          )}
           {activeStep === "Payment" && <Payment />}
         </div>
       </Container>
