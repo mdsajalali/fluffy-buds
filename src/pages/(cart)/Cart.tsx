@@ -1,5 +1,8 @@
 import { useState } from "react";
 import Container from "../../shared/Container";
+import Address from "./Address";
+import Payment from "./Payment";
+import CartContent from "./CartContent";
 
 type Step = "Cart" | "Address" | "Payment";
 
@@ -50,9 +53,9 @@ const Cart = () => {
 
         {/* Content Section */}
         <div className="my-4">
-          {activeStep === "Cart" && <div>Cart page</div>}
-          {activeStep === "Address" && <div>Address</div>}
-          {activeStep === "Payment" && <div>Payment</div>}
+          {activeStep === "Cart" && <CartContent />}
+          {activeStep === "Address" && <Address />}
+          {activeStep === "Payment" && <Payment />}
         </div>
       </Container>
     </div>
