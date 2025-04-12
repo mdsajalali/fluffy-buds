@@ -101,7 +101,7 @@ const Navbar = () => {
                   </Link>
                   <hr className="text-gray-300" />
                   <Link
-                    to="/orders"
+                    to="/my-orders"
                     className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100"
                   >
                     <ShoppingBag size={16} /> Orders
