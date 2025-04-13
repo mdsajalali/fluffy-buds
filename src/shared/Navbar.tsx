@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import Container from "./Container";
-import { Menu, X, LogOut, User, ShoppingBag } from "lucide-react";
+import { Menu, X, LogOut, ShoppingBag } from "lucide-react";
 
 const navItems = [
   { label: "Home", path: "/" },
@@ -93,13 +93,6 @@ const Navbar = () => {
 
               {showDropdown && (
                 <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-300 overflow-hidden rounded-lg shadow-lg z-50 text-sm">
-                  <Link
-                    onClick={() => setShowDropdown((prev) => !prev)}
-                    to="/profile"
-                    className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100"
-                  >
-                    <User size={16} /> Profile
-                  </Link>
                   <hr className="text-gray-300" />
                   <Link
                     onClick={() => setShowDropdown((prev) => !prev)}
