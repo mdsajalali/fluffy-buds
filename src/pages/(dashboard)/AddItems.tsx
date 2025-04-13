@@ -1,6 +1,7 @@
 import { useState, useRef, ChangeEvent } from "react";
 import { Trash2, Plus } from "lucide-react";
 import axiosInstance from "../../utils/axiosInstance";
+import { toast } from "sonner";
 
 const MAX_IMAGES = 4;
 
@@ -91,10 +92,22 @@ const AddItems = () => {
           "Content-Type": "multipart/form-data",
         },
       });
+      toast.success(response.data.message);
 
-      console.log("✅ Product submitted:", response.data);
+      // Clear the form fields
+      form.name.value = "";
+      form.description.value = "";
+      form.price.value = "";
+      form.discount.value = "";
+      form.category.value = "";
+
+      // Clear the selected colors, sizes, and images
+      setSelectedColors([]);
+      setSelectedSizes([]);
+      setImages([]);
     } catch (error) {
       console.error("❌ Product submission failed:", error);
+      toast.error("Product submission failed!");
     }
   };
 
