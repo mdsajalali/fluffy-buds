@@ -2,10 +2,27 @@ import { Pencil, Trash2 } from "lucide-react";
 import { useState } from "react";
 import Pagination from "../../components/Pagination";
 import useProducts from "../../hooks/useProducts";
+import axiosInstance from "../../lib/axiosInstance";
+import { toast } from "sonner";
 
 const ListItems = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const { products, loading, totalPages } = useProducts(currentPage);
+  const { products, loading, totalPages, setProducts } =
+    useProducts(currentPage);
+
+  // product delete
+  const handleDelete = async (id: string) => {
+    try {
+      const response = await axiosInstance.delete(`/delete-product/${id}`);
+      toast.success(response?.data?.message); 
+      setProducts((prevProducts) =>
+        prevProducts.filter((product) => product._id !== id)
+      );
+    } catch (error) {
+      console.error("Failed to delete product", error);
+      toast.error("Failed to delete product. Please try again.");
+    }
+  };
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
@@ -96,11 +113,14 @@ const ListItems = () => {
                     </td>
                     <td className="px-5 py-4 text-center">
                       <div className="flex justify-center gap-4">
-                        <button className="text-blue-600 hover:text-blue-800 transition flex items-center gap-1">
+                        <button className="text-blue-600 cursor-pointer hover:text-blue-800 transition flex items-center gap-1">
                           <Pencil size={18} />
                           <span className="hidden sm:inline">Edit</span>
                         </button>
-                        <button className="text-red-600 hover:text-red-800 transition flex items-center gap-1">
+                        <button
+                          onClick={() => handleDelete(item._id)}
+                          className="text-red-600 cursor-pointer hover:text-red-800 transition flex items-center gap-1"
+                        >
                           <Trash2 size={18} />
                           <span className="hidden sm:inline">Delete</span>
                         </button>

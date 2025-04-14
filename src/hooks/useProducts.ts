@@ -48,7 +48,7 @@ function useProducts(page: number) {
     fetchProducts();
   }, [page]);
 
-  return { products, loading, totalPages };
+  return { products, loading, totalPages, setProducts };
 }
 
 export default useProducts;
