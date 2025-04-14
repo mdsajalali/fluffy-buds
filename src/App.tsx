@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Accessories from "./components/Accessories";
 import Hero from "./components/Hero";
@@ -7,7 +6,6 @@ import Toys from "./components/Toys";
 import BottomNavbar from "./shared/BottomNavbar";
 import Footer from "./shared/Footer";
 import Navbar from "./shared/Navbar";
-import { ProductProps } from "./types/types";
 import Categories from "./components/Categories";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -23,28 +21,11 @@ import ProductDetails from "./pages/(products)/ProductDetails";
 import Cart from "./pages/(cart)/Cart";
 import MyOrders from "./pages/(orders)/MyOrders";
 import ProductUpdate from "./pages/(dashboard)/ProductUpdate";
+import useProducts from "./hooks/useProducts";
 
 const App = () => {
   const location = useLocation();
-  const [toys, setToys] = useState<ProductProps[]>([]);
-  const [accessories, setAccessories] = useState<ProductProps[]>([]);
-  const [stationery, setStationery] = useState<ProductProps[]>([]);
-  const [products, setProducts] = useState<ProductProps[]>([]);
-
-  useEffect(() => {
-    fetch("/products.json")
-      .then((res) => res.json())
-      .then((data) => {
-        setProducts(data);
-        setToys(data.filter((p: ProductProps) => p.category === "toys"));
-        setAccessories(
-          data.filter((p: ProductProps) => p.category === "accessory")
-        );
-        setStationery(
-          data.filter((p: ProductProps) => p.category === "stationery")
-        );
-      });
-  }, []);
+  const { toys, accessories, stationery, products } = useProducts();
 
   const isAuthPage =
     location.pathname === "/login" ||
