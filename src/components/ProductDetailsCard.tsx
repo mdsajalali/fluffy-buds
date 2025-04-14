@@ -7,9 +7,9 @@ interface ProductCardProps {
 }
 
 const ProductDetailsCard = ({ product }: ProductCardProps) => {
-  const [selectedImage, setSelectedImage] = useState(product.images[0]);
-  const [selectedSize, setSelectedSize] = useState(product.sizes[0]);
-  const [selectedColor, setSelectedColor] = useState(product.colors[0]);
+  const [selectedImage, setSelectedImage] = useState(product?.images[0]?.url);
+  const [selectedSize, setSelectedSize] = useState(product?.sizes[0]);
+  const [selectedColor, setSelectedColor] = useState(product?.colors[0]);
   const [quantities, setQuantities] = useState<{ [key: number]: number }>({});
 
   const handleImageClick = (image: string) => {
@@ -51,17 +51,17 @@ const ProductDetailsCard = ({ product }: ProductCardProps) => {
           <div className="flex flex-col md:flex-row gap-4">
             {/* Thumbnail Images */}
             <div className="flex md:flex-col gap-2 order-2 md:order-1">
-              {product.images.map((image, index) => (
+              {product?.images?.map((image, index) => (
                 <img
                   key={index}
-                  src={image}
+                  src={image?.url}
                   alt={`Thumbnail ${index + 1}`}
                   className={`w-20 h-24 object-cover cursor-pointer border-2 ${
-                    selectedImage === image
+                    selectedImage === image?.url
                       ? "border-blue-500"
                       : "border-transparent"
                   }`}
-                  onClick={() => handleImageClick(image)}
+                  onClick={() => handleImageClick(image?.url)}
                 />
               ))}
             </div>
@@ -80,17 +80,17 @@ const ProductDetailsCard = ({ product }: ProductCardProps) => {
         {/* Right Section: Product Details */}
         <div className="flex-1">
           <h1 className="text-2xl font-semibold text-blue-600">
-            {product.title}
+            {product.name}
           </h1>
 
           {/* Price */}
           <div className="text-2xl font-bold text-gray-800 mb-2">
-            ₹{product.price}
+            ₹{product?.price}
             <span className="line-through text-sm text-gray-500 ml-2">
-              ₹{product.originalPrice}
+              ₹{product?.discount}
             </span>
             <span className="text-red-500 text-sm ml-2">
-              ({product.discount}% OFF)
+              ({product?.discount}% OFF)
             </span>
           </div>
 
@@ -148,10 +148,10 @@ const ProductDetailsCard = ({ product }: ProductCardProps) => {
           <div className="flex items-center gap-4 mb-4">
             <div className="w-full">
               {/* Quantity Controller */}
-              {quantities[product.id] ? (
+              {quantities[Number(product._id)] ? (
                 <div className="mt-3 border border-black flex items-center justify-between px-3 py-1">
                   <button
-                    onClick={() => handleDecrease(product.id)}
+                    onClick={() => handleDecrease(Number(product._id))}
                     className="text-xl"
                   >
                     <svg
@@ -167,9 +167,11 @@ const ProductDetailsCard = ({ product }: ProductCardProps) => {
                       <path d="M872 474H152c-4.4 0-8 3.6-8 8v60c0 4.4 3.6 8 8 8h720c4.4 0 8-3.6 8-8v-60c0-4.4-3.6-8-8-8z"></path>
                     </svg>
                   </button>
-                  <span className="font-bold">{quantities[product.id]}</span>
+                  <span className="font-bold">
+                    {quantities[Number(product._id)]}
+                  </span>
                   <button
-                    onClick={() => handleIncrease(product.id)}
+                    onClick={() => handleIncrease(Number(product._id))}
                     className="text-xl"
                   >
                     <svg
@@ -190,7 +192,7 @@ const ProductDetailsCard = ({ product }: ProductCardProps) => {
               ) : (
                 <div
                   className="mt-3 border border-gray-300 w-full hover:shadow duration-300 shadow-[4px_4px_0_0_#22c55e]"
-                  onClick={() => handleAddToCart(product.id)}
+                  onClick={() => handleAddToCart(Number(product._id))}
                 >
                   <button className="w-full py-2 cursor-pointer font-bold text-sm  ">
                     Add To Cart

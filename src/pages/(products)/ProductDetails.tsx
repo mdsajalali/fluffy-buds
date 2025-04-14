@@ -14,7 +14,7 @@ const ProductDetails = () => {
       .then((res) => res.json())
       .then((data) => {
         const found = data.find(
-          (item: ProductProps) => item.id === parseInt(id as string)
+          (item: ProductProps) => item?.id === parseInt(id as string)
         );
         setProduct(found);
       });

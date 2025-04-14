@@ -21,11 +21,11 @@ import ProductDetails from "./pages/(products)/ProductDetails";
 import Cart from "./pages/(cart)/Cart";
 import MyOrders from "./pages/(orders)/MyOrders";
 import ProductUpdate from "./pages/(dashboard)/ProductUpdate";
-import useProducts from "./hooks/useProducts";
+import useCategoriesProduct from "./hooks/useCategoriesProduct";
 
 const App = () => {
   const location = useLocation();
-  const { toys, accessories, stationery, products } = useProducts();
+  const { toys, accessories, stationery, products } = useCategoriesProduct();
 
   const isAuthPage =
     location.pathname === "/login" ||

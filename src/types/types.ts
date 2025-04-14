@@ -1,13 +1,14 @@
 // Product cart type
 export interface ProductProps {
-  id: number;
-  title: string;
-  price: number;
-  originalPrice: number;
-  discount: number;
-  images: string[];
+  id?: number;
+  _id: string;
+  name: string;
   description: string;
-  category: "toys" | "accessory" | "stationery";
+  discount?: number;
+  category: string;
   sizes: string[];
   colors: string[];
+  price: number;
+  regularPrice: number;
+  images: { url: string }[];
 }
