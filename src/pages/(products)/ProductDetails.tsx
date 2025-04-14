@@ -2,34 +2,45 @@ import { useParams } from "react-router-dom";
 import Container from "../../shared/Container";
 import { useEffect, useState } from "react";
 import ProductDetailsCard from "../../components/ProductDetailsCard";
-import { ProductProps } from "../../types/types";
 import Categories from "../../components/Categories";
+import axiosInstance from "../../lib/axiosInstance";
+import { toast } from "sonner";
 
 const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    fetch("/products.json")
-      .then((res) => res.json())
-      .then((data) => {
-        const found = data.find(
-          (item: ProductProps) => item?.id === parseInt(id as string)
-        );
-        setProduct(found);
-      });
+    const fetchProduct = async () => {
+      setLoading(true);
+      try {
+        const res = await axiosInstance.get(`/product/${id}`);
+        const productData = res?.data?.product;
+        if (productData) {
+          setProduct(productData);
+        }
+      } catch (error) {
+        console.error("Failed to fetch product", error);
+        toast.error("Failed to fetch product details");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProduct();
   }, [id]);
+
+  if (loading) {
+    return <div className="text-center text-xl text-gray-500">Loading...</div>;
+  }
 
   return (
     <div className="md:mt-[65px]">
       {" "}
       {/* Adds margin to the top for large screens */}
       <Container>
-        {product ? (
-          <ProductDetailsCard product={product} />
-        ) : (
-          <div className="text-center text-xl text-gray-500">Loading...</div>
-        )}
+        {product && <ProductDetailsCard product={product} />}
         {/* Categories */}
         <Categories />
       </Container>

@@ -5,8 +5,6 @@ import { Link } from "react-router-dom";
 const ProductCard = ({ product }: { product: ProductProps }) => {
   const [quantities, setQuantities] = useState<{ [key: number]: number }>({});
 
-  console.log({ product });
-
   const handleAddToCart = (index: number) => {
     setQuantities((prev) => ({ ...prev, [index]: 1 }));
   };
@@ -67,7 +65,7 @@ const ProductCard = ({ product }: { product: ProductProps }) => {
                 className="cursor-pointer"
                 stroke="currentColor"
                 fill="currentColor"
-                stroke-width="0"
+                strokeWidth="0"
                 viewBox="0 0 1024 1024"
                 height="1em"
                 width="1em"
@@ -87,7 +85,7 @@ const ProductCard = ({ product }: { product: ProductProps }) => {
                 className="cursor-pointer"
                 stroke="currentColor"
                 fill="currentColor"
-                stroke-width="0"
+                strokeWidth="0"
                 viewBox="0 0 1024 1024"
                 height="1em"
                 width="1em"
