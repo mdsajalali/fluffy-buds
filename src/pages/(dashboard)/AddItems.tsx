@@ -15,6 +15,7 @@ const AddItems = () => {
   const [error, setError] = useState<string>("");
   const [selectedSizes, setSelectedSizes] = useState<string[]>([]);
   const [selectedColors, setSelectedColors] = useState<string[]>([]);
+  const [loading, setLoading] = useState(false);
 
   const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -65,6 +66,7 @@ const AddItems = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true);
 
     const form = e.currentTarget as HTMLFormElement & {
       name: { value: string };
@@ -108,13 +110,14 @@ const AddItems = () => {
     } catch (error) {
       console.error("❌ Product submission failed:", error);
       toast.error("Product submission failed!");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className="max-w-4xl mx-auto md:p-6 p-4">
       <h2 className="text-2xl font-bold mb-6">Add New Product</h2>
-
       <form onSubmit={handleSubmit}>
         <div>
           <label className="block font-medium mb-2">
@@ -302,9 +305,18 @@ const AddItems = () => {
 
         <button
           type="submit"
-          className="mt-8 w-full cursor-pointer bg-black text-white py-3 rounded hover:bg-gray-800 transition"
+          disabled={loading}
+          className={`mt-8 w-full py-3 rounded transition flex justify-center items-center ${
+            loading
+              ? "bg-gray-600 cursor-not-allowed"
+              : "bg-black hover:bg-gray-800 cursor-pointer text-white"
+          }`}
         >
-          Add Product
+          {loading ? (
+            <span className="inline-block w-6 h-6 border-2 border-t-transparent border-white rounded-full animate-spin"></span>
+          ) : (
+            "Add Product"
+          )}
         </button>
       </form>
     </div>
