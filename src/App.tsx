@@ -22,6 +22,7 @@ import Shop from "./pages/(products)/Shop";
 import ProductDetails from "./pages/(products)/ProductDetails";
 import Cart from "./pages/(cart)/Cart";
 import MyOrders from "./pages/(orders)/MyOrders";
+import ProductUpdate from "./pages/(dashboard)/ProductUpdate";
 
 const App = () => {
   const location = useLocation();
@@ -51,6 +52,7 @@ const App = () => {
     location.pathname === "/dashboard" ||
     location.pathname === "/dashboard/add-items" ||
     location.pathname === "/dashboard/list-items" ||
+    location.pathname.startsWith("/dashboard/list-items/") ||
     location.pathname === "/dashboard/orders";
 
   return (
@@ -95,6 +97,7 @@ const App = () => {
         <Route path="/dashboard" element={<Dashboard />}>
           <Route path="add-items" element={<AddItems />} />
           <Route path="list-items" element={<ListItems />} />
+          <Route path="list-items/:id" element={<ProductUpdate />} />
           <Route path="orders" element={<Orders />} />
         </Route>
 

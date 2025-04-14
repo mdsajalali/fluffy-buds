@@ -4,6 +4,7 @@ import Pagination from "../../components/Pagination";
 import useProducts from "../../hooks/useProducts";
 import axiosInstance from "../../lib/axiosInstance";
 import { toast } from "sonner";
+import { Link } from "react-router-dom";
 
 const ListItems = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -14,7 +15,7 @@ const ListItems = () => {
   const handleDelete = async (id: string) => {
     try {
       const response = await axiosInstance.delete(`/delete-product/${id}`);
-      toast.success(response?.data?.message); 
+      toast.success(response?.data?.message);
       setProducts((prevProducts) =>
         prevProducts.filter((product) => product._id !== id)
       );
@@ -113,10 +114,14 @@ const ListItems = () => {
                     </td>
                     <td className="px-5 py-4 text-center">
                       <div className="flex justify-center gap-4">
-                        <button className="text-blue-600 cursor-pointer hover:text-blue-800 transition flex items-center gap-1">
+                        <Link
+                          to={`${item._id}`}
+                          className="text-blue-600 cursor-pointer hover:text-blue-800 transition flex items-center gap-1"
+                        >
                           <Pencil size={18} />
                           <span className="hidden sm:inline">Edit</span>
-                        </button>
+                        </Link>
+
                         <button
                           onClick={() => handleDelete(item._id)}
                           className="text-red-600 cursor-pointer hover:text-red-800 transition flex items-center gap-1"
