@@ -1,6 +1,6 @@
 import { useState, useRef, ChangeEvent } from "react";
 import { Trash2, Plus } from "lucide-react";
-import axiosInstance from "../../utils/axiosInstance";
+import axiosInstance from "../../lib/axiosInstance";
 import { toast } from "sonner";
 
 const MAX_IMAGES = 4;
