@@ -1,12 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import HeadingTitle from "../shared/HeadingTitle";
 import useCategoriesProduct from "../hooks/useCategoriesProduct";
 import ProductCard from "../shared/ProductCard";
 
 const Categories = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
   const { toys, accessories, stationery, products } = useCategoriesProduct();
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [showAllProducts, setShowAllProducts] = useState(false);
+
+  const isCategoriesPage = location.pathname === "/categories";
 
   const categories = [
     {
@@ -30,6 +35,12 @@ const Categories = () => {
   ];
 
   const handleCategoryClick = (categoryName: string) => {
+    if (!isCategoriesPage) {
+      navigate("/categories");
+      sessionStorage.setItem("selectedCategory", categoryName);
+      return;
+    }
+
     if (activeCategory === categoryName) {
       setActiveCategory(null);
       setShowAllProducts(false);
@@ -40,30 +51,61 @@ const Categories = () => {
   };
 
   const handleViewAllClick = () => {
+    if (!isCategoriesPage) {
+      navigate("/categories");
+      sessionStorage.setItem("showAllProducts", "true");
+      return;
+    }
     setShowAllProducts(true);
     setActiveCategory(null);
   };
 
-  // Determine which products to display
+  useEffect(() => {
+    if (isCategoriesPage) {
+      const storedCategory = sessionStorage.getItem("selectedCategory");
+      const storedShowAll = sessionStorage.getItem("showAllProducts");
+
+      if (storedCategory) {
+        setActiveCategory(storedCategory);
+        sessionStorage.removeItem("selectedCategory");
+      } else if (storedShowAll) {
+        setShowAllProducts(true);
+        sessionStorage.removeItem("showAllProducts");
+      }
+    }
+  }, [isCategoriesPage]);
+
   const productsToDisplay = showAllProducts
     ? products
     : activeCategory
     ? categories.find((cat) => cat.name === activeCategory)?.products || []
     : [];
 
-  return (
-    <div className="container mx-auto py-6 px-4">
-      <HeadingTitle title="Categories" />
+  const getProductCountText = () => {
+    if (showAllProducts) {
+      return `All Products (${products.length})`;
+    }
+    if (activeCategory) {
+      const count = productsToDisplay.length;
+      return `${activeCategory} (${count} product${count !== 1 ? "s" : ""})`;
+    }
+    return "";
+  };
 
+  return (
+    <div className={`container mx-auto px-4 mb-10`}>
+      <div className={!isCategoriesPage ? "" : "md:mt-14"}>
+        <HeadingTitle title="Categories" />
+      </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {categories.map((category, index) => (
-          <div key={index} className="relative">
+        {categories?.map((category, index) => (
+          <div key={index} className="relative group">
             <div
               className={`overflow-hidden border border-gray-300 shadow-[4px_4px_0_0_#000] ${
                 activeCategory === category.name
                   ? "shadow-[4px_4px_0_0_#3b82f6]"
                   : ""
-              }`}
+              }  `}
               onClick={() => handleCategoryClick(category.name)}
             >
               <img
@@ -74,19 +116,22 @@ const Categories = () => {
             </div>
             <div className="text-center py-2">
               <h3 className="text-lg font-semibold">{category.name}</h3>
+              <p className="text-sm text-gray-500">
+                {category.products.length} items
+              </p>
             </div>
           </div>
         ))}
 
         <div
-          className={` flex items-center h-[260px] justify-center border border-gray-300 ${
+          className={`flex items-center h-[260px] justify-center border border-gray-300 ${
             showAllProducts ? "shadow-[4px_4px_0_0_#3b82f6]" : ""
-          } shadow-[4px_4px_0_0_#000] cursor-pointer`}
+          } shadow-[4px_4px_0_0_#000] cursor-pointer  `}
           onClick={handleViewAllClick}
         >
           <div
             className={`text-lg font-semibold flex items-center gap-2 ${
-              showAllProducts ? "text-blue-500 " : ""
+              showAllProducts ? "text-blue-500" : ""
             }`}
           >
             View All
@@ -105,14 +150,9 @@ const Categories = () => {
         </div>
       </div>
 
-      {/* Products Section */}
-      {productsToDisplay.length > 0 && (
+      {isCategoriesPage && productsToDisplay.length > 0 && (
         <div className="mt-8">
-          <h1 className="text-2xl font-bold mb-6">
-            {showAllProducts
-              ? "All Products"
-              : `Category: ${activeCategory} (${productsToDisplay.length} products)`}
-          </h1>
+          <h1 className="text-2xl font-bold mb-6">{getProductCountText()}</h1>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {productsToDisplay.map((product) => (
               <ProductCard key={product._id} product={product} />
