@@ -24,6 +24,7 @@ import ProductUpdate from "./pages/(dashboard)/ProductUpdate";
 import useCategoriesProduct from "./hooks/useCategoriesProduct";
 import Verify from "./pages/(cart)/Verify";
 import AdminRoute from "./routes/AdminRoute";
+import NotFound from "./components/(not-found)/NotFound";
 
 const App = () => {
   const location = useLocation();
@@ -89,6 +90,9 @@ const App = () => {
         {/* Auth pages */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+
+        {/* not found */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
 
       {!isAuthPage && <Footer />}
