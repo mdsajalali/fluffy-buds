@@ -21,7 +21,7 @@ const Navbar = () => {
   const { token, logOut, getTotalCartQuantity } = useContext(StoreContext);
   const role = getUserRole();
 
-  console.log({role})
+  console.log({ role });
 
   useEffect(() => {
     const handleResize = () => {
@@ -43,8 +43,6 @@ const Navbar = () => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
-
-  
 
   return (
     <div className="border-b border-gray-300 md:fixed md:w-full md:top-0 md:bg-white md:z-50">
@@ -157,16 +155,20 @@ const Navbar = () => {
           </button>
         </div>
         <div className="flex flex-col p-4 gap-4">
-          {navItems.map((item) => (
-            <Link
-              key={item.path}
-              to={item.path}
-              onClick={() => setIsOpen(false)}
-              className="text-gray-700 text-sm"
-            >
-              {item.label}
-            </Link>
-          ))}
+          {navItems.map((item) => {
+            if (item.label === "Admin Dashboard" && role !== "admin")
+              return null;
+            return (
+              <Link
+                key={item.path}
+                to={item.path}
+                onClick={() => setIsOpen(false)}
+                className="text-gray-700 text-sm"
+              >
+                {item.label}
+              </Link>
+            );
+          })}
           {/* Sign In */}
           <Link
             to="/login"
