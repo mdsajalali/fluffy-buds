@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axiosInstance from "../lib/axiosInstance";
+import { toast } from "sonner";
 
 const Register = () => {
   // State for password visibility
@@ -11,6 +13,47 @@ const Register = () => {
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
   const toggleConfirmPasswordVisibility = () =>
     setShowConfirmPassword(!showConfirmPassword);
+
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const target = e.target as typeof e.target & {
+      firstName: { value: string };
+      lastName: { value: string };
+      email: { value: string };
+      password: { value: string };
+      confirmPassword: { value: string };
+    };
+
+    const firstName = target.firstName.value;
+    const lastName = target.lastName.value;
+    const email = target.email.value;
+    const password = target.password.value;
+    const confirmPassword = target.confirmPassword.value;
+
+    try {
+      const res = await axiosInstance.post("/user/register", {
+        firstName,
+        lastName,
+        email,
+        password,
+        confirmPassword,
+      });
+
+      if (res?.data?.success) {
+        toast.success(res?.data?.message);
+        navigate("/login");
+      } else {
+        toast.error(res?.data?.message || "Registration failed");
+      }
+    } catch (err) {
+      toast.error("Something went wrong. Try again.");
+      console.error(err);
+    }
+  };
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4 md:px-0">
@@ -27,7 +70,7 @@ const Register = () => {
             Create your account to get started
           </p>
 
-          <form>
+          <form onSubmit={handleSubmit}>
             {/* First Name */}
             <div className="flex items-center gap-4 mb-4">
               <div>
@@ -36,7 +79,7 @@ const Register = () => {
                 </label>
                 <input
                   type="text"
-                  id="firstName"
+                  name="firstName"
                   placeholder="First Name"
                   className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
@@ -48,7 +91,7 @@ const Register = () => {
                 </label>
                 <input
                   type="text"
-                  id="lastName"
+                  name="lastName"
                   placeholder="Last Name"
                   className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
@@ -62,7 +105,7 @@ const Register = () => {
               </label>
               <input
                 type="email"
-                id="email"
+                name="email"
                 placeholder="Enter your email address"
                 className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
@@ -75,7 +118,7 @@ const Register = () => {
               </label>
               <input
                 type={showPassword ? "text" : "password"}
-                id="password"
+                name="password"
                 placeholder="Enter your password"
                 className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
@@ -98,7 +141,7 @@ const Register = () => {
               </label>
               <input
                 type={showConfirmPassword ? "text" : "password"}
-                id="confirmPassword"
+                name="confirmPassword"
                 placeholder="Confirm your password"
                 className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
