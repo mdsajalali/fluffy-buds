@@ -23,6 +23,7 @@ import MyOrders from "./pages/(orders)/MyOrders";
 import ProductUpdate from "./pages/(dashboard)/ProductUpdate";
 import useCategoriesProduct from "./hooks/useCategoriesProduct";
 import Verify from "./pages/(cart)/Verify";
+import AdminRoute from "./routes/AdminRoute";
 
 const App = () => {
   const location = useLocation();
@@ -77,13 +78,14 @@ const App = () => {
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
 
         {/* dashboard page */}
-        <Route path="/dashboard" element={<Dashboard />}>
-          <Route path="add-items" element={<AddItems />} />
-          <Route path="list-items" element={<ListItems />} />
-          <Route path="list-items/:id" element={<ProductUpdate />} />
-          <Route path="orders" element={<Orders />} />
+        <Route element={<AdminRoute />}>
+          <Route path="/dashboard" element={<Dashboard />}>
+            <Route path="add-items" element={<AddItems />} />
+            <Route path="list-items" element={<ListItems />} />
+            <Route path="list-items/:id" element={<ProductUpdate />} />
+            <Route path="orders" element={<Orders />} />
+          </Route>
         </Route>
-
         {/* Auth pages */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

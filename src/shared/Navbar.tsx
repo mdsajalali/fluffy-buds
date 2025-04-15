@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Container from "./Container";
 import { Menu, X, LogOut, ShoppingBag } from "lucide-react";
 import { StoreContext } from "../context/StoreContext";
+import { getUserRole } from "../lib/getUserRole";
 
 const navItems = [
   { label: "Home", path: "/" },
@@ -18,6 +19,9 @@ const Navbar = () => {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   /* @ts-ignore */
   const { token, logOut, getTotalCartQuantity } = useContext(StoreContext);
+  const role = getUserRole();
+
+  console.log({role})
 
   useEffect(() => {
     const handleResize = () => {
@@ -40,6 +44,8 @@ const Navbar = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  
+
   return (
     <div className="border-b border-gray-300 md:fixed md:w-full md:top-0 md:bg-white md:z-50">
       <Container>
@@ -49,15 +55,21 @@ const Navbar = () => {
           </Link>
 
           <nav className="hidden md:flex items-center gap-8">
-            {navItems.map((item) => (
-              <Link
-                key={item.path}
-                className="text-gray-600 text-base"
-                to={item.path}
-              >
-                {item.label}
-              </Link>
-            ))}
+            <nav className="hidden md:flex items-center gap-8">
+              {navItems.map((item) => {
+                if (item.label === "Admin Dashboard" && role !== "admin")
+                  return null;
+                return (
+                  <Link
+                    key={item.path}
+                    className="text-gray-600 text-base"
+                    to={item.path}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
+            </nav>
           </nav>
 
           <div className="flex items-center gap-4">
