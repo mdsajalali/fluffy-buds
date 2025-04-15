@@ -1,29 +1,13 @@
-import { useState } from "react";
+import { useContext } from "react";
 import { ProductProps } from "../types/types";
 import { Link } from "react-router-dom";
+import { StoreContext } from "../context/StoreContext";
 
 const ProductCard = ({ product }: { product: ProductProps }) => {
-  const [quantities, setQuantities] = useState<{ [key: number]: number }>({});
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  /* @ts-ignore */
+  const { cartItems, addToCart, removeFromCart } = useContext(StoreContext);
 
-  const handleAddToCart = (index: number) => {
-    setQuantities((prev) => ({ ...prev, [index]: 1 }));
-  };
-
-  const handleIncrease = (index: number) => {
-    setQuantities((prev) => ({ ...prev, [index]: prev[index] + 1 }));
-  };
-
-  const handleDecrease = (index: number) => {
-    setQuantities((prev) => {
-      const newQty = prev[index] - 1;
-      if (newQty <= 0) {
-        const updated = { ...prev };
-        delete updated[index];
-        return updated;
-      }
-      return { ...prev, [index]: newQty };
-    });
-  };
   return (
     <div className=" relative bg-white">
       {/* Discount Tag */}
@@ -55,10 +39,10 @@ const ProductCard = ({ product }: { product: ProductProps }) => {
         </div>
 
         {/* Quantity Controller */}
-        {quantities[Number(product?._id)] ? (
+        {cartItems[product?._id] ? (
           <div className="mt-3 border border-black flex items-center justify-between px-3 py-1">
             <button
-              onClick={() => handleDecrease(Number(product?._id))}
+              onClick={() => removeFromCart(product?._id)}
               className="text-xl"
             >
               <svg
@@ -74,13 +58,8 @@ const ProductCard = ({ product }: { product: ProductProps }) => {
                 <path d="M872 474H152c-4.4 0-8 3.6-8 8v60c0 4.4 3.6 8 8 8h720c4.4 0 8-3.6 8-8v-60c0-4.4-3.6-8-8-8z"></path>
               </svg>
             </button>
-            <span className="font-bold">
-              {quantities[Number(product?._id)]}
-            </span>
-            <button
-              onClick={() => handleIncrease(Number(product?._id))}
-              className="text-xl"
-            >
+            <span className="font-bold">{cartItems[product?._id]}</span>
+            <button onClick={() => addToCart(product?._id)} className="text-xl">
               <svg
                 className="cursor-pointer"
                 stroke="currentColor"
@@ -99,7 +78,7 @@ const ProductCard = ({ product }: { product: ProductProps }) => {
         ) : (
           <div
             className="mt-3 border border-gray-300 hover:shadow duration-300 shadow-[4px_4px_0_0_#22c55e]"
-            onClick={() => handleAddToCart(Number(product?._id))}
+            onClick={() => addToCart(product?._id)}
           >
             <button className="w-full py-2 cursor-pointer font-bold text-sm  ">
               Add To Cart
