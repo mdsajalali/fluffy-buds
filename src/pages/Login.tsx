@@ -1,13 +1,52 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Eye, EyeOff } from "lucide-react";
+import axiosInstance from "../lib/axiosInstance";
+import { toast } from "sonner";
+import { StoreContext } from "../context/StoreContext";
 
 const Login = () => {
   // State for password visibility
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  /* @ts-ignore */
+  const { setToken } = useContext(StoreContext);
 
   // Toggle password visibility
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const target = e.target as typeof e.target & {
+      email: { value: string };
+      password: { value: string };
+    };
+
+    const email = target.email.value;
+    const password = target.password.value;
+
+    try {
+      const res = await axiosInstance.post("/user/login", {
+        email,
+        password,
+      });
+
+      if (res?.data?.success) {
+        setToken(res?.data?.token);
+        localStorage.setItem("token", res?.data?.token);
+        toast.success(res?.data?.message);
+        navigate("/");
+      } else {
+        toast.error(res?.data?.message || "Registration failed");
+      }
+    } catch (err) {
+      toast.error("Something went wrong. Try again.");
+      console.error(err);
+    }
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4 md:px-0">
       <div className="bg-white shadow-lg rounded-lg flex flex-col md:flex-row w-full max-w-4xl">
@@ -21,14 +60,14 @@ const Login = () => {
             Sign in to your account to continue
           </p>
 
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="mb-4">
               <label htmlFor="email" className="block text-gray-700 mb-2">
                 Email
               </label>
               <input
                 type="email"
-                id="email"
+                name="email"
                 placeholder="Enter your email address"
                 className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
@@ -40,7 +79,7 @@ const Login = () => {
               </label>
               <input
                 type={showPassword ? "text" : "password"}
-                id="password"
+                name="password"
                 placeholder="Enter your password"
                 className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
