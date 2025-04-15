@@ -81,7 +81,7 @@ function StoreContextProvider({ children }: { children: ReactNode }) {
       {},
       { headers: { token } }
     );
-    setCartItems(response.data.cartData);
+    setCartItems(response?.data?.cartData);
   };
 
   // logout functionality

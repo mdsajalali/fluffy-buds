@@ -17,7 +17,7 @@ const Navbar = () => {
   const dropdownRef = useRef<HTMLDivElement>(null);
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   /* @ts-ignore */
-  const { token, logOut } = useContext(StoreContext);
+  const { token, logOut, getTotalCartQuantity } = useContext(StoreContext);
 
   useEffect(() => {
     const handleResize = () => {
@@ -82,7 +82,7 @@ const Navbar = () => {
 
               {/* Badge */}
               <div className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full shadow">
-                3
+                {getTotalCartQuantity()}
               </div>
             </Link>
 

@@ -1,39 +1,22 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { ProductProps } from "../types/types";
 import { Link } from "react-router-dom";
+import { StoreContext } from "../context/StoreContext";
 
 interface ProductCardProps {
   product: ProductProps;
 }
 
 const ProductDetailsCard = ({ product }: ProductCardProps) => {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  /* @ts-ignore */
+  const { cartItems, addToCart, removeFromCart } = useContext(StoreContext);
   const [selectedImage, setSelectedImage] = useState(product?.images[0]?.url);
   const [selectedSize, setSelectedSize] = useState(product?.sizes[0]);
   const [selectedColor, setSelectedColor] = useState(product?.colors[0]);
-  const [quantities, setQuantities] = useState<{ [key: number]: number }>({});
 
   const handleImageClick = (image: string) => {
     setSelectedImage(image);
-  };
-
-  const handleAddToCart = (index: number) => {
-    setQuantities((prev) => ({ ...prev, [index]: 1 }));
-  };
-
-  const handleIncrease = (index: number) => {
-    setQuantities((prev) => ({ ...prev, [index]: prev[index] + 1 }));
-  };
-
-  const handleDecrease = (index: number) => {
-    setQuantities((prev) => {
-      const newQty = prev[index] - 1;
-      if (newQty <= 0) {
-        const updated = { ...prev };
-        delete updated[index];
-        return updated;
-      }
-      return { ...prev, [index]: newQty };
-    });
   };
 
   return (
@@ -148,10 +131,10 @@ const ProductDetailsCard = ({ product }: ProductCardProps) => {
           <div className="flex items-center gap-4 mb-4">
             <div className="w-full">
               {/* Quantity Controller */}
-              {quantities[Number(product._id)] ? (
+              {cartItems[product?._id] ? (
                 <div className="mt-3 border border-black flex items-center justify-between px-3 py-1">
                   <button
-                    onClick={() => handleDecrease(Number(product._id))}
+                    onClick={() => removeFromCart(product?._id)}
                     className="text-xl"
                   >
                     <svg
@@ -168,10 +151,10 @@ const ProductDetailsCard = ({ product }: ProductCardProps) => {
                     </svg>
                   </button>
                   <span className="font-bold">
-                    {quantities[Number(product._id)]}
+                    {cartItems[product?._id]}
                   </span>
                   <button
-                    onClick={() => handleIncrease(Number(product._id))}
+                    onClick={() => addToCart(product?._id)}
                     className="text-xl"
                   >
                     <svg
@@ -192,7 +175,7 @@ const ProductDetailsCard = ({ product }: ProductCardProps) => {
               ) : (
                 <div
                   className="mt-3 border border-gray-300 w-full hover:shadow duration-300 shadow-[4px_4px_0_0_#22c55e]"
-                  onClick={() => handleAddToCart(Number(product._id))}
+                  onClick={() => addToCart(product?._id)}
                 >
                   <button className="w-full py-2 cursor-pointer font-bold text-sm  ">
                     Add To Cart
