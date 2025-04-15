@@ -6,7 +6,9 @@ import {
   ShoppingCart,
   X,
 } from "lucide-react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { StoreContext } from "../../context/StoreContext";
 
 const navItems = [
   {
@@ -41,6 +43,9 @@ const DashboardSidebar = ({
   isSidebarOpen,
   toggleSidebar,
 }: DashboardSidebarProps) => {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  /* @ts-ignore */
+  const { logOut } = useContext(StoreContext);
   return (
     <div
       className={`fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform ${
@@ -75,7 +80,10 @@ const DashboardSidebar = ({
             ))}
           </ul>
         </div>
-        <div className="flex items-center p-2 cursor-pointer text-gray-700 hover:bg-gray-200 rounded">
+        <div
+          onClick={logOut}
+          className="flex items-center p-2 cursor-pointer text-gray-700 hover:bg-gray-200 rounded"
+        >
           <LogOut size={20} className="mr-3" />
           Logout
         </div>

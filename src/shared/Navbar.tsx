@@ -1,7 +1,8 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import { Link } from "react-router-dom";
 import Container from "./Container";
 import { Menu, X, LogOut, ShoppingBag } from "lucide-react";
+import { StoreContext } from "../context/StoreContext";
 
 const navItems = [
   { label: "Home", path: "/" },
@@ -14,6 +15,9 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  /* @ts-ignore */
+  const { token, logOut } = useContext(StoreContext);
 
   useEffect(() => {
     const handleResize = () => {
@@ -82,40 +86,43 @@ const Navbar = () => {
               </div>
             </Link>
 
-            {/* Profile Dropdown */}
-            <div className="relative" ref={dropdownRef}>
-              <img
-                onClick={() => setShowDropdown((prev) => !prev)}
-                className="md:w-7 w-6 md:h-7 h-6 object-contain cursor-pointer"
-                src="/profile_icon.png"
-                alt="Profile"
-              />
+            {token ? (
+              <div className="relative" ref={dropdownRef}>
+                <img
+                  onClick={() => setShowDropdown((prev) => !prev)}
+                  className="md:w-7 w-6 md:h-7 h-6 object-contain cursor-pointer"
+                  src="/profile_icon.png"
+                  alt="Profile"
+                />
 
-              {showDropdown && (
-                <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-300 overflow-hidden rounded-lg shadow-lg z-50 text-sm">
-                  <hr className="text-gray-300" />
-                  <Link
-                    onClick={() => setShowDropdown((prev) => !prev)}
-                    to="/my-orders"
-                    className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100"
-                  >
-                    <ShoppingBag size={16} /> Orders
-                  </Link>
-                  <hr className="text-gray-300" />
-                  <button className="w-full cursor-pointer flex items-center gap-2 px-4 py-2 hover:bg-gray-100 text-left">
-                    <LogOut size={16} /> Logout
-                  </button>
-                </div>
-              )}
-            </div>
-
-            {/* Sign In */}
-            <Link
-              to="/login"
-              className="border hidden md:block border-gray-300 px-4 py-[6px] cursor-pointer rounded-full"
-            >
-              Sign In
-            </Link>
+                {showDropdown && (
+                  <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-300 overflow-hidden rounded-lg shadow-lg z-50 text-sm">
+                    <hr className="text-gray-300" />
+                    <Link
+                      onClick={() => setShowDropdown((prev) => !prev)}
+                      to="/my-orders"
+                      className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100"
+                    >
+                      <ShoppingBag size={16} /> Orders
+                    </Link>
+                    <hr className="text-gray-300" />
+                    <button
+                      onClick={logOut}
+                      className="w-full cursor-pointer flex items-center gap-2 px-4 py-2 hover:bg-gray-100 text-left"
+                    >
+                      <LogOut size={16} /> Logout
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <Link
+                to="/login"
+                className="border hidden md:block border-gray-300 px-4 py-[6px] cursor-pointer rounded-full"
+              >
+                Sign In
+              </Link>
+            )}
 
             {/* Mobile Menu Button */}
             <button onClick={() => setIsOpen(true)} className="md:hidden">

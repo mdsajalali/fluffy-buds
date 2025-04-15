@@ -1,4 +1,5 @@
-import { createContext, ReactNode, useState } from "react";
+import { createContext, ReactNode, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export interface StoreContextType {
   setToken: React.Dispatch<React.SetStateAction<string>>;
@@ -11,11 +12,29 @@ export const StoreContext = createContext<StoreContextType | undefined>(
 
 function StoreContextProvider({ children }: { children: ReactNode }) {
   const [token, setToken] = useState<string>("");
+  const navigate = useNavigate();
 
   console.log("token", token);
 
+  // logout functionality
+  const logOut = () => {
+    localStorage.removeItem("token");
+    setToken("");
+    navigate("/");
+  };
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      /* @ts-ignore */
+      setToken(localStorage.getItem("token"));
+    }
+  }, []);
+
   const contextValue = {
     setToken,
+    logOut,
+    token,
   };
   return (
     <StoreContext.Provider value={contextValue}>
