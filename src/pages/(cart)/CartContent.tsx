@@ -102,8 +102,11 @@ const CartContent = ({
 
       {/* Subtotal & Checkout */}
       <div className="flex justify-between items-center mt-6 flex-wrap gap-4">
+        <div>
+          <p>Delivery Fee : $2</p>
+        </div>
         <h2 className="text-lg font-semibold text-gray-800">
-          Subtotal: ${getTotalCartAmount()}
+          Subtotal: ${getTotalCartAmount() + 2}
         </h2>
         <button
           onClick={() => setActiveStep("Address")}

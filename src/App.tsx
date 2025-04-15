@@ -22,6 +22,7 @@ import Cart from "./pages/(cart)/Cart";
 import MyOrders from "./pages/(orders)/MyOrders";
 import ProductUpdate from "./pages/(dashboard)/ProductUpdate";
 import useCategoriesProduct from "./hooks/useCategoriesProduct";
+import Verify from "./pages/(cart)/Verify";
 
 const App = () => {
   const location = useLocation();
@@ -65,6 +66,7 @@ const App = () => {
 
         {/* cart page */}
         <Route path="/cart" element={<Cart />} />
+        <Route path="/verify" element={<Verify />} />
 
         {/* order page */}
         <Route path="/my-orders" element={<MyOrders />} />
