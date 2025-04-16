@@ -90,7 +90,7 @@ const ListItems = () => {
                     <td className="px-5 py-4 font-medium text-gray-800">
                       {item.name}
                     </td>
-                    <td className="px-5 py-4 text-gray-600 max-w-xs">
+                    <td className="px-5 py-4 truncate text-gray-600 max-w-xs">
                       {item.description}
                     </td>
                     <td className="px-5 py-4 text-gray-700">{item.category}</td>
