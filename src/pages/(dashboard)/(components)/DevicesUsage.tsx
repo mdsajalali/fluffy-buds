@@ -14,9 +14,9 @@ interface DeviceEntry {
 }
 
 const deviceData: DeviceEntry[] = [
-  { name: "Phone", value: 65 },
-  { name: "Tablet", value: 15 },
-  { name: "Computer", value: 20 },
+  { name: "Phone", value: 20 },
+  { name: "Tablet", value: 5 },
+  { name: "Computer", value: 75 },
 ];
 
 const COLORS = ["#6366f1", "#facc15", "#10b981"];

@@ -11,12 +11,13 @@ import {
   Package,
   ShoppingCart,
   DollarSign,
-  XCircle,
-  CheckCircle,
   LucideIcon,
+  Users,
 } from "lucide-react";
 import RecentOrders from "./RecentOrders";
 import DevicesUsage from "./(components)/DevicesUsage";
+import { useEffect, useState } from "react";
+import axiosInstance from "../../lib/axiosInstance";
 
 interface StatCardProps {
   title: string;
@@ -54,6 +55,21 @@ const salesData: SalesEntry[] = [
 ];
 
 const DashboardData = () => {
+  const [users, setUsers] = useState("");
+  const [orders, setOrders] = useState("");
+
+  const getTotalUserOrder = async () => {
+    try {
+      const response = await axiosInstance.get("/order/get-total-user-order");
+      setUsers(response?.data?.totalUsers);
+      setOrders(response?.data?.totalOrders);
+    } catch (error) {
+      console.error("Error fetching total user order:", error);
+    }
+  };
+  useEffect(() => {
+    getTotalUserOrder();
+  }, []);
   return (
     <div className="p-4 md:p-8 bg-gray-100 min-h-screen">
       <div>
@@ -62,12 +78,18 @@ const DashboardData = () => {
         </h1>
 
         {/* Stat Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 mb-10">
+        <div className="grid  grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
           <Card
             title="Total Products"
             value={dummyStats.totalProducts}
             Icon={Package}
             color="text-purple-500"
+          />
+          <Card
+            title="Total Users"
+            value={users}
+            Icon={Users}
+            color="text-red-500"
           />
           <Card
             title="Total Sales"
@@ -77,21 +99,9 @@ const DashboardData = () => {
           />
           <Card
             title="Total Orders"
-            value={dummyStats.totalOrders}
+            value={orders}
             Icon={ShoppingCart}
             color="text-blue-500"
-          />
-          <Card
-            title="Cancelled Orders"
-            value={dummyStats.cancelledOrders}
-            Icon={XCircle}
-            color="text-red-500"
-          />
-          <Card
-            title="Delivered Orders"
-            value={dummyStats.deliveredOrders}
-            Icon={CheckCircle}
-            color="text-emerald-500"
           />
         </div>
 
