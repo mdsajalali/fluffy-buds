@@ -31,26 +31,12 @@ interface SalesEntry {
   sales: number;
 }
 
-const salesData: SalesEntry[] = [
-  { month: "Jan", sales: 1200 },
-  { month: "Feb", sales: 1900 },
-  { month: "Mar", sales: 1500 },
-  { month: "Apr", sales: 2100 },
-  { month: "May", sales: 2800 },
-  { month: "Jun", sales: 3000 },
-  { month: "Jul", sales: 2700 },
-  { month: "Aug", sales: 2500 },
-  { month: "Sep", sales: 2200 },
-  { month: "Oct", sales: 2000 },
-  { month: "Nov", sales: 2400 },
-  { month: "Dec", sales: 3100 },
-];
-
 const DashboardData = () => {
   const [users, setUsers] = useState("");
   const [orders, setOrders] = useState("");
   const [sales, setSales] = useState("");
   const [totalProducts, setTotalProducts] = useState("");
+  const [salesData, setSalesData] = useState<SalesEntry[]>([]);
 
   const getTotalUserOrderSales = async () => {
     try {
@@ -73,19 +59,39 @@ const DashboardData = () => {
       console.error("Error fetching total products:", error);
     }
   };
+
+  const getLast12MonthsSalesData = async () => {
+    try {
+      const response = await axiosInstance.get(
+        "/order/get-last12-months-sales"
+      );
+      // Ensure the correct structure for sales data
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const formattedSalesData = response.data.data.map((item: any) => ({
+        month: item.month,
+        sales: item.sales, // Adjusted the key for sales
+      }));
+      setSalesData(formattedSalesData);
+    } catch (error) {
+      console.error("Error fetching last 12 months sales data:", error);
+    }
+  };
+
   useEffect(() => {
     getTotalUserOrderSales();
     getTotalProductQuantity();
+    getLast12MonthsSalesData();
   }, []);
+
   return (
-    <div className="p-4 md:p-8 bg-gray-100 min-h-screen">
+    <div className="p-4 md:p-8 bg-gray-100 ">
       <div>
         <h1 className="text-2xl md:text-3xl font-bold mb-6 text-gray-800">
           Dashboard Overview
         </h1>
 
         {/* Stat Cards */}
-        <div className="grid  grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
           <Card
             title="Total Products"
             value={totalProducts}
@@ -172,7 +178,8 @@ const DashboardData = () => {
           <DevicesUsage />
         </div>
       </div>
-      {/* recent orders */}
+
+      {/* Recent Orders */}
       <RecentOrders />
     </div>
   );
