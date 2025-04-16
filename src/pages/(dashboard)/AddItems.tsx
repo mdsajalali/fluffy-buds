@@ -103,6 +103,7 @@ const AddItems = () => {
             placeholder="Product Name"
             className="border p-3 rounded w-full"
             name="name"
+            required
           />
 
           <label className="block font-medium mb-2 mt-6">
@@ -112,6 +113,7 @@ const AddItems = () => {
             placeholder="Product Description"
             className="border p-3 rounded w-full h-32 resize-none"
             name="description"
+            required
           />
 
           <div className="flex flex-col md:flex-row gap-4 my-6">
@@ -124,6 +126,7 @@ const AddItems = () => {
                 placeholder="Regular Price"
                 className="border p-3 rounded w-full"
                 name="price"
+                required
               />
             </div>
 
@@ -134,6 +137,7 @@ const AddItems = () => {
                 placeholder="Discount Price"
                 className="border p-3 rounded w-full"
                 name="discount"
+                required
               />
             </div>
           </div>
@@ -142,7 +146,11 @@ const AddItems = () => {
             <label className="block font-medium mb-2">
               Categories<span className="text-red-500">*</span>
             </label>
-            <select className="border p-3 rounded w-full" name="category">
+            <select
+              className="border p-3 rounded w-full"
+              name="category"
+              required
+            >
               <option value="">Select Category</option>
               <option value="Toys">Toys</option>
               <option value="Stationery">Stationery</option>
@@ -156,7 +164,11 @@ const AddItems = () => {
                 <label className="block font-medium mb-2">
                   Sizes<span className="text-red-500">*</span>
                 </label>
-                <select className="border p-3 rounded w-full" name="size">
+                <select
+                  className="border p-3 rounded w-full"
+                  name="size"
+                  required
+                >
                   <option value="">Select Size</option>
                   <option value="XS">XS</option>
                   <option value="S">S</option>
@@ -173,7 +185,11 @@ const AddItems = () => {
                 <label className="block font-medium mb-2">
                   Colors<span className="text-red-500">*</span>
                 </label>
-                <select className="border p-3 rounded w-full" name="color">
+                <select
+                  className="border p-3 rounded w-full"
+                  name="color"
+                  required
+                >
                   <option value="">Select Color</option>
                   <option value="Black">Black</option>
                   <option value="White">White</option>

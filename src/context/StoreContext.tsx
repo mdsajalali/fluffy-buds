@@ -2,6 +2,7 @@ import { createContext, ReactNode, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../lib/axiosInstance";
 import useCategoriesProduct from "../hooks/useCategoriesProduct";
+import { toast } from "sonner";
 
 export interface StoreContextType {
   setToken: React.Dispatch<React.SetStateAction<string>>;
@@ -27,15 +28,19 @@ function StoreContextProvider({ children }: { children: ReactNode }) {
 
   // add to cart functionality
   const addToCart = async (itemId: string): Promise<void> => {
+    if (!token) {
+      navigate("/login");
+      toast.warning("You must be logged in to add items to your cart.");
+      return;
+    }
+
     if (!cartItems[itemId]) {
       setCartItems((prev) => ({ ...prev, [itemId]: 1 }));
     } else {
       setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
     }
 
-    if (token) {
-      await axiosInstance.post("/cart/add", { itemId }, { headers: { token } });
-    }
+    await axiosInstance.post("/cart/add", { itemId }, { headers: { token } });
   };
 
   // remove from cart
