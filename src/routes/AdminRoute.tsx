@@ -12,7 +12,6 @@ const AdminRoute = () => {
 
   try {
     const decoded = jwtDecode<DecodedToken>(token);
-    console.log("decode", decoded);
     if (decoded?.role === "admin") {
       return <Outlet />;
     } else {

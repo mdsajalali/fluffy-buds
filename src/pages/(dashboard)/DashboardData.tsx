@@ -31,14 +31,6 @@ interface SalesEntry {
   sales: number;
 }
 
-const dummyStats = {
-  totalProducts: 125,
-  totalOrders: 430,
-  totalSales: 24350,
-  cancelledOrders: 15,
-  deliveredOrders: 390,
-};
-
 const salesData: SalesEntry[] = [
   { month: "Jan", sales: 1200 },
   { month: "Feb", sales: 1900 },
@@ -57,18 +49,33 @@ const salesData: SalesEntry[] = [
 const DashboardData = () => {
   const [users, setUsers] = useState("");
   const [orders, setOrders] = useState("");
+  const [sales, setSales] = useState("");
+  const [totalProducts, setTotalProducts] = useState("");
 
-  const getTotalUserOrder = async () => {
+  const getTotalUserOrderSales = async () => {
     try {
-      const response = await axiosInstance.get("/order/get-total-user-order");
+      const response = await axiosInstance.get(
+        "/order/get-total-user-order-sales"
+      );
       setUsers(response?.data?.totalUsers);
       setOrders(response?.data?.totalOrders);
+      setSales(response?.data?.totalSales);
     } catch (error) {
-      console.error("Error fetching total user order:", error);
+      console.error("Error fetching total user order and sales:", error);
+    }
+  };
+
+  const getTotalProductQuantity = async () => {
+    try {
+      const response = await axiosInstance.get("/get-total-product-quantity");
+      setTotalProducts(response?.data?.getTotalProducts);
+    } catch (error) {
+      console.error("Error fetching total products:", error);
     }
   };
   useEffect(() => {
-    getTotalUserOrder();
+    getTotalUserOrderSales();
+    getTotalProductQuantity();
   }, []);
   return (
     <div className="p-4 md:p-8 bg-gray-100 min-h-screen">
@@ -81,7 +88,7 @@ const DashboardData = () => {
         <div className="grid  grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
           <Card
             title="Total Products"
-            value={dummyStats.totalProducts}
+            value={totalProducts}
             Icon={Package}
             color="text-purple-500"
           />
@@ -93,7 +100,7 @@ const DashboardData = () => {
           />
           <Card
             title="Total Sales"
-            value={`$${dummyStats.totalSales.toLocaleString()}`}
+            value={`$${sales}`}
             Icon={DollarSign}
             color="text-green-500"
           />
