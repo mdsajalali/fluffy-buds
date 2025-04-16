@@ -56,7 +56,6 @@ const DashboardSidebar = ({
       <div className="flex items-center justify-between p-4">
         <Link to="/">
           <img className="w-24" src="/logo.webp" alt="Logo" />
-          <h2 className="text-xl font-bold text-gray-800">Admin Panel</h2>
         </Link>
         <button className="md:hidden" onClick={toggleSidebar}>
           <X size={24} className="text-gray-600" />

@@ -183,11 +183,11 @@ const ProductDetailsCard = ({ product }: ProductCardProps) => {
                 </div>
               )}
             </div>
-            <div className="mt-3 border border-gray-300 w-full hover:shadow duration-300 shadow-[4px_4px_0_0_#22c55e]">
+            {/* <div className="mt-3 border border-gray-300 w-full hover:shadow duration-300 shadow-[4px_4px_0_0_#22c55e]">
               <button className="w-full py-2 cursor-pointer font-bold text-sm  ">
                 Buy It Now
               </button>
-            </div>
+            </div> */}
           </div>
 
           {/* Category */}

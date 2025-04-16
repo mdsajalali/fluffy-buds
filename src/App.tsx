@@ -25,6 +25,7 @@ import useCategoriesProduct from "./hooks/useCategoriesProduct";
 import Verify from "./pages/(cart)/Verify";
 import AdminRoute from "./routes/AdminRoute";
 import NotFound from "./components/(not-found)/NotFound";
+import DashboardData from "./pages/(dashboard)/DashboardData";
 
 const App = () => {
   const location = useLocation();
@@ -81,6 +82,7 @@ const App = () => {
         {/* dashboard page */}
         <Route element={<AdminRoute />}>
           <Route path="/dashboard" element={<Dashboard />}>
+            <Route path="/dashboard" element={<DashboardData />} />
             <Route path="add-items" element={<AddItems />} />
             <Route path="list-items" element={<ListItems />} />
             <Route path="list-items/:id" element={<ProductUpdate />} />
