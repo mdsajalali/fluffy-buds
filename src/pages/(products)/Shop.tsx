@@ -149,8 +149,11 @@ const Shop = () => {
           <div className="md:col-span-9 col-span-12">
             <div className="flex gap-2 my-4 items-center justify-between w-full max-w-7xl mx-auto">
               <h1 className="text-sm md:text-base mb-2 md:mb-0">
-                Showing 1 - 6 of {totalProducts} results
+                Showing {(currentPage - 1) * 6 + 1} -{" "}
+                {Math.min(currentPage * 6, totalProducts)} of {totalProducts}{" "}
+                results
               </h1>
+
               <select
                 value={sort}
                 onChange={(e) => setSort(e.target.value)}

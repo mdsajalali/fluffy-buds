@@ -93,6 +93,7 @@ function StoreContextProvider({ children }: { children: ReactNode }) {
   const logOut = (): void => {
     localStorage.removeItem("token");
     setToken("");
+    setCartItems({});
     navigate("/");
   };
 
