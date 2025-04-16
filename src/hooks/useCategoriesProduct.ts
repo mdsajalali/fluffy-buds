@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import axiosInstance from "../lib/axiosInstance";
 
-type Product = {
+export type Product = {
   _id: string;
   name: string;
   description: string;
   category: string;
-  sizes: string[];
-  colors: string[];
+  size: string[];
+  discount?: number;
+  color: string[];
   price: number;
   regularPrice: number;
   images: { url: string }[];

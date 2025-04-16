@@ -12,12 +12,12 @@ const ProductDetailsCard = ({ product }: ProductCardProps) => {
   /* @ts-ignore */
   const { cartItems, addToCart, removeFromCart } = useContext(StoreContext);
   const [selectedImage, setSelectedImage] = useState(product?.images[0]?.url);
-  const [selectedSize, setSelectedSize] = useState(product?.sizes[0]);
-  const [selectedColor, setSelectedColor] = useState(product?.colors[0]);
 
   const handleImageClick = (image: string) => {
     setSelectedImage(image);
   };
+
+  console.log(product)
 
   return (
     <div className="container mx-auto py-6 md:py-10">
@@ -88,19 +88,11 @@ const ProductDetailsCard = ({ product }: ProductCardProps) => {
               Size:
             </label>
             <div className="flex gap-2">
-              {product.sizes.map((size) => (
-                <button
-                  key={size}
-                  onClick={() => setSelectedSize(size)}
-                  className={`px-4 py-2 border rounded-full ${
-                    selectedSize === size
-                      ? "bg-red-500 text-white border-red-500"
-                      : "border-gray-300 text-gray-700"
-                  }`}
-                >
-                  {size}
-                </button>
-              ))}
+              <button
+                className={`w-8 h-8 rounded-full border-2 border-blue-500 `}
+              >
+                {product.size}
+              </button>
             </div>
           </div>
 
@@ -110,18 +102,12 @@ const ProductDetailsCard = ({ product }: ProductCardProps) => {
               Color:
             </label>
             <div className="flex gap-2">
-              {product.colors.map((color) => (
+              {product.color.split(" ").map((clr, index) => (
                 <button
-                  key={color}
-                  onClick={() => setSelectedColor(color)}
-                  className={`w-8 h-8 rounded-full border-2 ${
-                    selectedColor === color
-                      ? "border-blue-500"
-                      : "border-gray-300"
-                  }`}
-                  style={{
-                    backgroundColor: color.toLowerCase(),
-                  }}
+                  key={index}
+                  className={`w-8 h-8 rounded-full border-2 border-blue-500`}
+                  style={{ backgroundColor: clr.toLowerCase() }}
+                  title={clr}
                 />
               ))}
             </div>
@@ -150,9 +136,7 @@ const ProductDetailsCard = ({ product }: ProductCardProps) => {
                       <path d="M872 474H152c-4.4 0-8 3.6-8 8v60c0 4.4 3.6 8 8 8h720c4.4 0 8-3.6 8-8v-60c0-4.4-3.6-8-8-8z"></path>
                     </svg>
                   </button>
-                  <span className="font-bold">
-                    {cartItems[product?._id]}
-                  </span>
+                  <span className="font-bold">{cartItems[product?._id]}</span>
                   <button
                     onClick={() => addToCart(product?._id)}
                     className="text-xl"

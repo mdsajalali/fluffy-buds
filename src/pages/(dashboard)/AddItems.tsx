@@ -13,8 +13,6 @@ type ImageType = {
 const AddItems = () => {
   const [images, setImages] = useState<ImageType[]>([]);
   const [error, setError] = useState<string>("");
-  const [selectedSizes, setSelectedSizes] = useState<string[]>([]);
-  const [selectedColors, setSelectedColors] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
 
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -42,28 +40,6 @@ const AddItems = () => {
     setImages(newImages);
   };
 
-  const handleSizeChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    const value = e.target.value;
-    if (value && !selectedSizes.includes(value)) {
-      setSelectedSizes((prev) => [...prev, value]);
-    }
-  };
-
-  const removeSize = (size: string) => {
-    setSelectedSizes((prev) => prev.filter((s) => s !== size));
-  };
-
-  const handleColorChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    const value = e.target.value;
-    if (value && !selectedColors.includes(value)) {
-      setSelectedColors((prev) => [...prev, value]);
-    }
-  };
-
-  const removeColor = (color: string) => {
-    setSelectedColors((prev) => prev.filter((c) => c !== color));
-  };
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
@@ -83,9 +59,9 @@ const AddItems = () => {
     formData.append("price", form.price.value);
     formData.append("discount", form.discount.value);
     formData.append("category", form.category.value);
+    formData.append("color", form.color.value);
+    formData.append("size", form.size.value);
 
-    selectedSizes.forEach((size) => formData.append("sizes", size));
-    selectedColors.forEach((color) => formData.append("colors", color));
     images.forEach((img) => formData.append("images", img.file));
 
     try {
@@ -102,10 +78,9 @@ const AddItems = () => {
       form.price.value = "";
       form.discount.value = "";
       form.category.value = "";
+      form.color.value = "";
+      form.size.value = "";
 
-      // Clear the selected colors, sizes, and images
-      setSelectedColors([]);
-      setSelectedSizes([]);
       setImages([]);
     } catch (error) {
       console.error("❌ Product submission failed:", error);
@@ -181,11 +156,7 @@ const AddItems = () => {
                 <label className="block font-medium mb-2">
                   Sizes<span className="text-red-500">*</span>
                 </label>
-                <select
-                  className="border p-3 rounded w-full"
-                  onChange={handleSizeChange}
-                  name="size"
-                >
+                <select className="border p-3 rounded w-full" name="size">
                   <option value="">Select Size</option>
                   <option value="XS">XS</option>
                   <option value="S">S</option>
@@ -195,25 +166,6 @@ const AddItems = () => {
                   <option value="XXL">XXL</option>
                 </select>
               </div>
-              {selectedSizes.length > 0 && (
-                <div className="flex flex-wrap gap-2 mt-3">
-                  {selectedSizes.map((size) => (
-                    <div
-                      key={size}
-                      className="flex items-center bg-gray-100 border border-gray-300 rounded-full px-3 py-1 text-sm"
-                    >
-                      {size}
-                      <button
-                        type="button"
-                        onClick={() => removeSize(size)}
-                        className="ml-2 text-red-500 hover:text-red-700"
-                      >
-                        ✕
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              )}
             </div>
 
             <div className="w-full">
@@ -221,11 +173,7 @@ const AddItems = () => {
                 <label className="block font-medium mb-2">
                   Colors<span className="text-red-500">*</span>
                 </label>
-                <select
-                  className="border p-3 rounded w-full"
-                  onChange={handleColorChange}
-                  name="color"
-                >
+                <select className="border p-3 rounded w-full" name="color">
                   <option value="">Select Color</option>
                   <option value="Black">Black</option>
                   <option value="White">White</option>
@@ -235,25 +183,6 @@ const AddItems = () => {
                   <option value="Yellow">Yellow</option>
                 </select>
               </div>
-              {selectedColors.length > 0 && (
-                <div className="flex flex-wrap gap-2 mt-3">
-                  {selectedColors.map((color) => (
-                    <div
-                      key={color}
-                      className="flex items-center bg-gray-100 border border-gray-300 rounded-full px-3 py-1 text-sm"
-                    >
-                      {color}
-                      <button
-                        type="button"
-                        onClick={() => removeColor(color)}
-                        className="ml-2 text-red-500 hover:text-red-700"
-                      >
-                        ✕
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              )}
             </div>
           </div>
         </div>

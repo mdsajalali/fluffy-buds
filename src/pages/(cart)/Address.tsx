@@ -63,8 +63,8 @@ function Address({ setActiveStep }: AddressProps) {
       name: string;
       description: string;
       category: string;
-      sizes: string[];
-      colors: string[];
+      size: string[];
+      color: string[];
       price: number;
       regularPrice: number;
       images: { url: string }[];

@@ -18,8 +18,8 @@ type ProductType = {
   price: number;
   discount?: number;
   category: string;
-  sizes: string[];
-  colors: string[];
+  size: string;
+  color: string;
   images: string[];
 };
 
@@ -28,8 +28,6 @@ const ProductUpdate = () => {
   const [images, setImages] = useState<ImageType[]>([]);
   const [existingImages, setExistingImages] = useState<string[]>([]);
   const [error, setError] = useState<string>("");
-  const [selectedSizes, setSelectedSizes] = useState<string[]>([]);
-  const [selectedColors, setSelectedColors] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [product, setProduct] = useState<ProductType | null>(null);
   const navigate = useNavigate();
@@ -44,8 +42,7 @@ const ProductUpdate = () => {
         const productData = res?.data?.product;
         if (productData) {
           setProduct(productData);
-          setSelectedSizes(productData.sizes || []);
-          setSelectedColors(productData.colors || []);
+
           setExistingImages(productData.images || []);
         }
       } catch (error) {
@@ -88,28 +85,6 @@ const ProductUpdate = () => {
     setExistingImages(newImages);
   };
 
-  const handleSizeChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    const value = e.target.value;
-    if (value && !selectedSizes.includes(value)) {
-      setSelectedSizes((prev) => [...prev, value]);
-    }
-  };
-
-  const removeSize = (size: string) => {
-    setSelectedSizes((prev) => prev.filter((s) => s !== size));
-  };
-
-  const handleColorChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    const value = e.target.value;
-    if (value && !selectedColors.includes(value)) {
-      setSelectedColors((prev) => [...prev, value]);
-    }
-  };
-
-  const removeColor = (color: string) => {
-    setSelectedColors((prev) => prev.filter((c) => c !== color));
-  };
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
@@ -129,9 +104,9 @@ const ProductUpdate = () => {
     formData.append("price", form.price.value);
     formData.append("discount", form.discount.value || "0");
     formData.append("category", form.category.value);
+    formData.append("color", form.color.value);
+    formData.append("size", form.size.value);
 
-    selectedSizes.forEach((size) => formData.append("sizes", size));
-    selectedColors.forEach((color) => formData.append("colors", color));
     images.forEach((img) => formData.append("images", img.file));
     existingImages.forEach((img) => formData.append("existingImages", img));
 
@@ -150,8 +125,6 @@ const ProductUpdate = () => {
       // Update the local state with the new product data
       if (response.data.product) {
         setProduct(response.data.product);
-        setSelectedSizes(response.data.product.sizes || []);
-        setSelectedColors(response.data.product.colors || []);
         setExistingImages(response.data.product.images || []);
         setImages([]);
       }
@@ -263,9 +236,8 @@ const ProductUpdate = () => {
                 </label>
                 <select
                   className="border p-3 rounded w-full"
-                  onChange={handleSizeChange}
                   name="size"
-                  defaultValue=""
+                  defaultValue={product?.size}
                 >
                   <option value="">Select Size</option>
                   <option value="XS">XS</option>
@@ -276,25 +248,6 @@ const ProductUpdate = () => {
                   <option value="XXL">XXL</option>
                 </select>
               </div>
-              {selectedSizes.length > 0 && (
-                <div className="flex flex-wrap gap-2 mt-3">
-                  {selectedSizes.map((size) => (
-                    <div
-                      key={size}
-                      className="flex items-center bg-gray-100 border border-gray-300 rounded-full px-3 py-1 text-sm"
-                    >
-                      {size}
-                      <button
-                        type="button"
-                        onClick={() => removeSize(size)}
-                        className="ml-2 text-red-500 hover:text-red-700"
-                      >
-                        ✕
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              )}
             </div>
 
             <div className="w-full">
@@ -304,9 +257,8 @@ const ProductUpdate = () => {
                 </label>
                 <select
                   className="border p-3 rounded w-full"
-                  onChange={handleColorChange}
                   name="color"
-                  defaultValue=""
+                  defaultValue={product?.color}
                 >
                   <option value="">Select Color</option>
                   <option value="Black">Black</option>
@@ -317,25 +269,6 @@ const ProductUpdate = () => {
                   <option value="Yellow">Yellow</option>
                 </select>
               </div>
-              {selectedColors.length > 0 && (
-                <div className="flex flex-wrap gap-2 mt-3">
-                  {selectedColors.map((color) => (
-                    <div
-                      key={color}
-                      className="flex items-center bg-gray-100 border border-gray-300 rounded-full px-3 py-1 text-sm"
-                    >
-                      {color}
-                      <button
-                        type="button"
-                        onClick={() => removeColor(color)}
-                        className="ml-2 text-red-500 hover:text-red-700"
-                      >
-                        ✕
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              )}
             </div>
           </div>
         </div>

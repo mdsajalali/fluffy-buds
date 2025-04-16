@@ -1,9 +1,9 @@
 import { useContext } from "react";
-import { ProductProps } from "../types/types";
 import { Link } from "react-router-dom";
 import { StoreContext } from "../context/StoreContext";
 
-const ProductCard = ({ product }: { product: ProductProps }) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const ProductCard = ({ product }: any) => {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   /* @ts-ignore */
   const { cartItems, addToCart, removeFromCart } = useContext(StoreContext);

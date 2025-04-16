@@ -1,9 +1,9 @@
 import HeadingTitle from "../shared/HeadingTitle";
 import Container from "../shared/Container";
 import ProductCard from "../shared/ProductCard";
-import { ProductProps } from "../types/types";
+import { Product } from "../hooks/useCategoriesProduct";
 
-const Accessories = ({ products }: { products: ProductProps[] }) => {
+const Accessories = ({ products }: { products: Product[] }) => {
   return (
     <>
       <HeadingTitle title="Accessories" />

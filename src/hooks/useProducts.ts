@@ -4,9 +4,7 @@ import { ProductProps } from "../types/types";
 
 // ✅ Reusable Filter Type
 export interface ProductFilterOptions {
-  category?: string;
-  size?: string;
-  color?: string;
+  category?: string; 
   sort?: string;
   name?: string;
   minPrice?: number;
@@ -26,9 +24,7 @@ function useProducts(page: number, filters: ProductFilterOptions) {
         const res = await axiosInstance.get(`/products`, {
           params: {
             page,
-            category: filters.category,
-            size: filters.size,
-            color: filters.color,
+            category: filters.category, 
             sort: filters.sort,
             name: filters.name,
             minPrice: filters.minPrice,
@@ -49,9 +45,7 @@ function useProducts(page: number, filters: ProductFilterOptions) {
     fetchProducts();
   }, [
     page,
-    filters.category,
-    filters.size,
-    filters.color,
+    filters.category, 
     filters.sort,
     filters.name,
     filters.minPrice,

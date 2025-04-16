@@ -55,14 +55,10 @@ const CartContent = ({
                       ${product.price}
                     </td>
                     <td className="text-center px-6 py-4 text-gray-700 font-medium">
-                      {product.sizes.length > 0
-                        ? product.sizes.join(", ")
-                        : "—"}
+                      {product.size}
                     </td>
                     <td className="text-center px-6 py-4 text-gray-700">
-                      {product.colors.length > 0
-                        ? product.colors.join(", ")
-                        : "—"}
+                      {product.color}
                     </td>
                     <td className="text-center px-6 py-4">
                       <div className="inline-flex items-center gap-2">

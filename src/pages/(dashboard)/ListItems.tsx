@@ -39,8 +39,8 @@ const ListItems = () => {
               <th className="px-5 py-4 font-semibold">Name</th>
               <th className="px-5 py-4 font-semibold">Description</th>
               <th className="px-5 py-4 font-semibold">Category</th>
-              <th className="px-5 py-4 font-semibold">Sizes</th>
-              <th className="px-5 py-4 font-semibold">Colors</th>
+              <th className="px-5 py-4 font-semibold">Size</th>
+              <th className="px-5 py-4 font-semibold">Color</th>
               <th className="px-5 py-4 font-semibold">Price</th>
               <th className="px-5 py-4 font-semibold text-center">Actions</th>
             </tr>
@@ -97,10 +97,10 @@ const ListItems = () => {
                     </td>
                     <td className="px-5 py-4 text-gray-700">{item.category}</td>
                     <td className="px-5 py-4 text-gray-700">
-                      {item.sizes.length > 0 ? item.sizes.join(", ") : "—"}
+                      {item.size}
                     </td>
                     <td className="px-5 py-4 text-gray-700">
-                      {item.colors.length > 0 ? item.colors.join(", ") : "—"}
+                      {item.color}
                     </td>
                     <td className="px-5 py-4">
                       <div className="flex flex-col sm:flex-row sm:items-center gap-1">

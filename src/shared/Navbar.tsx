@@ -21,7 +21,6 @@ const Navbar = () => {
   const { token, logOut, getTotalCartQuantity } = useContext(StoreContext);
   const role = getUserRole();
 
-  console.log({ role });
 
   useEffect(() => {
     const handleResize = () => {

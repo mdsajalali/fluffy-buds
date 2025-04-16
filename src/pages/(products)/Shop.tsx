@@ -9,8 +9,6 @@ const Shop = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchText, setSearchText] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
-  const [selectedColor, setSelectedColor] = useState("");
-  const [selectedSize, setSelectedSize] = useState("");
   const [sort, setSort] = useState("");
 
   const [minPrice, setMinPrice] = useState<number>(0);
@@ -33,8 +31,6 @@ const Shop = () => {
     currentPage,
     {
       category: selectedCategory,
-      size: selectedSize,
-      color: selectedColor,
       sort,
       name: searchText,
       minPrice,
@@ -143,72 +139,6 @@ const Shop = () => {
                     }`}
                   >
                     {cat}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Colors */}
-            <div>
-              <div className="flex items-center mt-6 justify-between mb-2">
-                <h2 className="text-lg font-bold">Colors</h2>
-                {selectedColor.length > 0 && (
-                  <X
-                    size={18}
-                    className="cursor-pointer text-red-500"
-                    onClick={() => setSelectedColor("")}
-                  />
-                )}
-              </div>
-              <ul className="space-y-2">
-                {[
-                  "All",
-                  "Black",
-                  "White",
-                  "Red",
-                  "Blue",
-                  "Green",
-                  "Yellow",
-                ].map((col) => (
-                  <li
-                    key={col}
-                    onClick={() => setSelectedColor(col === "All" ? "" : col)}
-                    className={`cursor-pointer ${
-                      selectedColor === (col === "All" ? "" : col)
-                        ? "text-red-500 font-semibold"
-                        : "text-gray-700 hover:text-blue-500"
-                    }`}
-                  >
-                    {col}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Sizes */}
-            <div className="mb-6">
-              <div className="flex items-center mt-6 justify-between mb-2">
-                <h2 className="text-lg font-bold">Sizes</h2>
-                {selectedSize.length > 0 && (
-                  <X
-                    size={18}
-                    className="cursor-pointer text-red-500"
-                    onClick={() => setSelectedSize("")}
-                  />
-                )}
-              </div>
-              <ul className="space-y-2">
-                {["All", "XS", "S", "M", "L", "XL", "XXL"].map((size) => (
-                  <li
-                    key={size}
-                    onClick={() => setSelectedSize(size === "All" ? "" : size)}
-                    className={`cursor-pointer ${
-                      selectedSize === (size === "All" ? "" : size)
-                        ? "text-red-500 font-semibold"
-                        : "text-gray-700 hover:text-blue-500"
-                    }`}
-                  >
-                    {size}
                   </li>
                 ))}
               </ul>
