@@ -1,43 +1,44 @@
 import { useEffect, useState } from "react";
 import axiosInstance from "../lib/axiosInstance";
+import { ProductProps } from "../types/types";
 
-type Product = {
-  _id: string;
-  name: string;
-  description: string;
-  category: string;
-  sizes: string[];
-  colors: string[];
-  price: number;
-  regularPrice: number;
-  images: { url: string }[];
-};
+// ✅ Reusable Filter Type
+export interface ProductFilterOptions {
+  category?: string;
+  size?: string;
+  color?: string;
+  sort?: string;
+  name?: string;
+  minPrice?: number;
+  maxPrice?: number;
+}
 
-type Pagination = {
-  totalPages: number;
-};
-
-type ResponseData = {
-  products: Product[];
-  pagination: Pagination;
-};
-function useProducts(page: number) {
-  const [products, setProducts] = useState<Product[]>([]);
+function useProducts(page: number, filters: ProductFilterOptions) {
+  const [products, setProducts] = useState<ProductProps[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [totalPages, setTotalPages] = useState<number>(1);
+  const [totalProducts, setTotalProducts] = useState<number>(0);
 
   useEffect(() => {
     const fetchProducts = async () => {
       setLoading(true);
       try {
-        const res = await axiosInstance.get<ResponseData>(`/products`, {
+        const res = await axiosInstance.get(`/products`, {
           params: {
             page,
-            limit: 9,
+            category: filters.category,
+            size: filters.size,
+            color: filters.color,
+            sort: filters.sort,
+            name: filters.name,
+            minPrice: filters.minPrice,
+            maxPrice: filters.maxPrice,
           },
         });
+
         setProducts(res?.data?.products || []);
         setTotalPages(res?.data?.pagination?.totalPages || 1);
+        setTotalProducts(res?.data?.pagination?.totalProducts || 0);
       } catch (error) {
         console.error("Failed to fetch products", error);
       } finally {
@@ -46,9 +47,24 @@ function useProducts(page: number) {
     };
 
     fetchProducts();
-  }, [page]);
+  }, [
+    page,
+    filters.category,
+    filters.size,
+    filters.color,
+    filters.sort,
+    filters.name,
+    filters.minPrice,
+    filters.maxPrice,
+  ]);
 
-  return { products, loading, totalPages, setProducts };
+  return {
+    products,
+    loading,
+    totalPages,
+    setProducts,
+    totalProducts,
+  };
 }
 
 export default useProducts;

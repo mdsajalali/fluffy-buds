@@ -28,7 +28,7 @@ import NotFound from "./components/(not-found)/NotFound";
 
 const App = () => {
   const location = useLocation();
-  const { toys, accessories, stationery, products } = useCategoriesProduct();
+  const { toys, accessories, stationery } = useCategoriesProduct();
 
   const isAuthPage =
     location.pathname === "/login" ||
@@ -60,7 +60,7 @@ const App = () => {
         />
 
         {/* shop page */}
-        <Route path="/shop" element={<Shop products={products} />} />
+        <Route path="/shop" element={<Shop />} />
         <Route path="/shop/:id" element={<ProductDetails />} />
 
         {/* categories page */}

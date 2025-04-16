@@ -1,185 +1,246 @@
 import { Search, X } from "lucide-react";
 import { useState } from "react";
-import { ProductProps } from "../../types/types";
 import Container from "../../shared/Container";
 import ProductCard from "../../shared/ProductCard";
+import Pagination from "../../components/Pagination";
+import useProducts from "../../hooks/useProducts";
 
-interface ProductType {
-  products: ProductProps[];
-}
+const Shop = () => {
+  const [currentPage, setCurrentPage] = useState(1);
 
-const Shop = ({ products }: ProductType) => {
-  const [minPrice, setMinPrice] = useState(100);
-  const [maxPrice, setMaxPrice] = useState(900);
+  const [searchText, setSearchText] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedColor, setSelectedColor] = useState("");
+  const [selectedSize, setSelectedSize] = useState("");
+  const [sort, setSort] = useState("");
+
+  // price range functionality start here
+  const [minPrice, setMinPrice] = useState<number>(0);
+  const [maxPrice, setMaxPrice] = useState<number>(500);
+
+  // Handle max price change, ensuring maxPrice >= minPrice + 50
+  const handleMaxPriceChange = (value: number) => {
+    if (value >= minPrice + 50) {
+      setMaxPrice(value);
+    } else {
+      setMaxPrice(minPrice + 50);
+    }
+  };
+
+  // Reset to default values
+  const resetPriceRange = () => {
+    setMinPrice(0);
+    setMaxPrice(500);
+  };
+
+  // price range functionality end here
+
+  const { products, totalPages, totalProducts } = useProducts(currentPage, {
+    category: selectedCategory,
+    size: selectedSize,
+    color: selectedColor,
+    sort,
+    name: searchText,
+    minPrice,
+    maxPrice,
+  });
 
   return (
-    <div className="md:mt-[63px]">
+    <div className="md:mt-[50px]">
       <div className="bg-gray-100 py-14 md:py-20">
         <h1 className="text-center text-3xl md:text-4xl">Shop</h1>
       </div>
       <Container>
         <div className="grid grid-cols-12 gap-5">
+          {/* Sidebar Filters */}
           <div className="p-4 md:col-span-3 hidden md:block">
             {/* Search Section */}
             <div>
               <div className="flex items-center justify-between mb-2">
                 <h2 className="text-lg font-bold">Search</h2>
-                <h2 className="text-lg font-bold cursor-pointer text-red-500">
-                  <X size={18} />
-                </h2>
+                {searchText.length > 0 && (
+                  <X
+                    size={18}
+                    className="cursor-pointer text-red-500"
+                    onClick={() => setSearchText("")}
+                  />
+                )}
               </div>
               <div className="relative">
                 <input
+                  value={searchText}
+                  onChange={(e) => setSearchText(e.target.value)}
                   type="text"
                   placeholder="Search here..."
                   className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
-                  <Search />
+                  <Search size={18} />
                 </span>
               </div>
             </div>
 
-            {/* Price Range Slider */}
+            {/* Price Range */}
             <div>
+              {/* Price Range Header */}
               <div className="flex items-center mt-6 justify-between mb-2">
                 <h2 className="text-lg font-bold">Price Range</h2>
-                <h2 className="text-lg font-bold cursor-pointer text-red-500">
-                  <X size={18} />
-                </h2>
+                {(minPrice !== 0 || maxPrice !== 500) && (
+                  <X
+                    size={18}
+                    className="cursor-pointer text-red-500"
+                    onClick={resetPriceRange}
+                  />
+                )}
               </div>
               <div className="space-y-4">
+                {/* Price range display */}
                 <div className="flex justify-between text-sm text-gray-600">
-                  <span>${minPrice}</span>
+                  <span>$50</span>
                   <span>${maxPrice}</span>
                 </div>
+                {/* Slider container */}
                 <div className="relative h-2 bg-gray-200 rounded">
+                  {/* Max price slider */}
                   <input
                     type="range"
-                    min="0"
-                    max="1000"
-                    value={minPrice}
-                    onChange={(e) => setMinPrice(Number(e.target.value))}
-                    className="absolute w-full h-2 bg-transparent appearance-none pointer-events-none"
-                    style={{ zIndex: minPrice > maxPrice - 100 ? 5 : 3 }}
-                  />
-                  <input
-                    type="range"
-                    min="0"
-                    max="1000"
+                    min={0}
+                    max={500}
                     value={maxPrice}
-                    onChange={(e) => setMaxPrice(Number(e.target.value))}
-                    className="absolute w-full h-2 bg-transparent appearance-none pointer-events-none"
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      handleMaxPriceChange(Number(e.target.value))
+                    }
+                    className="absolute w-full h-2 bg-transparent appearance-none pointer-events-auto"
+                    style={{ zIndex: 4 }}
+                  />
+                  {/* Visual track between min and max */}
+                  <div
+                    className="absolute h-2 bg-blue-500 rounded"
+                    style={{
+                      left: `${(minPrice / 500) * 100}%`,
+                      width: `${((maxPrice - minPrice) / 500) * 100}%`,
+                    }}
                   />
                 </div>
               </div>
             </div>
 
-            {/* Categories Section */}
+            {/* Categories */}
             <div>
               <div className="flex items-center mt-6 justify-between mb-2">
                 <h2 className="text-lg font-bold">Categories</h2>
-                <h2 className="text-lg font-bold cursor-pointer text-red-500">
-                  <X size={18} />
-                </h2>
+                {selectedCategory.length > 0 && (
+                  <X
+                    size={18}
+                    className="cursor-pointer text-red-500"
+                    onClick={() => setSelectedCategory("")}
+                  />
+                )}
               </div>
               <ul className="space-y-2">
-                <li className="text-red-500 font-semibold cursor-pointer">
-                  All
-                </li>
-                <li className="text-gray-700 cursor-pointer hover:text-blue-500">
-                  Toys
-                </li>
-                <li className="text-gray-700 cursor-pointer hover:text-blue-500">
-                  Accessories
-                </li>
-                <li className="text-gray-700 cursor-pointer hover:text-blue-500">
-                  Stationery
-                </li>
+                {["All", "Toys", "Accessories", "Stationery"].map((cat) => (
+                  <li
+                    key={cat}
+                    onClick={() =>
+                      setSelectedCategory(cat === "All" ? "" : cat)
+                    }
+                    className={`cursor-pointer ${
+                      selectedCategory === (cat === "All" ? "" : cat)
+                        ? "text-red-500 font-semibold"
+                        : "text-gray-700 hover:text-blue-500"
+                    }`}
+                  >
+                    {cat}
+                  </li>
+                ))}
               </ul>
             </div>
 
-            {/* Colors Section */}
+            {/* Colors */}
             <div>
               <div className="flex items-center mt-6 justify-between mb-2">
                 <h2 className="text-lg font-bold">Colors</h2>
-                <h2 className="text-lg font-bold cursor-pointer text-red-500">
-                  <X size={18} />
-                </h2>
+                {selectedColor.length > 0 && (
+                  <X
+                    size={18}
+                    className="cursor-pointer text-red-500"
+                    onClick={() => setSelectedColor("")}
+                  />
+                )}
               </div>
               <ul className="space-y-2">
-                <li className="text-red-500 font-semibold cursor-pointer">
-                  All
-                </li>
-                <li className="text-gray-700 cursor-pointer hover:text-blue-500">
-                  Black
-                </li>
-                <li className="text-gray-700 cursor-pointer hover:text-blue-500">
-                  White
-                </li>
-                <li className="text-gray-700 cursor-pointer hover:text-blue-500">
-                  Red
-                </li>
-                <li className="text-gray-700 cursor-pointer hover:text-blue-500">
-                  Blue
-                </li>
-                <li className="text-gray-700 cursor-pointer hover:text-blue-500">
-                  Green
-                </li>
-                <li className="text-gray-700 cursor-pointer hover:text-blue-500">
-                  Yellow
-                </li>
+                {[
+                  "All",
+                  "Black",
+                  "White",
+                  "Red",
+                  "Blue",
+                  "Green",
+                  "Yellow",
+                ].map((col) => (
+                  <li
+                    key={col}
+                    onClick={() => setSelectedColor(col === "All" ? "" : col)}
+                    className={`cursor-pointer ${
+                      selectedColor === (col === "All" ? "" : col)
+                        ? "text-red-500 font-semibold"
+                        : "text-gray-700 hover:text-blue-500"
+                    }`}
+                  >
+                    {col}
+                  </li>
+                ))}
               </ul>
             </div>
 
-            {/* Sizes Section */}
-
+            {/* Sizes */}
             <div className="mb-6">
               <div className="flex items-center mt-6 justify-between mb-2">
                 <h2 className="text-lg font-bold">Sizes</h2>
-                <h2 className="text-lg font-bold cursor-pointer text-red-500">
-                  <X size={18} />
-                </h2>
+                {selectedSize.length > 0 && (
+                  <X
+                    size={18}
+                    className="cursor-pointer text-red-500"
+                    onClick={() => setSelectedSize("")}
+                  />
+                )}
               </div>
               <ul className="space-y-2">
-                <li className="text-red-500 font-semibold cursor-pointer">
-                  All
-                </li>
-                <li className="text-gray-700 cursor-pointer hover:text-blue-500">
-                  XS
-                </li>
-                <li className="text-gray-700 cursor-pointer hover:text-blue-500">
-                  S
-                </li>
-                <li className="text-gray-700 cursor-pointer hover:text-blue-500">
-                  M
-                </li>
-                <li className="text-gray-700 cursor-pointer hover:text-blue-500">
-                  L
-                </li>
-                <li className="text-gray-700 cursor-pointer hover:text-blue-500">
-                  XL
-                </li>
-                <li className="text-gray-700 cursor-pointer hover:text-blue-500">
-                  XXL
-                </li>
+                {["All", "XS", "S", "M", "L", "XL", "XXL"].map((size) => (
+                  <li
+                    key={size}
+                    onClick={() => setSelectedSize(size === "All" ? "" : size)}
+                    className={`cursor-pointer ${
+                      selectedSize === (size === "All" ? "" : size)
+                        ? "text-red-500 font-semibold"
+                        : "text-gray-700 hover:text-blue-500"
+                    }`}
+                  >
+                    {size}
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
 
-          <div className="md:col-span-9 col-span-12 ">
-            <div className="flex gap-2   my-4   items-center justify-between w-full max-w-7xl mx-auto ">
+          {/* Main Content */}
+          <div className="md:col-span-9 col-span-12">
+            <div className="flex gap-2 my-4 items-center justify-between w-full max-w-7xl mx-auto">
               <h1 className="text-sm md:text-base mb-2 md:mb-0">
-                Showing 1 - 6 of 15 results
+                Showing 1 - 6 of {totalProducts} results
               </h1>
-              <select className="w-48 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+              <select
+                value={sort}
+                onChange={(e) => setSort(e.target.value)}
+                className="w-48 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
                 <option value="">Sort by</option>
                 <option value="lowToHigh">Price: Low to High</option>
                 <option value="highToLow">Price: High to Low</option>
               </select>
             </div>
 
-            <div className=" grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {products.map((product) => (
                 <ProductCard key={product?._id} product={product} />
               ))}
@@ -187,8 +248,12 @@ const Shop = ({ products }: ProductType) => {
           </div>
         </div>
 
-        {/* pagination here */}
-        {/* <Pagination /> */}
+        {/* Pagination */}
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={(page) => setCurrentPage(page)}
+        />
       </Container>
     </div>
   );
