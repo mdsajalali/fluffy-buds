@@ -7,18 +7,15 @@ import useProducts from "../../hooks/useProducts";
 
 const Shop = () => {
   const [currentPage, setCurrentPage] = useState(1);
-
   const [searchText, setSearchText] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedColor, setSelectedColor] = useState("");
   const [selectedSize, setSelectedSize] = useState("");
   const [sort, setSort] = useState("");
 
-  // price range functionality start here
   const [minPrice, setMinPrice] = useState<number>(0);
   const [maxPrice, setMaxPrice] = useState<number>(500);
 
-  // Handle max price change, ensuring maxPrice >= minPrice + 50
   const handleMaxPriceChange = (value: number) => {
     if (value >= minPrice + 50) {
       setMaxPrice(value);
@@ -27,23 +24,23 @@ const Shop = () => {
     }
   };
 
-  // Reset to default values
   const resetPriceRange = () => {
     setMinPrice(0);
     setMaxPrice(500);
   };
 
-  // price range functionality end here
-
-  const { products, totalPages, totalProducts } = useProducts(currentPage, {
-    category: selectedCategory,
-    size: selectedSize,
-    color: selectedColor,
-    sort,
-    name: searchText,
-    minPrice,
-    maxPrice,
-  });
+  const { products, totalPages, totalProducts, loading } = useProducts(
+    currentPage,
+    {
+      category: selectedCategory,
+      size: selectedSize,
+      color: selectedColor,
+      sort,
+      name: searchText,
+      minPrice,
+      maxPrice,
+    }
+  );
 
   return (
     <div className="md:mt-[50px]">
@@ -82,7 +79,6 @@ const Shop = () => {
 
             {/* Price Range */}
             <div>
-              {/* Price Range Header */}
               <div className="flex items-center mt-6 justify-between mb-2">
                 <h2 className="text-lg font-bold">Price Range</h2>
                 {(minPrice !== 0 || maxPrice !== 500) && (
@@ -94,26 +90,22 @@ const Shop = () => {
                 )}
               </div>
               <div className="space-y-4">
-                {/* Price range display */}
                 <div className="flex justify-between text-sm text-gray-600">
                   <span>$50</span>
                   <span>${maxPrice}</span>
                 </div>
-                {/* Slider container */}
                 <div className="relative h-2 bg-gray-200 rounded">
-                  {/* Max price slider */}
                   <input
                     type="range"
                     min={0}
                     max={500}
                     value={maxPrice}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                    onChange={(e) =>
                       handleMaxPriceChange(Number(e.target.value))
                     }
                     className="absolute w-full h-2 bg-transparent appearance-none pointer-events-auto"
                     style={{ zIndex: 4 }}
                   />
-                  {/* Visual track between min and max */}
                   <div
                     className="absolute h-2 bg-blue-500 rounded"
                     style={{
@@ -241,9 +233,22 @@ const Shop = () => {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {products.map((product) => (
-                <ProductCard key={product?._id} product={product} />
-              ))}
+              {loading ? (
+                Array.from({ length: 6 }).map((_, i) => (
+                  <div
+                    key={i}
+                    className="h-72 w-full rounded-lg bg-gray-200 animate-pulse"
+                  />
+                ))
+              ) : products.length === 0 ? (
+                <div className="col-span-full text-center text-gray-500 text-lg py-10">
+                  No products found.
+                </div>
+              ) : (
+                products.map((product) => (
+                  <ProductCard key={product?._id} product={product} />
+                ))
+              )}
             </div>
           </div>
         </div>
