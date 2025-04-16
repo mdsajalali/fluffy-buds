@@ -123,6 +123,7 @@ function Address({ setActiveStep }: AddressProps) {
                   name="firstName"
                   placeholder="First name"
                   className="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-all duration-300"
+                  required
                 />
               </div>
               <div>
@@ -134,6 +135,7 @@ function Address({ setActiveStep }: AddressProps) {
                   name="lastName"
                   placeholder="Last name"
                   className="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-all duration-300"
+                  required
                 />
               </div>
             </div>
@@ -147,6 +149,7 @@ function Address({ setActiveStep }: AddressProps) {
                 name="email"
                 placeholder="Email address"
                 className="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-all duration-300"
+                required
               />
             </div>
 
@@ -159,6 +162,7 @@ function Address({ setActiveStep }: AddressProps) {
                 name="street"
                 placeholder="Street"
                 className="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-all duration-300"
+                required
               />
             </div>
 
@@ -172,6 +176,7 @@ function Address({ setActiveStep }: AddressProps) {
                   name="city"
                   placeholder="City"
                   className="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-all duration-300"
+                  required
                 />
               </div>
               <div>
@@ -183,6 +188,7 @@ function Address({ setActiveStep }: AddressProps) {
                   name="state"
                   placeholder="State"
                   className="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-all duration-300"
+                  required
                 />
               </div>
             </div>
@@ -197,6 +203,7 @@ function Address({ setActiveStep }: AddressProps) {
                   name="zipcode"
                   placeholder="Zip code"
                   className="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-all duration-300"
+                  required
                 />
               </div>
               <div>
@@ -208,6 +215,7 @@ function Address({ setActiveStep }: AddressProps) {
                   name="country"
                   placeholder="Country"
                   className="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-all duration-300"
+                  required
                 />
               </div>
             </div>
@@ -221,6 +229,7 @@ function Address({ setActiveStep }: AddressProps) {
                 name="phone"
                 placeholder="Phone"
                 className="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 transition-all duration-300"
+                required
               />
             </div>
           </div>
