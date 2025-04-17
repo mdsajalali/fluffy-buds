@@ -17,15 +17,23 @@ const Toys = ({ products, loading }: ToysProps) => {
     <>
       <HeadingTitle title="Toys" />
       <Container>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {loading
-            ? Array.from({ length: skeletonCount }).map((_, index) => (
-                <ProductCardSkeleton key={index} />
-              ))
-            : products?.map((product) => (
-                <ProductCard key={product._id} product={product} />
-              ))}
-        </div>
+        {loading ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {Array.from({ length: skeletonCount }).map((_, index) => (
+              <ProductCardSkeleton key={index} />
+            ))}
+          </div>
+        ) : products && products.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {products.map((product) => (
+              <ProductCard key={product._id} product={product} />
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-10 text-gray-500 text-lg">
+            No toys found.
+          </div>
+        )}
       </Container>
     </>
   );

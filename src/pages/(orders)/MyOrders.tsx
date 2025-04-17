@@ -67,8 +67,8 @@ function MyOrders() {
         <div className="space-y-4">
           {loading ? (
             <OrderSkeleton />
-          ) : (
-            orders?.map((order) => (
+          ) : orders && orders.length > 0 ? (
+            orders.map((order) => (
               <div
                 key={order._id}
                 className="border border-gray-300 rounded-lg p-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4"
@@ -131,6 +131,10 @@ function MyOrders() {
                 </div>
               </div>
             ))
+          ) : (
+            <div className="text-center py-10 text-gray-500 text-lg">
+              No orders found.
+            </div>
           )}
         </div>
       </Container>
