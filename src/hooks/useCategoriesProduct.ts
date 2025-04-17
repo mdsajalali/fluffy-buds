@@ -55,7 +55,7 @@ function useCategoriesProduct() {
     };
 
     fetchProducts();
-  }, [products]);
+  }, []);
 
   return {
     products,

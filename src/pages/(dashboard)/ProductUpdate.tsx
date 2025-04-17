@@ -286,7 +286,9 @@ const ProductUpdate = () => {
                 className="relative group w-28 h-28 rounded overflow-hidden"
               >
                 <img
-                  src={img}
+                  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                  // @ts-expect-error
+                  src={img?.url}
                   alt={`existing-preview-${index}`}
                   className="w-full h-full object-cover border rounded"
                 />
@@ -340,22 +342,32 @@ const ProductUpdate = () => {
           </div>
         </div>
 
-        <button
-          onClick={() => navigate("/dashboard/list-items")}
-          type="submit"
-          disabled={loading}
-          className={`mt-8 w-full py-3 rounded transition flex justify-center items-center ${
-            loading
-              ? "bg-gray-600 cursor-not-allowed"
-              : "bg-black hover:bg-gray-800 cursor-pointer text-white"
-          }`}
-        >
-          {loading ? (
-            <span className="inline-block w-6 h-6 border-2 border-t-transparent border-white rounded-full animate-spin"></span>
-          ) : (
-            "Update Product"
-          )}
-        </button>
+        <div className="flex items-center mt-8  justify-center gap-3">
+          <button
+            onClick={() => navigate("/dashboard/list-items")}
+            type="submit"
+            disabled={loading}
+            className={`w-full py-3 rounded transition flex justify-center items-center ${
+              loading
+                ? "bg-gray-600 cursor-not-allowed"
+                : "bg-black hover:bg-gray-800 cursor-pointer text-white"
+            }`}
+          >
+            {loading ? (
+              <span className="inline-block w-6 h-6 border-2 border-t-transparent border-white rounded-full animate-spin"></span>
+            ) : (
+              "Update Product"
+            )}
+          </button>
+          <button
+            type="button"
+            onClick={() => navigate("/dashboard/list-items")}
+            className="w-full cursor-pointer py-3 rounded bg-gray-200 hover:bg-gray-300 transition"
+            aria-label="Cancel update"
+          >
+            Cancel
+          </button>
+        </div>
       </form>
     </div>
   );
