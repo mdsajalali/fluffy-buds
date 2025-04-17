@@ -3,6 +3,7 @@ import { Step } from "./Cart";
 import useCategoriesProduct from "../../hooks/useCategoriesProduct";
 import { StoreContext } from "../../context/StoreContext";
 import { useContext } from "react";
+import CartSkeleton from "../../components/(skeleton)/CartSkeleton";
 
 const CartContent = ({
   setActiveStep,
@@ -13,10 +14,15 @@ const CartContent = ({
   /* @ts-ignore */
   const { cartItems, removeFromCart, getTotalCartAmount, addToCart } =
     useContext(StoreContext);
-  const { products } = useCategoriesProduct();
+  const { products, loading } = useCategoriesProduct();
+
+  // Skeleton component for rectangular blocks
+  const SkeletonBlock = ({ className }: { className?: string }) => (
+    <div className={`animate-pulse bg-gray-200 rounded ${className}`} />
+  );
 
   return (
-    <div className="max-w-6xl mx-auto ">
+    <div className="max-w-6xl mx-auto">
       <div className="overflow-x-auto rounded-lg shadow">
         <table className="min-w-full bg-white text-sm">
           <thead className="bg-gray-100 text-gray-600 uppercase text-xs">
@@ -32,66 +38,70 @@ const CartContent = ({
             </tr>
           </thead>
           <tbody>
-            {products?.map((product) => {
-              if (cartItems[product._id] > 0) {
-                return (
-                  <tr
-                    key={product._id}
-                    className="border-b border-gray-200 hover:bg-gray-50"
-                  >
-                    <td className="px-6 py-4 flex items-center gap-4">
-                      {product.images.length > 0 && (
-                        <img
-                          src={product.images[0].url}
-                          alt={product.name}
-                          className="w-14 h-14 rounded object-cover"
-                        />
-                      )}
-                    </td>
-                    <td className="text-center py-4 text-gray-700">
-                      {product.name}
-                    </td>
-                    <td className="text-center px-6 py-4 text-blue-600 font-medium">
-                      ${product.price}
-                    </td>
-                    <td className="text-center px-6 py-4 text-gray-700 font-medium">
-                      {product.size}
-                    </td>
-                    <td className="text-center px-6 py-4 text-gray-700">
-                      {product.color}
-                    </td>
-                    <td className="text-center px-6 py-4">
-                      <div className="inline-flex items-center gap-2">
+            {loading ? (
+              <CartSkeleton />
+            ) : (
+              products?.map((product) => {
+                if (cartItems[product._id] > 0) {
+                  return (
+                    <tr
+                      key={product._id}
+                      className="border-b border-gray-200 hover:bg-gray-50"
+                    >
+                      <td className="px-6 py-4 flex items-center gap-4">
+                        {product.images.length > 0 && (
+                          <img
+                            src={product.images[0].url}
+                            alt={product.name}
+                            className="w-14 h-14 rounded object-cover"
+                          />
+                        )}
+                      </td>
+                      <td className="text-center py-4 text-gray-700">
+                        {product.name}
+                      </td>
+                      <td className="text-center px-6 py-4 text-blue-600 font-medium">
+                        ${product.price}
+                      </td>
+                      <td className="text-center px-6 py-4 text-gray-700 font-medium">
+                        {product.size}
+                      </td>
+                      <td className="text-center px-6 py-4 text-gray-700">
+                        {product.color}
+                      </td>
+                      <td className="text-center px-6 py-4">
+                        <div className="inline-flex items-center gap-2">
+                          <button
+                            onClick={() => removeFromCart(product?._id)}
+                            className="p-1 cursor-pointer bg-gray-200 rounded hover:bg-gray-300"
+                          >
+                            <Minus className="w-4 h-4" />
+                          </button>
+                          <span>{cartItems[product._id]}</span>
+                          <button
+                            onClick={() => addToCart(product?._id)}
+                            className="p-1 cursor-pointer bg-gray-200 rounded hover:bg-gray-300"
+                          >
+                            <Plus className="w-4 h-4" />
+                          </button>
+                        </div>
+                      </td>
+                      <td className="text-center px-6 py-4 font-semibold text-gray-800">
+                        ${product.price * cartItems[product._id]}
+                      </td>
+                      <td className="text-center px-6 py-4">
                         <button
-                          onClick={() => removeFromCart(product?._id)}
-                          className="p-1 cursor-pointer bg-gray-200 rounded hover:bg-gray-300"
+                          onClick={() => removeFromCart(product._id)}
+                          className="text-red-500 hover:text-red-700 cursor-pointer"
                         >
-                          <Minus className="w-4 h-4" />
+                          <Trash2 className="w-5 h-5" />
                         </button>
-                        <span>{cartItems[product._id]}</span>
-                        <button
-                          onClick={() => addToCart(product?._id)}
-                          className="p-1 cursor-pointer bg-gray-200 rounded hover:bg-gray-300"
-                        >
-                          <Plus className="w-4 h-4" />
-                        </button>
-                      </div>
-                    </td>
-                    <td className="text-center px-6 py-4 font-semibold text-gray-800">
-                      ${product.price * cartItems[product._id]}
-                    </td>
-                    <td className="text-center px-6 py-4">
-                      <button
-                        onClick={() => removeFromCart(product._id)}
-                        className="text-red-500 hover:text-red-700  cursor-pointer"
-                      >
-                        <Trash2 className="w-5 h-5" />
-                      </button>
-                    </td>
-                  </tr>
-                );
-              }
-            })}
+                      </td>
+                    </tr>
+                  );
+                }
+              })
+            )}
           </tbody>
         </table>
       </div>
@@ -99,17 +109,33 @@ const CartContent = ({
       {/* Subtotal & Checkout */}
       <div className="flex justify-between items-center mt-6 flex-wrap gap-4">
         <div>
-          <p>Delivery Fee : $2</p>
+          {loading ? (
+            <SkeletonBlock className="h-4 w-24" />
+          ) : (
+            <p>Delivery Fee: $2</p>
+          )}
         </div>
-        <h2 className="text-lg font-semibold text-gray-800">
-          Subtotal: ${getTotalCartAmount() + 2}
-        </h2>
-        <button
-          onClick={() => setActiveStep("Address")}
-          className="bg-blue-600 hover:bg-blue-700 cursor-pointer text-white px-6 py-2 rounded-md text-sm font-medium"
-        >
-          Proceed to Checkout
-        </button>
+        <div>
+          {loading ? (
+            <SkeletonBlock className="h-6 w-32" />
+          ) : (
+            <h2 className="text-lg font-semibold text-gray-800">
+              Subtotal: ${getTotalCartAmount() + 2}
+            </h2>
+          )}
+        </div>
+        <div>
+          {loading ? (
+            <SkeletonBlock className="h-10 w-40 rounded-md" />
+          ) : (
+            <button
+              onClick={() => setActiveStep("Address")}
+              className="bg-blue-600 hover:bg-blue-700 cursor-pointer text-white px-6 py-2 rounded-md text-sm font-medium"
+            >
+              Proceed to Checkout
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );
