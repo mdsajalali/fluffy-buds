@@ -29,7 +29,7 @@ import DashboardData from "./pages/(dashboard)/DashboardData";
 
 const App = () => {
   const location = useLocation();
-  const { toys, accessories, stationery } = useCategoriesProduct();
+  const { toys, accessories, stationery, loading } = useCategoriesProduct();
 
   const isAuthPage =
     location.pathname === "/login" ||
@@ -52,9 +52,9 @@ const App = () => {
           element={
             <>
               <Hero />
-              <Toys products={toys} />
-              <Accessories products={accessories} />
-              <Stationery products={stationery} />
+              <Toys products={toys} loading={loading} />
+              <Accessories products={accessories} loading={loading} />
+              <Stationery products={stationery} loading={loading} />
               <Categories />
             </>
           }
