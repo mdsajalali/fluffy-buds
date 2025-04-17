@@ -4,9 +4,8 @@ import Container from "../../shared/Container";
 import ProductCard from "../../shared/ProductCard";
 import Pagination from "../../components/Pagination";
 import useProducts from "../../hooks/useProducts";
-import ProductCardSkeleton from "../../components/(skeleton)/ProductCardSkeleton";
 import PaginationSkeleton from "../../components/(skeleton)/PaginationSkeleton";
-import SidebarSkeleton from "../../components/(skeleton)/SidebarSkeleton";
+import ProductCardSkeleton from "../../components/(skeleton)/ProductCardSkeleton";
 
 const Shop = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -49,108 +48,104 @@ const Shop = () => {
       <Container>
         <div className="grid grid-cols-12 gap-5">
           {/* Sidebar Filters */}
-          {loading ? (
-            <SidebarSkeleton />
-          ) : (
-            <div className="p-4 md:col-span-3 hidden md:block">
-              {/* Search Section */}
-              <div>
-                <div className="flex items-center justify-between mb-2">
-                  <h2 className="text-lg font-bold">Search</h2>
-                  {searchText.length > 0 && (
-                    <X
-                      size={18}
-                      className="cursor-pointer text-red-500"
-                      onClick={() => setSearchText("")}
-                    />
-                  )}
-                </div>
-                <div className="relative">
-                  <input
-                    value={searchText}
-                    onChange={(e) => setSearchText(e.target.value)}
-                    type="text"
-                    placeholder="Search here..."
-                    className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          <div className="p-4 md:col-span-3 hidden md:block">
+            {/* Search Section */}
+            <div>
+              <div className="flex items-center justify-between mb-2">
+                <h2 className="text-lg font-bold">Search</h2>
+                {searchText.length > 0 && (
+                  <X
+                    size={18}
+                    className="cursor-pointer text-red-500"
+                    onClick={() => setSearchText("")}
                   />
-                  <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
-                    <Search size={18} />
-                  </span>
-                </div>
+                )}
               </div>
-
-              {/* Price Range */}
-              <div>
-                <div className="flex items-center mt-6 justify-between mb-2">
-                  <h2 className="text-lg font-bold">Price Range</h2>
-                  {(minPrice !== 0 || maxPrice !== 500) && (
-                    <X
-                      size={18}
-                      className="cursor-pointer text-red-500"
-                      onClick={resetPriceRange}
-                    />
-                  )}
-                </div>
-                <div className="space-y-4">
-                  <div className="flex justify-between text-sm text-gray-600">
-                    <span>$50</span>
-                    <span>${maxPrice}</span>
-                  </div>
-                  <div className="relative h-2 bg-gray-200 rounded">
-                    <input
-                      type="range"
-                      min={0}
-                      max={500}
-                      value={maxPrice}
-                      onChange={(e) =>
-                        handleMaxPriceChange(Number(e.target.value))
-                      }
-                      className="absolute w-full h-2 bg-transparent appearance-none pointer-events-auto"
-                      style={{ zIndex: 4 }}
-                    />
-                    <div
-                      className="absolute h-2 bg-blue-500 rounded"
-                      style={{
-                        left: `${(minPrice / 500) * 100}%`,
-                        width: `${((maxPrice - minPrice) / 500) * 100}%`,
-                      }}
-                    />
-                  </div>
-                </div>
-              </div>
-
-              {/* Categories */}
-              <div>
-                <div className="flex items-center mt-6 justify-between mb-2">
-                  <h2 className="text-lg font-bold">Categories</h2>
-                  {selectedCategory.length > 0 && (
-                    <X
-                      size={18}
-                      className="cursor-pointer text-red-500"
-                      onClick={() => setSelectedCategory("")}
-                    />
-                  )}
-                </div>
-                <ul className="space-y-2">
-                  {["All", "Toys", "Accessories", "Stationery"].map((cat) => (
-                    <li
-                      key={cat}
-                      onClick={() =>
-                        setSelectedCategory(cat === "All" ? "" : cat)
-                      }
-                      className={`cursor-pointer ${
-                        selectedCategory === (cat === "All" ? "" : cat)
-                          ? "text-red-500 font-semibold"
-                          : "text-gray-700 hover:text-blue-500"
-                      }`}
-                    >
-                      {cat}
-                    </li>
-                  ))}
-                </ul>
+              <div className="relative">
+                <input
+                  value={searchText}
+                  onChange={(e) => setSearchText(e.target.value)}
+                  type="text"
+                  placeholder="Search here..."
+                  className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+                  <Search size={18} />
+                </span>
               </div>
             </div>
-          )}
+
+            {/* Price Range */}
+            <div>
+              <div className="flex items-center mt-6 justify-between mb-2">
+                <h2 className="text-lg font-bold">Price Range</h2>
+                {(minPrice !== 0 || maxPrice !== 500) && (
+                  <X
+                    size={18}
+                    className="cursor-pointer text-red-500"
+                    onClick={resetPriceRange}
+                  />
+                )}
+              </div>
+              <div className="space-y-4">
+                <div className="flex justify-between text-sm text-gray-600">
+                  <span>$50</span>
+                  <span>${maxPrice}</span>
+                </div>
+                <div className="relative h-2 bg-gray-200 rounded">
+                  <input
+                    type="range"
+                    min={0}
+                    max={500}
+                    value={maxPrice}
+                    onChange={(e) =>
+                      handleMaxPriceChange(Number(e.target.value))
+                    }
+                    className="absolute w-full h-2 bg-transparent appearance-none pointer-events-auto"
+                    style={{ zIndex: 4 }}
+                  />
+                  <div
+                    className="absolute h-2 bg-blue-500 rounded"
+                    style={{
+                      left: `${(minPrice / 500) * 100}%`,
+                      width: `${((maxPrice - minPrice) / 500) * 100}%`,
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Categories */}
+            <div>
+              <div className="flex items-center mt-6 justify-between mb-2">
+                <h2 className="text-lg font-bold">Categories</h2>
+                {selectedCategory.length > 0 && (
+                  <X
+                    size={18}
+                    className="cursor-pointer text-red-500"
+                    onClick={() => setSelectedCategory("")}
+                  />
+                )}
+              </div>
+              <ul className="space-y-2">
+                {["All", "Toys", "Accessories", "Stationery"].map((cat) => (
+                  <li
+                    key={cat}
+                    onClick={() =>
+                      setSelectedCategory(cat === "All" ? "" : cat)
+                    }
+                    className={`cursor-pointer ${
+                      selectedCategory === (cat === "All" ? "" : cat)
+                        ? "text-red-500 font-semibold"
+                        : "text-gray-700 hover:text-blue-500"
+                    }`}
+                  >
+                    {cat}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
 
           {/* Main Content */}
           <div className="md:col-span-9 col-span-12">
