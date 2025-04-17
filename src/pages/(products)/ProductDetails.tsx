@@ -31,16 +31,12 @@ const ProductDetails = () => {
     fetchProduct();
   }, [id]);
 
-  if (loading) {
-    return <div className="text-center text-xl text-gray-500">Loading...</div>;
-  }
-
   return (
     <div className="md:mt-[65px] ">
       {" "}
       {/* Adds margin to the top for large screens */}
       <Container>
-        {product && <ProductDetailsCard product={product} />}
+        {product && <ProductDetailsCard product={product} loading={loading} />}
 
         {/* recent products */}
         <NewArrivals />
