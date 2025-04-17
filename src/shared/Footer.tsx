@@ -174,7 +174,7 @@ const Footer = () => {
         </div>
 
         {/* Footer Bottom */}
-        <div className="text-center md:mb-0 mb-8 mt-8">
+        <div className="text-center md:mb-0 mb-12 mt-4 md:mt-8">
           <p className="text-sm md:text-base text-gray-600">
             &copy; {getFullYear} Fluffy Buds. All rights reserved.
           </p>

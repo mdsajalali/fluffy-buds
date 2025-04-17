@@ -147,7 +147,7 @@ const Navbar = () => {
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="flex justify-between items-center p-[18px] border-b border-gray-300">
+        <div className="flex justify-between items-center py-[12px] px-[18px] border-b border-gray-300">
           <h2 className="text-lg font-semibold">Menu</h2>
           <button onClick={() => setIsOpen(false)}>
             <X size={24} />

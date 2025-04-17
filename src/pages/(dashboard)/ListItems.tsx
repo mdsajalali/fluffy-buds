@@ -57,11 +57,11 @@ const ListItems: React.FC = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div className="max-w-7xl mx-auto sm:px-6 lg:px-8 md:py-10">
       <h2 className="text-2xl font-bold mb-6">Product List</h2>
 
-      <div className="overflow-x-auto">
-        <table className="min-w-full bg-white border border-gray-200 rounded-xl shadow-sm text-sm">
+      <div className="overflow-x-auto w-full">
+        <table className="w-full bg-white border border-gray-200 rounded-xl shadow-sm text-sm">
           <thead className="bg-gray-100 text-gray-700">
             <tr className="text-left">
               <th className="px-5 py-4 font-semibold">Image</th>
