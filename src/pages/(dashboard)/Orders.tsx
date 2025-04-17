@@ -102,7 +102,7 @@ const Orders = () => {
               orders.map((order) => (
                 <tr key={order._id} className="hover:bg-gray-50 transition">
                   <td className="px-5 py-4 font-medium text-gray-800">
-                    {order._id}
+                    ORD-{order._id.slice(0, 5)}
                   </td>
                   <td className="px-5 py-4 text-gray-700">
                     {order.address?.firstName} {order.address?.lastName}

@@ -106,7 +106,7 @@ function StoreContextProvider({ children }: { children: ReactNode }) {
       }
     }
     loadData();
-  }, []);
+  }, [token]);
 
   const contextValue: StoreContextType = {
     setToken,
