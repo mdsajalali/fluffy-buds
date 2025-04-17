@@ -22,15 +22,18 @@ const Cart = () => {
           {steps.map((step, index) => (
             <div key={step} className="flex items-center">
               <div
-                className={`w-8 h-8 rounded-full flex items-center justify-center border-2 cursor-pointer transition-all duration-300 ${
+                className={`w-8 h-8 rounded-full flex items-center justify-center border-2 transition-all duration-300 ${
                   activeStep === step
                     ? "bg-blue-500 text-white border-blue-500"
                     : "bg-white text-gray-500 border-gray-300"
+                } ${
+                  step === "Payment" ? "cursor-not-allowed" : "cursor-pointer"
                 }`}
-                onClick={() => handleStepChange(step)}
+                onClick={() => step !== "Payment" && handleStepChange(step)}
               >
                 {index + 1}
               </div>
+
               <span
                 className={`ml-2 text-sm font-medium ${
                   activeStep === step ? "text-blue-500" : "text-gray-500"
