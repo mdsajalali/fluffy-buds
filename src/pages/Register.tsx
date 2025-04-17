@@ -1,49 +1,42 @@
 import { useState } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { Eye, EyeOff } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../lib/axiosInstance";
 import { toast } from "sonner";
 
+// Type for form inputs
+type RegisterFormData = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+};
+
 const Register = () => {
-  // State for password visibility
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  // Toggle password visibility
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
   const toggleConfirmPasswordVisibility = () =>
     setShowConfirmPassword(!showConfirmPassword);
 
   const navigate = useNavigate();
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<RegisterFormData>();
 
-    const target = e.target as typeof e.target & {
-      firstName: { value: string };
-      lastName: { value: string };
-      email: { value: string };
-      password: { value: string };
-      confirmPassword: { value: string };
-    };
-
-    const firstName = target.firstName.value;
-    const lastName = target.lastName.value;
-    const email = target.email.value;
-    const password = target.password.value;
-    const confirmPassword = target.confirmPassword.value;
-
+  const onSubmit: SubmitHandler<RegisterFormData> = async (data) => {
     try {
-      const res = await axiosInstance.post("/user/register", {
-        firstName,
-        lastName,
-        email,
-        password,
-        confirmPassword,
-      });
+      const res = await axiosInstance.post("/user/register", data);
 
       if (res?.data?.success) {
-        toast.success(res?.data?.message);
+        toast.success(res.data.message);
         navigate("/login");
       } else {
         toast.error(res?.data?.message || "Registration failed");
@@ -54,11 +47,9 @@ const Register = () => {
     }
   };
 
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4 md:px-0">
       <div className="bg-white shadow-lg rounded-lg flex flex-col md:flex-row w-full max-w-4xl">
-        {/* Left Section: Form */}
         <div className="lg:p-8 p-4 w-full md:w-1/2">
           <div className="flex items-center mb-6">
             <img src="/logo.webp" alt="Logo" />
@@ -70,55 +61,83 @@ const Register = () => {
             Create your account to get started
           </p>
 
-          <form onSubmit={handleSubmit}>
-            {/* First Name */}
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className="flex items-center gap-4 mb-4">
-              <div>
-                <label htmlFor="firstName" className="block text-gray-700 mb-2">
-                  First Name
-                </label>
+              <div className="w-full">
+                <label className="block text-gray-700 mb-2">First Name</label>
                 <input
                   type="text"
-                  name="firstName"
+                  {...register("firstName", {
+                    required: "First name is required",
+                    minLength: {
+                      value: 3,
+                      message: "Minimum 3 characters",
+                    },
+                  })}
                   placeholder="First Name"
                   className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
+                {errors.firstName && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.firstName.message}
+                  </p>
+                )}
               </div>
-              {/* Last Name */}
-              <div>
-                <label htmlFor="lastName" className="block text-gray-700 mb-2">
-                  Last Name
-                </label>
+
+              <div className="w-full">
+                <label className="block text-gray-700 mb-2">Last Name</label>
                 <input
                   type="text"
-                  name="lastName"
+                  {...register("lastName", {
+                    required: "Last name is required",
+                    minLength: {
+                      value: 3,
+                      message: "Minimum 3 characters",
+                    },
+                  })}
                   placeholder="Last Name"
                   className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
+                {errors.lastName && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.lastName.message}
+                  </p>
+                )}
               </div>
             </div>
 
-            {/* Email */}
             <div className="mb-4">
-              <label htmlFor="email" className="block text-gray-700 mb-2">
-                Email
-              </label>
+              <label className="block text-gray-700 mb-2">Email</label>
               <input
                 type="email"
-                name="email"
+                {...register("email", {
+                  required: "Email is required",
+                  pattern: {
+                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                    message: "Enter a valid email address",
+                  },
+                })}
                 placeholder="Enter your email address"
                 className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
+              {errors.email && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.email.message}
+                </p>
+              )}
             </div>
 
-            {/* Password */}
             <div className="mb-4 relative">
-              <label htmlFor="password" className="block text-gray-700 mb-2">
-                Password
-              </label>
+              <label className="block text-gray-700 mb-2">Password</label>
               <input
                 type={showPassword ? "text" : "password"}
-                name="password"
+                {...register("password", {
+                  required: "Password is required",
+                  minLength: {
+                    value: 8,
+                    message: "Password must be at least 8 characters",
+                  },
+                })}
                 placeholder="Enter your password"
                 className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
@@ -129,19 +148,24 @@ const Register = () => {
               >
                 {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
               </button>
+              {errors.password && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.password.message}
+                </p>
+              )}
             </div>
 
-            {/* Confirm Password */}
             <div className="mb-6 relative">
-              <label
-                htmlFor="confirmPassword"
-                className="block text-gray-700 mb-2"
-              >
+              <label className="block text-gray-700 mb-2">
                 Confirm Password
               </label>
               <input
                 type={showConfirmPassword ? "text" : "password"}
-                name="confirmPassword"
+                {...register("confirmPassword", {
+                  required: "Confirm Password is required",
+                  validate: (value) =>
+                    value === watch("password") || "Passwords do not match",
+                })}
                 placeholder="Confirm your password"
                 className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
@@ -152,9 +176,13 @@ const Register = () => {
               >
                 {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
               </button>
+              {errors.confirmPassword && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.confirmPassword.message}
+                </p>
+              )}
             </div>
 
-            {/* Submit Button */}
             <button
               type="submit"
               className="w-full bg-blue-600 cursor-pointer text-white p-3 rounded-lg hover:bg-blue-700 transition duration-300"
@@ -164,16 +192,13 @@ const Register = () => {
           </form>
 
           <p className="text-center mt-4">
-            <div>
-              Already have an account?{" "}
-              <Link to="/login" className="text-blue-600 hover:underline">
-                Sign In
-              </Link>{" "}
-            </div>
+            Already have an account?{" "}
+            <Link to="/login" className="text-blue-600 hover:underline">
+              Sign In
+            </Link>
           </p>
         </div>
 
-        {/* Right Section: Image (Hidden on screens < 768px) */}
         <div className="hidden md:block w-full md:w-1/2 p-8">
           <img
             src="/login.svg"
