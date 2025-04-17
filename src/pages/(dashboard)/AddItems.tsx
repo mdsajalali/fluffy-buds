@@ -57,7 +57,9 @@ const AddItems = () => {
     formData.append("name", form.name.value);
     formData.append("description", form.description.value);
     formData.append("price", form.price.value);
-    formData.append("discount", form.discount.value);
+    const discountValue =
+      form.discount.value.trim() === "" ? "0" : form.discount.value;
+    formData.append("discount", discountValue);
     formData.append("category", form.category.value);
     formData.append("color", form.color.value);
     formData.append("size", form.size.value);
@@ -137,7 +139,6 @@ const AddItems = () => {
                 placeholder="Discount Price"
                 className="border p-3 rounded w-full"
                 name="discount"
-                required
               />
             </div>
           </div>

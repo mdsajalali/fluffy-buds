@@ -11,9 +11,11 @@ const ProductCard = ({ product }: any) => {
   return (
     <div className=" relative bg-white">
       {/* Discount Tag */}
-      <div className="absolute top-2 left-2 bg-green-700 text-white text-sm px-2 py-1 font-bold z-10 rotate-[-2deg]">
-        {product?.discount}% OFF
-      </div>
+      {product?.discount > 0 && (
+        <div className="absolute top-2 left-2 bg-green-700 text-white text-sm px-2 py-1 font-bold z-10 rotate-[-2deg]">
+          {product?.discount}% OFF
+        </div>
+      )}
 
       {/* Image */}
       <div className="overflow-hidden border border-gray-300 shadow-[4px_4px_0_0_#000]">
@@ -33,9 +35,11 @@ const ProductCard = ({ product }: any) => {
         </Link>
         <div className="text-sm mt-1">
           <span className="font-bold text-black">$ {product?.price}</span>{" "}
-          <span className="line-through text-gray-500 text-xs">
-            $ {product?.discount}
-          </span>
+          {product?.discount > 0 && (
+            <span className="line-through text-gray-500 text-xs">
+              $ {product?.discount}
+            </span>
+          )}
         </div>
 
         {/* Quantity Controller */}

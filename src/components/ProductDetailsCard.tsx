@@ -17,8 +17,6 @@ const ProductDetailsCard = ({ product }: ProductCardProps) => {
     setSelectedImage(image);
   };
 
-  console.log(product)
-
   return (
     <div className="container mx-auto py-6 md:py-10">
       {/* Breadcrumb */}
@@ -69,12 +67,16 @@ const ProductDetailsCard = ({ product }: ProductCardProps) => {
           {/* Price */}
           <div className="text-2xl font-bold text-gray-800 mb-2">
             ₹{product?.price}
-            <span className="line-through text-sm text-gray-500 ml-2">
-              ₹{product?.discount}
-            </span>
-            <span className="text-red-500 text-sm ml-2">
-              ({product?.discount}% OFF)
-            </span>
+            {typeof product?.discount === "number" && product.discount > 0 && (
+              <>
+                <span className="line-through text-sm text-gray-500 ml-2">
+                  ₹{product.discount}
+                </span>
+                <span className="text-red-500 text-sm ml-2">
+                  ({product.discount}% OFF)
+                </span>
+              </>
+            )}
           </div>
 
           {/* Description */}
