@@ -36,7 +36,7 @@ const ProductDetails = () => {
   }
 
   return (
-    <div className="md:mt-[65px]">
+    <div className="md:mt-[65px] ">
       {" "}
       {/* Adds margin to the top for large screens */}
       <Container>
