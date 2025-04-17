@@ -2,9 +2,9 @@ import { useParams } from "react-router-dom";
 import Container from "../../shared/Container";
 import { useEffect, useState } from "react";
 import ProductDetailsCard from "../../components/ProductDetailsCard";
-import Categories from "../../components/Categories";
 import axiosInstance from "../../lib/axiosInstance";
 import { toast } from "sonner";
+import NewArrivals from "./NewArrivals";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -41,8 +41,9 @@ const ProductDetails = () => {
       {/* Adds margin to the top for large screens */}
       <Container>
         {product && <ProductDetailsCard product={product} />}
-        {/* Categories */}
-        <Categories />
+
+        {/* recent products */}
+        <NewArrivals />
       </Container>
     </div>
   );

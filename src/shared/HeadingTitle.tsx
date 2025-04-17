@@ -1,6 +1,6 @@
 const HeadingTitle = ({ title }: { title: string }) => {
   return (
-    <div className="flex items-center gap-2 justify-center py-8 lg:py-10">
+    <div className="flex text-center items-center gap-2 justify-center py-8 lg:py-10">
       <svg
         stroke="currentColor"
         fill="currentColor"
