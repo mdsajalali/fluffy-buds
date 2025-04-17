@@ -5,26 +5,55 @@ import useProducts from "../../hooks/useProducts";
 import axiosInstance from "../../lib/axiosInstance";
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
+import DeleteConfirmationModal from "../../components/DeleteConfirmationModal";
+import { ProductProps } from "../../types/types";
 
-const ListItems = () => {
-  const [currentPage, setCurrentPage] = useState(1);
+const ListItems: React.FC = () => {
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [productToDelete, setProductToDelete] = useState<{
+    id: string;
+    name: string;
+  } | null>(null);
   const { products, loading, totalPages, setProducts } = useProducts(
     currentPage,
     {}
   );
 
-  // product delete
-  const handleDelete = async (id: string) => {
-    try {
-      const response = await axiosInstance.delete(`/delete-product/${id}`);
-      toast.success(response?.data?.message);
-      setProducts((prevProducts) =>
-        prevProducts.filter((product) => product._id !== id)
-      );
-    } catch (error) {
-      console.error("Failed to delete product", error);
-      toast.error("Failed to delete product. Please try again.");
+  // Show delete confirmation modal
+  const handleDeleteClick = (id: string, name: string) => {
+    setProductToDelete({ id, name });
+    setShowModal(true);
+  };
+
+  // Confirm delete
+  const confirmDelete = async () => {
+    if (productToDelete) {
+      try {
+        const response = await axiosInstance.delete(
+          `/delete-product/${productToDelete.id}`
+        );
+        toast.success(response?.data?.message);
+        setProducts((prevProducts: ProductProps[]) =>
+          prevProducts.filter(
+            (product: ProductProps) => product._id !== productToDelete.id
+          )
+        );
+        setShowModal(false);
+        setProductToDelete(null);
+      } catch (error) {
+        console.error("Failed to delete product", error);
+        toast.error("Failed to delete product. Please try again.");
+        setShowModal(false);
+        setProductToDelete(null);
+      }
     }
+  };
+
+  // Cancel delete
+  const cancelDelete = () => {
+    setShowModal(false);
+    setProductToDelete(null);
   };
 
   return (
@@ -75,7 +104,7 @@ const ListItems = () => {
                     </td>
                   </tr>
                 ))
-              : products.map((item) => (
+              : products.map((item: ProductProps) => (
                   <tr
                     key={item._id}
                     className="hover:bg-gray-50 transition-all"
@@ -96,12 +125,8 @@ const ListItems = () => {
                       {item.description}
                     </td>
                     <td className="px-5 py-4 text-gray-700">{item.category}</td>
-                    <td className="px-5 py-4 text-gray-700">
-                      {item.size}
-                    </td>
-                    <td className="px-5 py-4 text-gray-700">
-                      {item.color}
-                    </td>
+                    <td className="px-5 py-4 text-gray-700">{item.size}</td>
+                    <td className="px-5 py-4 text-gray-700">{item.color}</td>
                     <td className="px-5 py-4">
                       <div className="flex flex-col sm:flex-row sm:items-center gap-1">
                         <span className="text-base font-bold text-gray-900">
@@ -125,7 +150,7 @@ const ListItems = () => {
                         </Link>
 
                         <button
-                          onClick={() => handleDelete(item._id)}
+                          onClick={() => handleDeleteClick(item._id, item.name)}
                           className="text-red-600 cursor-pointer hover:text-red-800 transition flex items-center gap-1"
                         >
                           <Trash2 size={18} />
@@ -139,10 +164,17 @@ const ListItems = () => {
         </table>
       </div>
 
+      {/* Delete confirmation modal */}
+      <DeleteConfirmationModal
+        isOpen={showModal}
+        onConfirm={confirmDelete}
+        onCancel={cancelDelete}
+      />
+
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}
-        onPageChange={(page) => setCurrentPage(page)}
+        onPageChange={(page: number) => setCurrentPage(page)}
       />
     </div>
   );
