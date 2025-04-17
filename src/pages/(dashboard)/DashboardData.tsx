@@ -105,14 +105,14 @@ const DashboardData = () => {
   );
 
   return (
-    <div className="p-4 md:p-8 bg-gray-100 ">
+    <div className=" md:p-8 bg-gray-100 ">
       <div>
         <h1 className="text-2xl md:text-3xl font-bold mb-6 text-gray-800">
           Dashboard Overview
         </h1>
 
         {/* Stat Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6 mb-10">
           {loading ? (
             Array(4)
               .fill(0)

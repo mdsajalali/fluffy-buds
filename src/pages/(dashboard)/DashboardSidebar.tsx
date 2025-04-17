@@ -37,11 +37,13 @@ const navItems = [
 type DashboardSidebarProps = {
   isSidebarOpen: boolean;
   toggleSidebar: () => void;
+  setIsSidebarOpen: (value: boolean) => void;
 };
 
 const DashboardSidebar = ({
   isSidebarOpen,
   toggleSidebar,
+  setIsSidebarOpen,
 }: DashboardSidebarProps) => {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   /* @ts-ignore */
@@ -69,6 +71,7 @@ const DashboardSidebar = ({
             {navItems.map((item, index) => (
               <li key={index}>
                 <Link
+                  onClick={() => setIsSidebarOpen(false)}
                   to={item.to}
                   className="flex items-center p-2 text-gray-700 hover:bg-gray-200 rounded"
                 >

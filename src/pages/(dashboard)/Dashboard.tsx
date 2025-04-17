@@ -16,6 +16,7 @@ const Dashboard = () => {
       <DashboardSidebar
         isSidebarOpen={isSidebarOpen}
         toggleSidebar={toggleSidebar}
+        setIsSidebarOpen={setIsSidebarOpen}
       />
 
       {/* Overlay for mobile sidebar */}

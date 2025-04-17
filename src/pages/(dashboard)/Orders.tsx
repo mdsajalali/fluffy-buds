@@ -80,7 +80,7 @@ const Orders = () => {
   }, []);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-10">
+    <div className="max-w-7xl mx-auto md:px-4 md:py-10">
       <h2 className="text-2xl font-bold mb-6">Orders</h2>
 
       <div className="overflow-x-auto">

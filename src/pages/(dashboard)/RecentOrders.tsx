@@ -57,7 +57,7 @@ const RecentOrders = () => {
       </div>
 
       <div className="overflow-x-auto">
-        <table className="min-w-full bg-white border border-gray-200 rounded-xl shadow-sm text-sm">
+        <table className="w-full bg-white border border-gray-200 rounded-xl shadow-sm text-sm">
           <thead className="bg-gray-100 text-gray-700">
             <tr>
               <th className="px-5 py-4 text-left font-semibold">Order ID</th>
@@ -96,19 +96,18 @@ const RecentOrders = () => {
             )}
           </tbody>
         </table>
-
-        <div className="mt-4 text-center">
-          {loading ? (
-            <SkeletonBlock className="h-8 w-28 mx-auto rounded" />
-          ) : (
-            <button
-              onClick={() => navigate("/dashboard/orders")}
-              className="text-sm text-white bg-blue-600 cursor-pointer hover:bg-blue-700 transition font-medium px-4 py-2 rounded"
-            >
-              View all orders
-            </button>
-          )}
-        </div>
+      </div>
+      <div className="mt-4 text-center">
+        {loading ? (
+          <SkeletonBlock className="h-8 w-28 mx-auto rounded" />
+        ) : (
+          <button
+            onClick={() => navigate("/dashboard/orders")}
+            className="text-sm text-white bg-blue-600 cursor-pointer hover:bg-blue-700 transition font-medium px-4 py-2 rounded"
+          >
+            View all orders
+          </button>
+        )}
       </div>
     </div>
   );
