@@ -2,6 +2,14 @@ import { useContext, useState } from "react";
 import { ProductProps } from "../types/types";
 import { Link } from "react-router-dom";
 import { StoreContext } from "../context/StoreContext";
+import LightGallery from "lightgallery/react";
+import lgZoom from "lightgallery/plugins/zoom";
+import lgThumbnail from "lightgallery/plugins/thumbnail";
+
+// Import styles
+import "lightgallery/css/lightgallery.css";
+import "lightgallery/css/lg-zoom.css";
+import "lightgallery/css/lg-thumbnail.css";
 
 interface ProductCardProps {
   product: ProductProps;
@@ -46,7 +54,7 @@ const ProductDetailsCard = ({ product, loading }: ProductCardProps) => {
         <div className="flex-1 w-full">
           <div className="flex flex-col md:flex-row gap-4">
             {/* Thumbnail Images */}
-            <div className="flex md:flex-col justify-between md:justify-start md:gap-2 order-2 md:order-1">
+            <div className="flex md:flex-col vurgu justify-between md:justify-start md:gap-2 order-2 md:order-1">
               {loading
                 ? Array(4)
                     .fill(0)
@@ -76,11 +84,47 @@ const ProductDetailsCard = ({ product, loading }: ProductCardProps) => {
               {loading ? (
                 <SkeletonBlock className="w-full h-[300px] md:h-[600px]" />
               ) : (
-                <img
-                  src={selectedImage}
-                  alt="Main Product"
-                  className="w-full h-[300px] md:h-[600px] object-cover"
-                />
+                <LightGallery
+                  plugins={[lgZoom, lgThumbnail]}
+                  speed={500}
+                  zoom={true}
+                  scale={1}
+                  mobileSettings={{
+                    controls: true,
+                    showCloseIcon: true,
+                    download: false,
+                  }}
+                >
+                  {/* Main Image as the trigger */}
+                  <a
+                    href={selectedImage}
+                    data-src={selectedImage}
+                    data-sub-html=" "
+                    className="block"
+                  >
+                    <img
+                      src={selectedImage}
+                      alt="Main Product"
+                      className="w-full h-[300px] md:h-[600px] object-cover"
+                    />
+                  </a>
+                  {/* Include all other images in the gallery */}
+                  {product?.images?.map((image, index) => (
+                    <a
+                      key={image?._id || index}
+                      href={image?.url}
+                      data-src={image?.url}
+                      data-sub-html=" "
+                      style={{ display: "none" }}
+                    >
+                      <img
+                        src={image?.url}
+                        alt={`Product Image ${index + 1}`}
+                        className="w-full h-[300px] md:h-[600px] object-cover"
+                      />
+                    </a>
+                  ))}
+                </LightGallery>
               )}
             </div>
           </div>
@@ -208,7 +252,7 @@ const ProductDetailsCard = ({ product, loading }: ProductCardProps) => {
                       viewBox="0 0 1024 1024"
                       height="1em"
                       width="1em"
-                      xmlns="http://www.w3.org/2000/svg"
+                      xmlns="http://www.w3 poniendo.org/2000/svg"
                     >
                       <path d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8Z"></path>
                       <path d="M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8Z"></path>

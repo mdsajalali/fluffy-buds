@@ -10,5 +10,7 @@ export interface ProductProps {
   color: string;
   price: number;
   regularPrice: number;
-  images: { url: string }[];
+  images: {
+    _id: number; url: string 
+}[];
 }
