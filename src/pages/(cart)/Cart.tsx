@@ -59,9 +59,7 @@ const Cart = () => {
           {activeStep === "Cart" && (
             <CartContent setActiveStep={setActiveStep} />
           )}
-          {activeStep === "Address" && (
-            <Address setActiveStep={setActiveStep} />
-          )}
+          {activeStep === "Address" && <Address />}
           {activeStep === "Payment" && <Payment />}
         </div>
       </Container>
