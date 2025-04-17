@@ -2,7 +2,7 @@ import HeadingTitle from "../shared/HeadingTitle";
 import Container from "../shared/Container";
 import ProductCard from "../shared/ProductCard";
 import { Product } from "../hooks/useCategoriesProduct";
-import ProductCardSkeleton from "./ProductCardSkeleton";
+import ProductCardSkeleton from "./(skeleton)/ProductCardSkeleton";
 
 interface ToysProps {
   products: Product[];
