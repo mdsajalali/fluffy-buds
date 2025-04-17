@@ -1,37 +1,35 @@
 import { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { Eye, EyeOff } from "lucide-react";
 import axiosInstance from "../lib/axiosInstance";
 import { toast } from "sonner";
 import { StoreContext } from "../context/StoreContext";
 
+// Define the form data type
+type LoginFormInputs = {
+  email: string;
+  password: string;
+};
+
 const Login = () => {
-  // State for password visibility
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   /* @ts-ignore */
   const { setToken } = useContext(StoreContext);
 
-  // Toggle password visibility
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormInputs>();
+
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const target = e.target as typeof e.target & {
-      email: { value: string };
-      password: { value: string };
-    };
-
-    const email = target.email.value;
-    const password = target.password.value;
-
+  const onSubmit: SubmitHandler<LoginFormInputs> = async (data) => {
     try {
-      const res = await axiosInstance.post("/user/login", {
-        email,
-        password,
-      });
+      const res = await axiosInstance.post("/user/login", data);
 
       if (res?.data?.success) {
         setToken(res?.data?.token);
@@ -39,7 +37,7 @@ const Login = () => {
         toast.success(res?.data?.message);
         navigate("/");
       } else {
-        toast.error(res?.data?.message || "Registration failed");
+        toast.error(res?.data?.message || "Login failed");
       }
     } catch (err) {
       toast.error("Something went wrong. Try again.");
@@ -50,7 +48,6 @@ const Login = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4 md:px-0">
       <div className="bg-white shadow-lg rounded-lg flex flex-col md:flex-row w-full max-w-4xl">
-        {/* Left Section: Form */}
         <div className="lg:p-8 p-4 w-full md:w-1/2">
           <div className="flex items-center mb-6">
             <img src="/logo.webp" alt="Logo" />
@@ -60,26 +57,43 @@ const Login = () => {
             Sign in to your account to continue
           </p>
 
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-4">
               <label htmlFor="email" className="block text-gray-700 mb-2">
                 Email
               </label>
               <input
                 type="email"
-                name="email"
+                {...register("email", {
+                  required: "Email is required",
+                  pattern: {
+                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                    message: "Enter a valid email address",
+                  },
+                })}
                 placeholder="Enter your email address"
                 className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
+              {errors.email && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.email.message}
+                </p>
+              )}
             </div>
-            {/* Password */}
+
             <div className="mb-6 relative">
               <label htmlFor="password" className="block text-gray-700 mb-2">
                 Password
               </label>
               <input
                 type={showPassword ? "text" : "password"}
-                name="password"
+                {...register("password", {
+                  required: "Password is required",
+                  minLength: {
+                    value: 8,
+                    message: "Password must be at least 8 characters",
+                  },
+                })}
                 placeholder="Enter your password"
                 className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
@@ -90,7 +104,13 @@ const Login = () => {
               >
                 {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
               </button>
+              {errors.password && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.password.message}
+                </p>
+              )}
             </div>
+
             <button
               type="submit"
               className="w-full bg-blue-600 cursor-pointer text-white p-3 rounded-lg hover:bg-blue-700 transition duration-300"
@@ -100,16 +120,13 @@ const Login = () => {
           </form>
 
           <p className="text-center mt-4">
-            <div>
-              Don't have an account?{" "}
-              <Link to="/register" className="text-blue-600 hover:underline">
-                Sign Up
-              </Link>
-            </div>
+            Don't have an account?{" "}
+            <Link to="/register" className="text-blue-600 hover:underline">
+              Sign Up
+            </Link>
           </p>
         </div>
 
-        {/* Right Section: Image (Hidden on screens < 768px) */}
         <div className="hidden md:block w-full md:w-1/2 p-8">
           <img
             src="/login.svg"
