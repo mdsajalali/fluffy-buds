@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axiosInstance from "../../lib/axiosInstance";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
+import RecentOrdersSkeleton from "../../components/(skeleton)/RecentOrdersSkeleton";
 
 interface Address {
   firstName: string;
@@ -18,9 +19,11 @@ interface Order {
 
 const RecentOrders = () => {
   const [orders, setOrders] = useState<Order[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
   const navigate = useNavigate();
 
   const fetchAllOrders = async () => {
+    setLoading(true);
     try {
       const res = await axiosInstance.get("/order/list");
       if (res.data.success) {
@@ -28,15 +31,21 @@ const RecentOrders = () => {
       } else {
         toast.error("Failed to fetch orders");
       }
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       toast.error("Something went wrong");
+    } finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
     fetchAllOrders();
   }, []);
+
+  const SkeletonBlock = ({ className }: { className?: string }) => (
+    <div className={`animate-pulse bg-gray-200 rounded ${className}`} />
+  );
 
   return (
     <div className="py-10">
@@ -58,40 +67,47 @@ const RecentOrders = () => {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
-            {orders.map((order) => (
-              <tr key={order._id} className="hover:bg-gray-50 transition">
-                <td className="px-5 py-4 font-medium text-gray-800">
-                  {order._id}
-                </td>
-                <td className="px-5 py-4 text-gray-700">
-                  {order.address?.firstName} {order.address?.lastName}
-                  <div className="text-xs text-gray-500">
-                    {order.address?.email}
-                  </div>
-                </td>
-
-                <td className="px-5 py-4 text-gray-900 font-semibold">
-                  ${order.amount.toFixed(2)}
-                </td>
-                <td className="px-5 py-4">
-                  {order.payment ? (
-                    <span className="text-green-600 font-medium">Paid</span>
-                  ) : (
-                    <span className="text-red-600 font-medium">Unpaid</span>
-                  )}
-                </td>
-              </tr>
-            ))}
+            {loading ? (
+              <RecentOrdersSkeleton />
+            ) : (
+              orders.map((order) => (
+                <tr key={order._id} className="hover:bg-gray-50 transition">
+                  <td className="px-5 py-4 font-medium text-gray-800">
+                    {order._id}
+                  </td>
+                  <td className="px-5 py-4 text-gray-700">
+                    {order.address?.firstName} {order.address?.lastName}
+                    <div className="text-xs text-gray-500">
+                      {order.address?.email}
+                    </div>
+                  </td>
+                  <td className="px-5 py-4 text-gray-900 font-semibold">
+                    ${order.amount.toFixed(2)}
+                  </td>
+                  <td className="px-5 py-4">
+                    {order.payment ? (
+                      <span className="text-green-600 font-medium">Paid</span>
+                    ) : (
+                      <span className="text-red-600 font-medium">Unpaid</span>
+                    )}
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
 
         <div className="mt-4 text-center">
-          <button
-            onClick={() => navigate("/dashboard/orders")}
-            className="text-sm text-white bg-blue-600 cursor-pointer hover:bg-blue-700 transition font-medium px-4 py-2 rounded"
-          >
-            View all orders
-          </button>
+          {loading ? (
+            <SkeletonBlock className="h-8 w-28 mx-auto rounded" />
+          ) : (
+            <button
+              onClick={() => navigate("/dashboard/orders")}
+              className="text-sm text-white bg-blue-600 cursor-pointer hover:bg-blue-700 transition font-medium px-4 py-2 rounded"
+            >
+              View all orders
+            </button>
+          )}
         </div>
       </div>
     </div>
