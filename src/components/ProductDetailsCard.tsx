@@ -31,13 +31,13 @@ const ProductDetailsCard = ({ product }: ProductCardProps) => {
         <div className="flex-1 w-full">
           <div className="flex flex-col md:flex-row gap-4">
             {/* Thumbnail Images */}
-            <div className="flex md:flex-col gap-2 order-2 md:order-1">
+            <div className="flex md:flex-col justify-between md:justify-start md:gap-2 order-2 md:order-1">
               {product?.images?.map((image, index) => (
                 <img
                   key={index}
                   src={image?.url}
                   alt={`Thumbnail ${index + 1}`}
-                  className={`w-20 h-24 object-cover cursor-pointer border-2 ${
+                  className={`md:w-20 w-18 h-16 md:h-24 object-cover cursor-pointer border-2 ${
                     selectedImage === image?.url
                       ? "border-blue-500"
                       : "border-transparent"
