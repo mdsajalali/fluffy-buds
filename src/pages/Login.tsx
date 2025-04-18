@@ -13,7 +13,7 @@ type LoginFormInputs = {
 };
 
 const Login = () => {
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
   const navigate = useNavigate();
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   /* @ts-ignore */
@@ -22,6 +22,7 @@ const Login = () => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<LoginFormInputs>();
 
@@ -43,6 +44,23 @@ const Login = () => {
       toast.error("Something went wrong. Try again.");
       console.error(err);
     }
+  };
+
+  // Demo credentials
+  const demoUser: LoginFormInputs = {
+    email: "user@fluffy-buds.com",
+    password: "fluffy-buds@2025",
+  };
+  const demoAdmin: LoginFormInputs = {
+    email: "admin@fluffy-buds.com",
+    password: "fluffy-buds@2025",
+  };
+
+  // Function to handle demo login
+  const handleDemoLogin = (type: "user" | "admin") => {
+    const credentials = type === "user" ? demoUser : demoAdmin;
+    setValue("email", credentials.email);
+    setValue("password", credentials.password);
   };
 
   return (
@@ -118,6 +136,24 @@ const Login = () => {
               Log in
             </button>
           </form>
+
+          {/* Demo Buttons */}
+          <div className="mt-4 flex gap-4">
+            <button
+              type="button"
+              onClick={() => handleDemoLogin("user")}
+              className="w-full cursor-pointer bg-green-600 text-white p-3 rounded-lg hover:bg-green-700 transition duration-300"
+            >
+              Demo User
+            </button>
+            <button
+              type="button"
+              onClick={() => handleDemoLogin("admin")}
+              className="w-full cursor-pointer bg-purple-600 text-white p-3 rounded-lg hover:bg-purple-700 transition duration-300"
+            >
+              Demo Admin
+            </button>
+          </div>
 
           <p className="text-center mt-4">
             Don't have an account?{" "}
