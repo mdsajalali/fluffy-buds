@@ -15,7 +15,6 @@ import {
   Users,
 } from "lucide-react";
 import RecentOrders from "./RecentOrders";
-import DevicesUsage from "./(components)/DevicesUsage";
 import { useEffect, useState } from "react";
 import axiosInstance from "../../lib/axiosInstance";
 
@@ -159,7 +158,7 @@ const DashboardData = () => {
         </div>
 
         {/* Graphs */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 ">
           {/* Sales Graph */}
           <div className="bg-white shadow-md rounded-2xl p-6 col-span-2">
             <h2 className="text-lg font-semibold text-gray-700 mb-6">
@@ -221,9 +220,6 @@ const DashboardData = () => {
               </ResponsiveContainer>
             )}
           </div>
-
-          {/* Device Usage Pie */}
-          <DevicesUsage />
         </div>
       </div>
 

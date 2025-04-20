@@ -36,8 +36,11 @@ function StoreContextProvider({ children }: { children: ReactNode }) {
 
     if (!cartItems[itemId]) {
       setCartItems((prev) => ({ ...prev, [itemId]: 1 }));
+      toast.success(`Product added to cart!`);
     } else {
       setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
+      toast.success(`Product added to cart!`);
+
     }
 
     await axiosInstance.post("/cart/add", { itemId }, { headers: { token } });
@@ -53,6 +56,7 @@ function StoreContextProvider({ children }: { children: ReactNode }) {
         { itemId },
         { headers: { token } }
       );
+      toast.success(`Product removed from cart!`);
     }
   };
 

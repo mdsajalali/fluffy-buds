@@ -221,7 +221,7 @@ const ProductDetailsCard = ({ product, loading }: ProductCardProps) => {
               {loading ? (
                 <SkeletonBlock className="h-10 w-full mt-3" />
               ) : cartItems[product?._id] ? (
-                <div className="mt-3 border border-black flex items-center justify-between px-3 py-1">
+                <div className="mt-4 border border-gray-300 rounded  flex items-center justify-between px-3 py-[5px]">
                   <button
                     onClick={() => removeFromCart(product?._id)}
                     className="text-xl"
@@ -260,11 +260,8 @@ const ProductDetailsCard = ({ product, loading }: ProductCardProps) => {
                   </button>
                 </div>
               ) : (
-                <div
-                  className="mt-3 border border-gray-300 w-full hover:shadow duration-300 shadow-[4px_4px_0_0_#22c55e]"
-                  onClick={() => addToCart(product?._id)}
-                >
-                  <button className="w-full py-2 cursor-pointer font-bold text-sm">
+                <div className="mt-4" onClick={() => addToCart(product?._id)}>
+                  <button className="w-full py-2 cursor-pointer text-sm font-semibold bg-green-600 text-white rounded hover:bg-green-700 transition-colors duration-300">
                     Add To Cart
                   </button>
                 </div>
