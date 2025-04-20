@@ -3,6 +3,7 @@ import axiosInstance from "../../lib/axiosInstance";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import RecentOrdersSkeleton from "../../components/(skeleton)/RecentOrdersSkeleton";
+import moment from "moment";
 
 interface Address {
   firstName: string;
@@ -14,6 +15,7 @@ interface Order {
   _id: string;
   address?: Address;
   amount: number;
+  createdAt: string;
   payment: boolean;
 }
 
@@ -62,6 +64,7 @@ const RecentOrders = () => {
             <tr>
               <th className="px-5 py-4 text-left font-semibold">Order ID</th>
               <th className="px-5 py-4 text-left font-semibold">Customer</th>
+              <th className="px-5 py-4 text-left font-semibold">Date</th>
               <th className="px-5 py-4 text-left font-semibold">Amount</th>
               <th className="px-5 py-4 text-left font-semibold">Payment</th>
             </tr>
@@ -80,6 +83,9 @@ const RecentOrders = () => {
                     <div className="text-xs text-gray-500">
                       {order.address?.email}
                     </div>
+                  </td>
+                  <td className="px-5 py-4 text-gray-900 font-semibold">
+                    {moment(order?.createdAt).format("DD-MMM-YYYY")}
                   </td>
                   <td className="px-5 py-4 text-gray-900 font-semibold">
                     ${order.amount.toFixed(2)}
