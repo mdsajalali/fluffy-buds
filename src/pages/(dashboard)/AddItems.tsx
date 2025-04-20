@@ -17,8 +17,6 @@ type FormInputs = {
   price: number | "";
   discount: number | "";
   category: string;
-  color: string;
-  size: string;
 };
 
 const AddItems = () => {
@@ -40,8 +38,6 @@ const AddItems = () => {
       price: "",
       discount: "",
       category: "",
-      color: "",
-      size: "",
     },
   });
 
@@ -90,8 +86,6 @@ const AddItems = () => {
     formData.append("price", data.price.toString());
     formData.append("discount", data.discount ? data.discount.toString() : "0");
     formData.append("category", data.category);
-    formData.append("color", data.color);
-    formData.append("size", data.size);
 
     images.forEach((img) => formData.append("images", img.file));
 
@@ -248,62 +242,6 @@ const AddItems = () => {
                 {errors.category.message}
               </p>
             )}
-          </div>
-
-          <div className="flex flex-col md:flex-row gap-4 my-6">
-            <div className="w-full">
-              <label className="block font-medium mb-2">
-                Sizes<span className="text-red-500">*</span>
-              </label>
-              <select
-                className={`border p-3 rounded w-full ${
-                  errors.size ? "border-red-500" : ""
-                }`}
-                {...register("size", {
-                  required: "Size is required",
-                })}
-              >
-                <option value="">Select Size</option>
-                <option value="XS">XS</option>
-                <option value="S">S</option>
-                <option value="M">M</option>
-                <option value="L">L</option>
-                <option value="XL">XL</option>
-                <option value="XXL">XXL</option>
-              </select>
-              {errors.size && (
-                <p className="text-red-500 text-sm mt-1">
-                  {errors.size.message}
-                </p>
-              )}
-            </div>
-
-            <div className="w-full">
-              <label className="block font-medium mb-2">
-                Colors<span className="text-red-500">*</span>
-              </label>
-              <select
-                className={`border p-3 rounded w-full ${
-                  errors.color ? "border-red-500" : ""
-                }`}
-                {...register("color", {
-                  required: "Color is required",
-                })}
-              >
-                <option value="">Select Color</option>
-                <option value="Black">Black</option>
-                <option value="White">White</option>
-                <option value="Red">Red</option>
-                <option value="Blue">Blue</option>
-                <option value="Green">Green</option>
-                <option value="Yellow">Yellow</option>
-              </select>
-              {errors.color && (
-                <p className="text-red-500 text-sm mt-1">
-                  {errors.color.message}
-                </p>
-              )}
-            </div>
           </div>
         </div>
 

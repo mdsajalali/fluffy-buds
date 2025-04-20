@@ -30,8 +30,6 @@ const CartContent = ({
               <th className="text-left px-6 py-3">Product</th>
               <th className="text-left px-6 py-3">Product Name</th>
               <th className="text-center px-6 py-3">Price</th>
-              <th className="text-center px-6 py-3">Size</th>
-              <th className="text-center px-6 py-3">Color</th>
               <th className="text-center px-6 py-3">Quantity</th>
               <th className="text-center px-6 py-3">Total</th>
               <th className="text-center px-6 py-3">Action</th>
@@ -62,12 +60,6 @@ const CartContent = ({
                       </td>
                       <td className="text-center px-6 py-4 text-blue-600 font-medium">
                         ${product.price}
-                      </td>
-                      <td className="text-center px-6 py-4 text-gray-700 font-medium">
-                        {product.size}
-                      </td>
-                      <td className="text-center px-6 py-4 text-gray-700">
-                        {product.color}
                       </td>
                       <td className="text-center px-6 py-4">
                         <div className="inline-flex items-center gap-2">

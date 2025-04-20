@@ -6,8 +6,6 @@ export interface ProductProps {
   description: string;
   discount?: number;
   category: string;
-  size: string;
-  color: string;
   price: number;
   regularPrice: number;
   images: {

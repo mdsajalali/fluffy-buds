@@ -38,9 +38,7 @@ function Address() {
       _id: string;
       name: string;
       description: string;
-      category: string;
-      size: string[];
-      color: string[];
+      category: string; 
       price: number;
       regularPrice: number;
       images: { url: string }[];

@@ -68,8 +68,6 @@ const ListItems: React.FC = () => {
               <th className="px-5 py-4 font-semibold">Name</th>
               <th className="px-5 py-4 font-semibold">Description</th>
               <th className="px-5 py-4 font-semibold">Category</th>
-              <th className="px-5 py-4 font-semibold">Size</th>
-              <th className="px-5 py-4 font-semibold">Color</th>
               <th className="px-5 py-4 font-semibold">Price</th>
               <th className="px-5 py-4 font-semibold text-center">Actions</th>
             </tr>
@@ -125,8 +123,6 @@ const ListItems: React.FC = () => {
                       {item.description}
                     </td>
                     <td className="px-5 py-4 text-gray-700">{item.category}</td>
-                    <td className="px-5 py-4 text-gray-700">{item.size}</td>
-                    <td className="px-5 py-4 text-gray-700">{item.color}</td>
                     <td className="px-5 py-4">
                       <div className="flex flex-col sm:flex-row sm:items-center gap-1">
                         <span className="text-base font-bold text-gray-900">

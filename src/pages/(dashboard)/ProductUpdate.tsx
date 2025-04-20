@@ -18,8 +18,6 @@ type ProductType = {
   price: number;
   discount?: number;
   category: string;
-  size: string;
-  color: string;
   images: string[];
 };
 
@@ -104,8 +102,6 @@ const ProductUpdate = () => {
     formData.append("price", form.price.value);
     formData.append("discount", form.discount.value || "0");
     formData.append("category", form.category.value);
-    formData.append("color", form.color.value);
-    formData.append("size", form.size.value);
 
     images.forEach((img) => formData.append("images", img.file));
     existingImages.forEach((img) => formData.append("existingImages", img));
@@ -227,50 +223,6 @@ const ProductUpdate = () => {
               <option value="Accessories">Accessories</option>
             </select>
           </div>
-
-          <div className="flex flex-col md:flex-row gap-4 my-6">
-            <div className="w-full">
-              <div>
-                <label className="block font-medium mb-2">
-                  Sizes<span className="text-red-500">*</span>
-                </label>
-                <select
-                  className="border p-3 rounded w-full"
-                  name="size"
-                  defaultValue={product?.size}
-                >
-                  <option value="">Select Size</option>
-                  <option value="XS">XS</option>
-                  <option value="S">S</option>
-                  <option value="M">M</option>
-                  <option value="L">L</option>
-                  <option value="XL">XL</option>
-                  <option value="XXL">XXL</option>
-                </select>
-              </div>
-            </div>
-
-            <div className="w-full">
-              <div>
-                <label className="block font-medium mb-2">
-                  Colors<span className="text-red-500">*</span>
-                </label>
-                <select
-                  className="border p-3 rounded w-full"
-                  name="color"
-                  defaultValue={product?.color}
-                >
-                  <option value="">Select Color</option>
-                  <option value="Black">Black</option>
-                  <option value="White">White</option>
-                  <option value="Red">Red</option>
-                  <option value="Blue">Blue</option>
-                  <option value="Green">Green</option>
-                  <option value="Yellow">Yellow</option>
-                </select>
-              </div>
-            </div>
-          </div>
         </div>
 
         <div className="mt-6">
@@ -344,6 +296,14 @@ const ProductUpdate = () => {
 
         <div className="flex items-center mt-8  justify-center gap-3">
           <button
+            type="button"
+            onClick={() => navigate("/dashboard/list-items")}
+            className="w-full cursor-pointer py-3 rounded bg-gray-200 hover:bg-gray-300 transition"
+            aria-label="Cancel update"
+          >
+            Cancel
+          </button>
+          <button
             onClick={() => navigate("/dashboard/list-items")}
             type="submit"
             disabled={loading}
@@ -358,14 +318,6 @@ const ProductUpdate = () => {
             ) : (
               "Update Product"
             )}
-          </button>
-          <button
-            type="button"
-            onClick={() => navigate("/dashboard/list-items")}
-            className="w-full cursor-pointer py-3 rounded bg-gray-200 hover:bg-gray-300 transition"
-            aria-label="Cancel update"
-          >
-            Cancel
           </button>
         </div>
       </form>

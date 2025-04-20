@@ -31,11 +31,6 @@ const ProductDetailsCard = ({ product, loading }: ProductCardProps) => {
     <div className={`animate-pulse bg-gray-200 rounded ${className}`} />
   );
 
-  // Skeleton component for circular buttons
-  const SkeletonCircle = ({ className }: { className?: string }) => (
-    <div className={`animate-pulse bg-gray-200 rounded-full ${className}`} />
-  );
-
   return (
     <div className="container mx-auto py-6 md:py-10">
       {/* Breadcrumb */}
@@ -175,45 +170,6 @@ const ProductDetailsCard = ({ product, loading }: ProductCardProps) => {
           )}
 
           <hr className="text-gray-300 mb-4" />
-
-          {/* Size Selection */}
-          <div className="mb-4">
-            <label className="block text-gray-700 font-semibold mb-2">
-              {loading ? <SkeletonBlock className="h-4 w-16" /> : "Size:"}
-            </label>
-            <div className="flex gap-2">
-              {loading ? (
-                <SkeletonCircle className="w-8 h-8" />
-              ) : (
-                <button className="w-8 h-8 rounded-full border-2 border-blue-500">
-                  {product.size}
-                </button>
-              )}
-            </div>
-          </div>
-
-          {/* Color Selection */}
-          <div className="mb-4">
-            <label className="block text-gray-700 font-semibold mb-2">
-              {loading ? <SkeletonBlock className="h-4 w-16" /> : "Color:"}
-            </label>
-            <div className="flex gap-2">
-              {loading ? (
-                <SkeletonCircle className="w-8 h-8" />
-              ) : (
-                product.color
-                  .split(" ")
-                  .map((clr, index) => (
-                    <button
-                      key={index}
-                      className="w-8 h-8 rounded-full border-2 border-blue-500"
-                      style={{ backgroundColor: clr.toLowerCase() }}
-                      title={clr}
-                    />
-                  ))
-              )}
-            </div>
-          </div>
 
           {/* Add to Cart */}
           <div className="flex items-center gap-4 mb-4">
