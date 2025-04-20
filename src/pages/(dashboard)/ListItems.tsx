@@ -74,7 +74,7 @@ const ListItems: React.FC = () => {
           </thead>
           <tbody className="divide-y divide-gray-200">
             {loading
-              ? Array.from({ length: 9 }).map((_, i) => (
+              ? Array.from({ length: 6 }).map((_, i) => (
                   <tr key={i} className="animate-pulse">
                     <td className="px-5 py-4">
                       <div className="w-16 h-16 bg-gray-200 rounded-md" />
