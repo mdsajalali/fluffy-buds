@@ -145,31 +145,91 @@ const ProductDetailsCard = ({ product, loading }: ProductCardProps) => {
                 ${product?.price}
                 {typeof product?.discount === "number" &&
                   product.discount > 0 && (
-                    <>
-                      <span className="line-through text-sm text-gray-500 ml-2">
-                        ${product.discount}
-                      </span>
-                      <span className="text-red-500 text-sm ml-2">
-                        ({product.discount}% OFF)
-                      </span>
-                    </>
+                    <span className="text-red-500 text-sm ml-2">
+                      ({product.discount}% OFF)
+                    </span>
                   )}
               </>
             )}
           </div>
 
-          {/* Description */}
+          {/* Category */}
           {loading ? (
-            <div className="space-y-2 mb-4">
-              <SkeletonBlock className="h-4 w-full" />
-              <SkeletonBlock className="h-4 w-full" />
-              <SkeletonBlock className="h-4 w-3/4" />
-            </div>
+            <SkeletonBlock className="h-4 w-40" />
           ) : (
-            <p className="text-gray-600 mb-4">{product.description}</p>
+            <p className="py-3">
+              Category:{" "}
+              <span className="font-semibold text-gray-600 ">
+                {product.category}
+              </span>
+            </p>
           )}
 
-          <hr className="text-gray-300 mb-4" />
+          <div className="flex items-center gap-2 py-2">
+            <div className="flex items-center gap-1">
+              <svg
+                stroke="currentColor"
+                fill="none"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                height="48"
+                width="48"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path
+                  d="M11.998 2l.118 .007l.059 .008l.061 .013l.111 .034a.993 .993 0 0 1 .217 .112l.104 .082l.255 .218a11 11 0 0 0 7.189 2.537l.342 -.01a1 1 0 0 1 1.005 .717a13 13 0 0 1 -9.208 16.25a1 1 0 0 1 -.502 0a13 13 0 0 1 -9.209 -16.25a1 1 0 0 1 1.005 -.717a11 11 0 0 0 7.531 -2.527l.263 -.225l.096 -.075a.993 .993 0 0 1 .217 -.112l.112 -.034a.97 .97 0 0 1 .119 -.021l.115 -.007zm3.71 7.293a1 1 0 0 0 -1.415 0l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.32 1.497l2 2l.094 .083a1 1 0 0 0 1.32 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z"
+                  stroke-width="0"
+                  fill="currentColor"
+                ></path>
+              </svg>
+              <h3 className="text-[14px]">
+                Secure <br /> Checkout
+              </h3>
+            </div>
+            <div className="flex items-center gap-1">
+              <svg
+                stroke="currentColor"
+                fill="none"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                height="48"
+                width="48"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path
+                  d="M11.998 2l.118 .007l.059 .008l.061 .013l.111 .034a.993 .993 0 0 1 .217 .112l.104 .082l.255 .218a11 11 0 0 0 7.189 2.537l.342 -.01a1 1 0 0 1 1.005 .717a13 13 0 0 1 -9.208 16.25a1 1 0 0 1 -.502 0a13 13 0 0 1 -9.209 -16.25a1 1 0 0 1 1.005 -.717a11 11 0 0 0 7.531 -2.527l.263 -.225l.096 -.075a.993 .993 0 0 1 .217 -.112l.112 -.034a.97 .97 0 0 1 .119 -.021l.115 -.007zm3.71 7.293a1 1 0 0 0 -1.415 0l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.32 1.497l2 2l.094 .083a1 1 0 0 0 1.32 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z"
+                  stroke-width="0"
+                  fill="currentColor"
+                ></path>
+              </svg>
+              <h3 className="text-[14px]">
+                Satisfaction <br /> Guaranteed
+              </h3>
+            </div>
+            <div className="sm:flex items-center gap-1 hidden">
+              <svg
+                stroke="currentColor"
+                fill="currentColor"
+                stroke-width="0"
+                viewBox="0 0 24 24"
+                height="48"
+                width="48"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path fill="none" d="M0 0h24v24H0z"></path>
+                <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"></path>
+              </svg>
+              <h3 className="text-[14px]">
+                Privacy <br /> Protected
+              </h3>
+            </div>
+          </div>
 
           {/* Add to Cart */}
           <div className="flex items-center gap-4 mb-4">
@@ -225,14 +285,18 @@ const ProductDetailsCard = ({ product, loading }: ProductCardProps) => {
             </div>
           </div>
 
-          {/* Category */}
+          {/* Description */}
           {loading ? (
-            <SkeletonBlock className="h-4 w-40" />
+            <div className="space-y-2 mb-4">
+              <SkeletonBlock className="h-4 w-full" />
+              <SkeletonBlock className="h-4 w-full" />
+              <SkeletonBlock className="h-4 w-3/4" />
+            </div>
           ) : (
-            <p className="text-gray-600">
-              Category:{" "}
-              <span className="font-semibold">{product.category}</span>
-            </p>
+            <div className="my-4">
+              <h1>Product Description</h1>
+              <p className="text-gray-600">{product.description}</p>
+            </div>
           )}
         </div>
       </div>
