@@ -9,6 +9,7 @@ This project demonstrates real-world e-commerce functionality, UI best practices
 ## 🔥 Tech Stack
 
 - **React 19** – Frontend library for dynamic UIs
+- **TypeScript** – Static type-checking for JavaScript
 - **Tailwind CSS 4** – Utility-first CSS for responsive design
 - **React Router v7** – Client-side routing
 - **Axios** – API communication
