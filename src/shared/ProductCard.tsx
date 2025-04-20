@@ -9,34 +9,41 @@ const ProductCard = ({ product }: any) => {
   const { cartItems, addToCart, removeFromCart } = useContext(StoreContext);
 
   return (
-    <div className=" relative bg-white">
+    <div className="relative rounded-xl overflow-hidden bg-white shadow-lg border border-gray-200 hover:shadow-xl transition-shadow duration-300">
       {/* Discount Tag */}
       {product?.discount > 0 && (
-        <div className="absolute top-2 left-2 bg-green-700 text-white text-sm px-2 py-1 font-bold z-10 rotate-[-2deg]">
+        <div className="absolute top-2 left-2 bg-green-600 text-white text-xs font-semibold px-2 py-0.5 rounded shadow-md z-10 rotate-[-2deg]">
           {product?.discount}% OFF
         </div>
       )}
 
       {/* Image */}
-      <div className="overflow-hidden border border-gray-300 shadow-[4px_4px_0_0_#000]">
+      <div className="bg-gray-50 border-b border-gray-200 overflow-hidden">
         {product?.images?.length > 0 && (
-          <img
-            src={product?.images[0].url}
-            alt={product?.name}
-            className="w-full h-64 object-contain cursor-pointer transition-transform duration-300 hover:scale-105"
-          />
+          <Link to={`/shop/${product._id}`}>
+            <img
+              src={product?.images[0].url}
+              alt={product?.name}
+              className="w-full h-64 object-contain transition-transform duration-300 hover:scale-105"
+            />
+          </Link>
         )}
       </div>
 
       {/* Info Section */}
-      <div className="p-3">
+      <div className="p-4">
         <Link to={`/shop/${product._id}`}>
-          <h2 className="font-bold text-sm">{product?.name}</h2>
+          <h2 className="text-base font-semibold text-gray-800 hover:text-black line-clamp-2 min-h-[2.5rem]">
+            {product?.name}
+          </h2>
         </Link>
-        <div className="text-sm mt-1">
-          <span className="font-bold text-black">$ {product?.price}</span>{" "}
+
+        <div className="mt-2 flex items-center gap-2">
+          <span className="text-green-700 font-bold text-sm">
+            $ {product?.price}
+          </span>
           {product?.discount > 0 && (
-            <span className="line-through text-gray-500 text-xs">
+            <span className="line-through text-gray-400 text-xs">
               $ {product?.discount}
             </span>
           )}
@@ -44,10 +51,10 @@ const ProductCard = ({ product }: any) => {
 
         {/* Quantity Controller */}
         {cartItems[product?._id] ? (
-          <div className="mt-3 border border-black flex items-center justify-between px-3 py-1">
+          <div className="mt-4 flex items-center justify-between border border-gray-300 rounded-md px-4 py-2">
             <button
               onClick={() => removeFromCart(product?._id)}
-              className="text-xl"
+              className="text-xl text-gray-700 hover:text-black"
             >
               <svg
                 className="cursor-pointer"
@@ -62,8 +69,13 @@ const ProductCard = ({ product }: any) => {
                 <path d="M872 474H152c-4.4 0-8 3.6-8 8v60c0 4.4 3.6 8 8 8h720c4.4 0 8-3.6 8-8v-60c0-4.4-3.6-8-8-8z"></path>
               </svg>
             </button>
-            <span className="font-bold">{cartItems[product?._id]}</span>
-            <button onClick={() => addToCart(product?._id)} className="text-xl">
+            <span className="font-semibold text-sm">
+              {cartItems[product?._id]}
+            </span>
+            <button
+              onClick={() => addToCart(product?._id)}
+              className="text-xl text-gray-700 hover:text-black"
+            >
               <svg
                 className="cursor-pointer"
                 stroke="currentColor"
@@ -80,11 +92,8 @@ const ProductCard = ({ product }: any) => {
             </button>
           </div>
         ) : (
-          <div
-            className="mt-3 border border-gray-300 hover:shadow duration-300 shadow-[4px_4px_0_0_#22c55e]"
-            onClick={() => addToCart(product?._id)}
-          >
-            <button className="w-full py-2 cursor-pointer font-bold text-sm  ">
+          <div className="mt-4" onClick={() => addToCart(product?._id)}>
+            <button className="w-full py-2 cursor-pointer text-sm font-semibold bg-green-600 text-white rounded hover:bg-green-700 transition-colors duration-300">
               Add To Cart
             </button>
           </div>
