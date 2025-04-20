@@ -3,6 +3,7 @@ import axiosInstance from "../../lib/axiosInstance";
 import Container from "../../shared/Container";
 import { StoreContext } from "../../context/StoreContext";
 import OrderSkeleton from "../../components/(skeleton)/OrderSkeleton";
+import moment from "moment";
 
 interface OrderItem {
   _id: string;
@@ -15,6 +16,7 @@ interface Order {
   _id: string;
   items: OrderItem[];
   amount: number;
+  createdAt: number;
   status: string;
 }
 
@@ -101,6 +103,11 @@ function MyOrders() {
                   </span>
                   <span className="text-gray-600">
                     Items: {order.items.length}
+                  </span>
+                </div>
+                <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-6">
+                  <span className="text-gray-800 font-medium">
+                    {moment(order?.createdAt).format("DD-MMM-YYYY")}
                   </span>
                 </div>
 

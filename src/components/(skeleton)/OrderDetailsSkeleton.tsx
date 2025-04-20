@@ -22,6 +22,9 @@ const OrderDetailsSkeleton = () => {
           <SkeletonBlock className="h-4 w-16" />
         </td>
         <td className="px-5 py-4">
+          <SkeletonBlock className="h-4 w-28" />
+        </td>
+        <td className="px-5 py-4">
           <SkeletonBlock className="h-4 w-12" />
         </td>
         <td className="px-5 py-4">

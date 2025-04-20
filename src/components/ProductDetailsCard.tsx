@@ -17,10 +17,14 @@ interface ProductCardProps {
 }
 
 const ProductDetailsCard = ({ product, loading }: ProductCardProps) => {
+  const prodImages = product?.images.map((img) =>
+    img.url.replace("http://", "https://")
+  );
+
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   /* @ts-ignore */
   const { cartItems, addToCart, removeFromCart } = useContext(StoreContext);
-  const [selectedImage, setSelectedImage] = useState(product?.images?.[0]?.url);
+  const [selectedImage, setSelectedImage] = useState(prodImages[0]);
 
   const handleImageClick = (image: string) => {
     setSelectedImage(image);
@@ -59,17 +63,17 @@ const ProductDetailsCard = ({ product, loading }: ProductCardProps) => {
                         className="md:w-20 w-18 h-16 md:h-24"
                       />
                     ))
-                : product?.images?.map((image, index) => (
+                : prodImages.map((image, index) => (
                     <img
                       key={index}
-                      src={image?.url}
+                      src={image}
                       alt={`Thumbnail ${index + 1}`}
                       className={`md:w-20 w-18 h-16 md:h-24 object-cover cursor-pointer border-2 ${
-                        selectedImage === image?.url
+                        selectedImage === image
                           ? "border-blue-500"
                           : "border-transparent"
                       }`}
-                      onClick={() => handleImageClick(image?.url)}
+                      onClick={() => handleImageClick(image)}
                     />
                   ))}
             </div>

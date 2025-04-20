@@ -87,13 +87,7 @@ const ListItems: React.FC = () => {
                     </td>
                     <td className="px-5 py-4">
                       <div className="h-4 w-16 bg-gray-200 rounded" />
-                    </td>
-                    <td className="px-5 py-4">
-                      <div className="h-4 w-16 bg-gray-200 rounded" />
-                    </td>
-                    <td className="px-5 py-4">
-                      <div className="h-4 w-16 bg-gray-200 rounded" />
-                    </td>
+                    </td> 
                     <td className="px-5 py-4">
                       <div className="h-4 w-20 bg-gray-200 rounded" />
                     </td>

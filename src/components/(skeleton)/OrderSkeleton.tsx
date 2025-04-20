@@ -24,6 +24,10 @@ function OrderSkeleton() {
           <SkeletonBlock className="h-4 w-20" />
         </div>
 
+        <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-6">
+          <SkeletonBlock className="h-4 w-24" />
+        </div>
+
         <div className="flex items-center gap-3">
           <SkeletonBlock className="h-6 w-24 rounded-full" />
           <SkeletonBlock className="h-10 w-32 rounded-lg" />

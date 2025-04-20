@@ -20,12 +20,7 @@ function CartSkeleton() {
         <td className="text-center px-6 py-4">
           <SkeletonBlock className="h-4 w-16 mx-auto" />
         </td>
-        <td className="text-center px-6 py-4">
-          <SkeletonBlock className="h-4 w-12 mx-auto" />
-        </td>
-        <td className="text-center px-6 py-4">
-          <SkeletonBlock className="h-4 w-16 mx-auto" />
-        </td>
+        
         <td className="text-center px-6 py-4">
           <div className="inline-flex items-center gap-2">
             <SkeletonCircle className="w-6 h-6" />

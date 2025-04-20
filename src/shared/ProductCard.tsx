@@ -9,7 +9,7 @@ const ProductCard = ({ product }: any) => {
   const { cartItems, addToCart, removeFromCart } = useContext(StoreContext);
 
   return (
-    <div className="relative rounded-xl overflow-hidden bg-white shadow-lg border border-gray-200 hover:shadow-xl transition-shadow duration-300">
+    <div className="relative rounded-xl overflow-hidden bg-white shadow-lg border border-gray-200 hover:shadow-xl transition-shadow duration-300 flex flex-col">
       {/* Discount Tag */}
       {product?.discount > 0 && (
         <div className="absolute top-2 left-2 bg-green-600 text-white text-xs font-semibold px-2 py-0.5 rounded shadow-md z-10 rotate-[-2deg]">
@@ -31,8 +31,8 @@ const ProductCard = ({ product }: any) => {
       </div>
 
       {/* Info Section */}
-      <div className="p-4">
-        <Link to={`/shop/${product._id}`}>
+      <div className="p-4   grow flex flex-col">
+        <Link className="block mb-auto" to={`/shop/${product._id}`}>
           <h2 className="text-base font-semibold text-gray-800 hover:text-black line-clamp-2 min-h-[2.5rem]">
             {product?.name}
           </h2>

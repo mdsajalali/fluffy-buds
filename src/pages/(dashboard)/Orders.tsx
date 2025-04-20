@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axiosInstance from "../../lib/axiosInstance";
 import { toast } from "sonner";
 import OrderDetailsSkeleton from "../../components/(skeleton)/OrderDetailsSkeleton";
+import moment from "moment";
 
 type OrderItem = {
   _id: string;
@@ -23,6 +24,7 @@ type Order = {
   amount: number;
   payment: boolean;
   address: Address;
+  createdAt: string;
   status: OrderStatus;
 };
 
@@ -34,7 +36,7 @@ const statusColors: Record<OrderStatus, string> = {
 
 const Orders = () => {
   const [orders, setOrders] = useState<Order[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(true); 
 
   const fetchAllOrders = async () => {
     setLoading(true);
@@ -91,6 +93,7 @@ const Orders = () => {
               <th className="px-5 py-4 text-left font-semibold">Customer</th>
               <th className="px-5 py-4 text-left font-semibold">Items</th>
               <th className="px-5 py-4 text-left font-semibold">Amount</th>
+              <th className="px-5 py-4 text-left font-semibold">Date</th>
               <th className="px-5 py-4 text-left font-semibold">Payment</th>
               <th className="px-5 py-4 text-left font-semibold">Status</th>
             </tr>
@@ -121,6 +124,9 @@ const Orders = () => {
                   </td>
                   <td className="px-5 py-4 text-gray-900 font-semibold">
                     ${order.amount.toFixed(2)}
+                  </td>
+                  <td className="px-5 py-4 text-gray-900 font-semibold">
+                    {moment(order?.createdAt).format("DD-MMM-YYYY")}
                   </td>
                   <td className="px-5 py-4">
                     {order.payment ? (
